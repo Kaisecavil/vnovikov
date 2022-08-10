@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ConsoleApp2.Constants;
+﻿using ConsoleApp2.Constants;
 
 namespace ConsoleApp2
 {
@@ -26,12 +23,12 @@ namespace ConsoleApp2
             SetStartField();
         }
 
-        public void SetStartField()//заполнение поля точками
+        private void SetStartField()//заполнение поля точками
         {
             for (int i = 0; i < Rows; i++)
                 for (int j = 0; j < Columns; j++)
                 {
-                    Field[i, j] = '.';
+                    Field[i, j] = GameConstants.GAME_MARKS[2];
                 }
         }
 
@@ -87,7 +84,7 @@ namespace ConsoleApp2
         {
             if (x >= 1 && y >= 1 && x <= Rows && y <= Columns)
             {
-                if (Field[x - 1, y - 1] == '.')
+                if (Field[x - 1, y - 1] == GameConstants.GAME_MARKS[2])
                 {
                     return true;
                 }
@@ -111,7 +108,7 @@ namespace ConsoleApp2
             }
             else
             {
-                char mark = turnCounter % 2 == 0 ? 'O' : 'X';// проверяем только метки игрока совершившего последний ход... довольно логично
+                char mark = turnCounter % 2 == 0 ? GameConstants.GAME_MARKS[1] : GameConstants.GAME_MARKS[0];// проверяем только метки игрока совершившего последний ход... довольно логично
                 int playernum = turnCounter % 2 == 0 ? 2 : 1;
                 bool ldiag = true;
                 bool rdiag = true;

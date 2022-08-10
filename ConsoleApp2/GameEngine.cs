@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using ConsoleApp2.Constants;
-using ConsoleApp2;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ConsoleApp2
 {
@@ -38,7 +31,6 @@ namespace ConsoleApp2
                     }
                     catch (Exception e)
                     {
-
                         Console.WriteLine(e.Message);
                         continue;
                     }
@@ -66,29 +58,33 @@ namespace ConsoleApp2
 
         }
 
-        public static string AskForTurnInfo(int turn, List<Player> players) //Метод запрашиваюший у нужного игрока строку на ввод
+        private static string AskForTurnInfo(int turn, List<Player> players) //Метод запрашиваюший у нужного игрока строку на ввод
         {
             Console.Write($"Player #{players[turn % 2].PlayerNumber} ({players[turn % 2].PlayerName}) Input two numbers [1-3]:");
             return Console.ReadLine();
         }
 
-        public static string InputName(int playerNum)//Метод для ввода и валидации имени игрока
+        private static string InputName(int playerNum)//Метод для ввода и валидации имени игрока
         {
             string name = "";
             do
             {
                 if (name.Length >= GameConstants.MAX_NAME_LENGTH)
                 {
-                    Console.WriteLine($"invalid name length,length must be between 1 and {GameConstants.MAX_NAME_LENGTH}");
+                    Console.WriteLine($"invalid name length,length must be between {GameConstants.MIN_NAME_LENGTH} and {GameConstants.MAX_NAME_LENGTH}");
                 }
-                Console.WriteLine($"Player#{playerNum} Input your name [1-{GameConstants.MAX_NAME_LENGTH}] characters:");
+                Console.WriteLine($"Player#{playerNum} Input your name [{GameConstants.MIN_NAME_LENGTH}-{GameConstants.MAX_NAME_LENGTH}] characters:");
                 name = Console.ReadLine();
+                if(name.Length < GameConstants.MIN_NAME_LENGTH)
+                {
+                    Console.WriteLine($"invalid name length,length must be between {GameConstants.MIN_NAME_LENGTH} and {GameConstants.MAX_NAME_LENGTH}");
+                }
             } while (name.Length >= GameConstants.MAX_NAME_LENGTH || name.Length == 0);
             
                 return name;
         }
 
-        public void ParseTurnInfo(string turnStr, out int x, out int y)//Метод проверяюший формат ввода и выуживающий из него две координаты
+        private void ParseTurnInfo(string turnStr, out int x, out int y)//Метод проверяюший формат ввода и выуживающий из него две координаты
         {
             string temp = Regex.Replace(turnStr, @"\s+", " ").Trim();
             Regex regex = new Regex(@"^\d \d$");
