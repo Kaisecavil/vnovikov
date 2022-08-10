@@ -22,16 +22,6 @@ namespace ConsoleApp2
             AmountOfSkippedTurns = 0;
             SetStartField();
         }
-
-        private void SetStartField()// Initializing game field with dots 
-        {
-            for (int i = 0; i < Rows; i++)
-                for (int j = 0; j < Columns; j++)
-                {
-                    Field[i, j] = GameConstants.GAME_MARKS[2];
-                }
-        }
-
         public void DisplayField()
         {
             for (int i = 0; i < Rows; i++)
@@ -80,26 +70,6 @@ namespace ConsoleApp2
 
             }
         }
-
-        private bool ValidSpot(int x, int y)
-        {
-            if (x >= 1 && y >= 1 && x <= Rows && y <= Columns)
-            {
-                if (Field[x - 1, y - 1] == GameConstants.GAME_MARKS[2])
-                {
-                    return true;
-                }
-                else
-                {
-                    throw new Exception("this plase is alredy marked,try another");
-                }
-            }
-            else
-            {
-                throw new Exception($"Coordinates out of range of game field, must be beetwen 1 and {Rows}");
-            }
-        }
-
         public int CheckVictory(out int res)
         {
             if (turnCounter - AmountOfSkippedTurns < 5)//until that moment none of players can't win
@@ -151,6 +121,32 @@ namespace ConsoleApp2
 
         }
 
-       
+        private void SetStartField()// Initializing game field with dots 
+        {
+            for (int i = 0; i < Rows; i++)
+                for (int j = 0; j < Columns; j++)
+                {
+                    Field[i, j] = GameConstants.GAME_MARKS[2];
+                }
+        }
+
+        private bool ValidSpot(int x, int y)
+        {
+            if (x >= 1 && y >= 1 && x <= Rows && y <= Columns)
+            {
+                if (Field[x - 1, y - 1] == GameConstants.GAME_MARKS[2])
+                {
+                    return true;
+                }
+                else
+                {
+                    throw new Exception("this plase is alredy marked,try another");
+                }
+            }
+            else
+            {
+                throw new Exception($"Coordinates out of range of game field, must be beetwen 1 and {Rows}");
+            }
+        }
     }
 }
