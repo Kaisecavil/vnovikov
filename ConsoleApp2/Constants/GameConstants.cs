@@ -6,7 +6,7 @@
         public const int MIN_NAME_LENGTH = 1;
         public const int MAX_NAME_LENGTH = 25;
         public static readonly char[] GAME_MARKS = { 'X', 'O','.' };
-        public const int MISTAKES_MAX_COUNT = 2; //максимальное кол-во ошибок которое мользователь может совершить подряд
-        
+        public const int MISTAKES_MAX_COUNT = 2; //Max amount of mistakes that player can do
+
     }
 }

@@ -15,15 +15,15 @@ namespace ConsoleApp2
             players.Add(player2);
             GameField gameField = new GameField(3, 3);
             gameField.DisplayField();
-            int x = -1; //переменные для запоминания координат и состояния игры
+            int x = -1; //variables for remembering coordinates
             int y = -1;
             int res = 0;
-            while (gameField.CheckVictory(out res) == 0)//игра идет до того момента пока метод определения победы не выдаст результат отличный от нуля или пока не закочится поле
+            while (gameField.CheckVictory(out res) == 0)
             {
                 while (true)
                 {
 
-                    try // запрашиваем на ввод необходимую информацию и если она не подходит по тем или иным причинам запрашиваем ещё раз
+                    try 
                     {
                         ParseTurnInfo(AskForTurnInfo(gameField.turnCounter, players), out x, out y);
                         gameField.MakeTurn(x, y);
@@ -49,7 +49,7 @@ namespace ConsoleApp2
             Console.WriteLine("press Enter to repeate,and any other button to exit");
             if (Console.ReadKey().Key == ConsoleKey.Enter)
             {
-                GameStart(); //не уверен насчёт этого способа повтора игры , при нём во первых почему-то вылетает две просьбы ввести пользователя ник . и ещё возможно переполнение стека вызова в теории
+                GameStart(); 
             }
             else
             {
@@ -58,13 +58,13 @@ namespace ConsoleApp2
 
         }
 
-        private static string AskForTurnInfo(int turn, List<Player> players) //Метод запрашиваюший у нужного игрока строку на ввод
+        private static string AskForTurnInfo(int turn, List<Player> players) 
         {
             Console.Write($"Player #{players[turn % 2].PlayerNumber} ({players[turn % 2].PlayerName}) Input two numbers [1-3]:");
             return Console.ReadLine();
         }
 
-        private static string InputName(int playerNum)//Метод для ввода и валидации имени игрока
+        private static string InputName(int playerNum)
         {
             string name = "";
             do
@@ -84,7 +84,7 @@ namespace ConsoleApp2
                 return name;
         }
 
-        private void ParseTurnInfo(string turnStr, out int x, out int y)//Метод проверяюший формат ввода и выуживающий из него две координаты
+        private void ParseTurnInfo(string turnStr, out int x, out int y)//Method for parsing Players input
         {
             string temp = Regex.Replace(turnStr, @"\s+", " ").Trim();
             Regex regex = new Regex(@"^\d \d$");

@@ -8,8 +8,8 @@ namespace ConsoleApp2
         private int Columns;
         private char[,] Field;
         private int AmountOfSkippedTurns;
-        private int mistakesInRow; //счетчик текущей серии ошибок пользователя при вводе, который обнуляется если пользователь ввёл всё правильно
-        public int turnCounter { get; private set; }//счёкик ходов позволяюший понять завершена и чёй сейчас ход Х или О
+        private int mistakesInRow; 
+        public int turnCounter { get; private set; }
 
 
         public GameField(int rows, int columns)
@@ -23,7 +23,7 @@ namespace ConsoleApp2
             SetStartField();
         }
 
-        private void SetStartField()//заполнение поля точками
+        private void SetStartField()// Initializing game field with dots 
         {
             for (int i = 0; i < Rows; i++)
                 for (int j = 0; j < Columns; j++)
@@ -32,7 +32,7 @@ namespace ConsoleApp2
                 }
         }
 
-        public void DisplayField()// отрисовка поля
+        public void DisplayField()
         {
             for (int i = 0; i < Rows; i++)
             {
@@ -53,9 +53,9 @@ namespace ConsoleApp2
         }
 
 
-        public void MakeTurn(int x, int y)//метод совершения хода
+        public void MakeTurn(int x, int y)
         {
-            char mark = GameConstants.GAME_MARKS[turnCounter % 2];//из счётчика хода можем понять какую метку нужно ставить
+            char mark = GameConstants.GAME_MARKS[turnCounter % 2];
 
             try
             {
@@ -71,7 +71,8 @@ namespace ConsoleApp2
                 mistakesInRow++;
                 if (mistakesInRow == GameConstants.MISTAKES_MAX_COUNT)
                 {
-                    turnCounter++;// если пользователь превысил лимит ошибок бросаем исключение и пропускаем ход
+                    turnCounter++;//skip turn if player done to much mistakes
+                    
                     AmountOfSkippedTurns++;
                     throw new Exception($"is's yours {mistakesInRow}-th mistake in a row, your turn is skipped");
                 }
@@ -101,14 +102,15 @@ namespace ConsoleApp2
 
         public int CheckVictory(out int res)
         {
-            if (turnCounter - AmountOfSkippedTurns < 5)// до этого момента ни одна из сторон выйграть не может . нет смысла проверять победные условия
+            if (turnCounter - AmountOfSkippedTurns < 5)//until that moment none of players can't win
+                                                       
             {
                 res = 0;
                 return 0;
             }
             else
             {
-                char mark = turnCounter % 2 == 0 ? GameConstants.GAME_MARKS[1] : GameConstants.GAME_MARKS[0];// проверяем только метки игрока совершившего последний ход... довольно логично
+                char mark = turnCounter % 2 == 0 ? GameConstants.GAME_MARKS[1] : GameConstants.GAME_MARKS[0];//loking only for necessary player mark
                 int playernum = turnCounter % 2 == 0 ? 2 : 1;
                 bool ldiag = true;
                 bool rdiag = true;
@@ -137,7 +139,7 @@ namespace ConsoleApp2
                 }
                 else
                 {
-                    if (turnCounter - AmountOfSkippedTurns == Rows * Columns)//отслеживатель ничьей
+                    if (turnCounter - AmountOfSkippedTurns == Rows * Columns)//Draw catcher
                     {
                         res = -1;
                         return -1;
