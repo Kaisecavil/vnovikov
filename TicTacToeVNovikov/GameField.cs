@@ -33,10 +33,10 @@ namespace TicTacToeVNovikov
                     Console.WriteLine("-----");
             }
         }
-        public void CheckVictory(Player currPlayer , int turnNum, int skippedTurnCount, out int res)
+        public void CheckVictory(Player currentPlayer , int turnNumber, int skippedTurnCount, out int res)
         {
             
-            char mark = currPlayer.Mark;//loking only for necessary player mark
+            char mark = currentPlayer.Mark;//loking only for necessary player mark
             bool ldiag = true;
             bool rdiag = true;
             for (int i = 0; i < Rows; i++)
@@ -50,7 +50,7 @@ namespace TicTacToeVNovikov
                 }
                 if (col || row)
                 {
-                    res = currPlayer.PlayerSequenceNumber;
+                    res = currentPlayer.PlayerSequenceNumber;
                     return;
 
 
@@ -60,12 +60,12 @@ namespace TicTacToeVNovikov
             }
             if (ldiag || rdiag)
             {
-                res = currPlayer.PlayerSequenceNumber;
+                res = currentPlayer.PlayerSequenceNumber;
                 return;
             }
             else
             {
-                if (turnNum - skippedTurnCount == Rows * Columns-1)//Draw catcher
+                if (turnNumber - skippedTurnCount == Rows * Columns-1)//Draw catcher
                 {
                     res = -1;
                     return;

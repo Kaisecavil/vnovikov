@@ -6,16 +6,16 @@ namespace TicTacToeVNovikov
     internal class Game //class that responsible for game logic
     {
         private int turnCounter;
-        private int AmountOfSkippedTurns;
-        private List<Player> players;
+        private int amountOfSkippedTurns;
+        private List<Player> playerList;
         private GameField gameField;
-        private Player CurrentPlayer;
+        private Player currentPlayer;
         private int mistakesInRow;
 
         public Game()
         {
             turnCounter = 0;
-            players = new List<Player>();
+            playerList = new List<Player>();
             gameField = new GameField(GameConstants.FieldSize, GameConstants.FieldSize);
             mistakesInRow = 0;
         }
@@ -27,18 +27,18 @@ namespace TicTacToeVNovikov
         public void Startgame()
         {
             PlayersRegister();
-            CurrentPlayer = players[0];
+            currentPlayer = playerList[0];
             gameField.DisplayField();
-            int res = 0;
-            while (res == 0)
+            int winnerIndex = 0;
+            while (winnerIndex == 0)
             {
-                MakeTurn(CurrentPlayer);
-                gameField.CheckVictory(CurrentPlayer,turnCounter,AmountOfSkippedTurns, out res);
+                MakeTurn(currentPlayer);
+                gameField.CheckVictory(currentPlayer,turnCounter,amountOfSkippedTurns,out winnerIndex);
                 PassTurn();
             }
-            if(res != -1)
+            if(winnerIndex != -1)
             {
-                Console.WriteLine($"Player#{players[res-1].PlayerSequenceNumber} ({players[res-1].PlayerName}) is winner");
+                Console.WriteLine($"Player#{playerList[winnerIndex-1].PlayerSequenceNumber} ({playerList[winnerIndex-1].PlayerName}) is winner");
             }
             else
             {
@@ -68,7 +68,7 @@ namespace TicTacToeVNovikov
                     {
                         //skip turn if player done to much mistakes
                         Console.WriteLine($"is's yours {mistakesInRow}-th mistake in a row, your turn is skipped");
-                        AmountOfSkippedTurns++;
+                        amountOfSkippedTurns++;
                         mistakesInRow=0;
                         return;
                     }
@@ -81,7 +81,7 @@ namespace TicTacToeVNovikov
         {
             turnCounter++;
             int necesseryPlayerSequenceNum = turnCounter % GameConstants.PlayersCount;
-            CurrentPlayer = players[necesseryPlayerSequenceNum];
+            currentPlayer = playerList[necesseryPlayerSequenceNum];
             mistakesInRow = 0;
         }
 
@@ -95,7 +95,7 @@ namespace TicTacToeVNovikov
                     {
                         Console.WriteLine($"Player #{i} input your name:");
                         char mark = GameConstants.GameMarks[i];
-                        players.Add(new Player(Console.ReadLine(), mark,i));
+                        playerList.Add(new Player(Console.ReadLine(), mark,i));
                         break;
                     }
                     catch(Exception e)
@@ -107,9 +107,9 @@ namespace TicTacToeVNovikov
             }
         }
 
-        private string AskPlayerForTurn(Player currPlayer) //Метод запрашиваюший у нужного игрока строку на ввод
+        private string AskPlayerForTurn(Player player) //Метод запрашиваюший у нужного игрока строку на ввод
         {
-            Console.WriteLine($"Player #{currPlayer.PlayerSequenceNumber} ({currPlayer.PlayerName}) input two numbers in range of [1-{GameConstants.FieldSize}]:");
+            Console.WriteLine($"Player #{player.PlayerSequenceNumber} ({player.PlayerName}) input two numbers in range of [1-{GameConstants.FieldSize}]:");
             return Console.ReadLine();
             
         }

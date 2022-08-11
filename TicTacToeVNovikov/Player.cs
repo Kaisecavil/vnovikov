@@ -40,13 +40,13 @@ namespace TicTacToeVNovikov
             }
         }
 
-        public Player(string name,char mark,int sequenceNum)
+        public Player(string name,char mark,int sequenceNumber)
         {
             try
             {
                 PlayerName = name;
                 Mark = mark;
-                PlayerSequenceNumber = sequenceNum;
+                PlayerSequenceNumber = sequenceNumber;
             }
             catch (Exception e)
             {
