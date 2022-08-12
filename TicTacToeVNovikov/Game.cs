@@ -1,120 +1,130 @@
 ﻿using System.Text.RegularExpressions;
-using TicTacToeVNovikov.Constants;
 
-namespace TicTacToeVNovikov
+namespace TicTacToeVNovikov;
+
+internal class Game
 {
-    internal class Game //class that responsible for game logic
+    private int _turnCounter;
+    private int _amountOfSkippedTurns;
+    private List<Player> _playerList;
+    private GameField _gameField;
+    private Player _currentPlayer;
+    private int _mistakesInRow;
+    private int _fieldSize;
+    private int _playersCount;
+    private int _maxMistakesCount;
+    private string _gameMarks;
+
+    public Game(int fieldSize = GameConstants.FieldSize, int playersCount = GameConstants.PlayersCount, int maxMistakesCount = GameConstants.MaxMistakesCount, string gameMarks = GameConstants.GameMarks)
     {
-        private int turnCounter;
-        private int amountOfSkippedTurns;
-        private List<Player> playerList;
-        private GameField gameField;
-        private Player currentPlayer;
-        private int mistakesInRow;
+        _playerList = new List<Player>();
+        _gameField = new GameField(fieldSize, fieldSize);
+        _turnCounter = 0;
+        _mistakesInRow = 0;
+        _fieldSize = fieldSize;
+        _playersCount = playersCount;
+        _maxMistakesCount = maxMistakesCount;
+        _gameMarks = gameMarks;
+        PlayersRegister();
+        _currentPlayer = _playerList[0];
+    }
 
-        public Game()
+
+
+    public static bool AskForNewGame()
+    {
+        Console.WriteLine("Would you like to start new TicTacToe game?\n..Press Enter to begin or any othe button to exit");
+        return Console.ReadKey().Key == ConsoleKey.Enter;
+    }
+    public void Startgame()
+    {
+        _gameField.DisplayField();
+        int winnerIndex = 0;
+        while (winnerIndex == 0)
         {
-            turnCounter = 0;
-            playerList = new List<Player>();
-            gameField = new GameField(GameConstants.FieldSize, GameConstants.FieldSize);
-            mistakesInRow = 0;
+            MakeTurn(_currentPlayer);
+            _gameField.CheckVictory(_currentPlayer, _turnCounter, _amountOfSkippedTurns, out winnerIndex);
+            PassTurn();
         }
-        public bool AskForNewGame()
+        if (winnerIndex != -1)
         {
-            Console.WriteLine("Would you like to start new game?..Press Enter to begin or any othe button to exit");
-            return Console.ReadKey().Key == ConsoleKey.Enter;
+            Console.WriteLine($"Player#{_playerList[winnerIndex - 1].PlayerSequenceNumber} ({_playerList[winnerIndex - 1].PlayerName}) is winner");
         }
-        public void Startgame()
+        else
         {
-            PlayersRegister();
-            currentPlayer = playerList[0];
-            gameField.DisplayField();
-            int winnerIndex = 0;
-            while (winnerIndex == 0)
-            {
-                MakeTurn(currentPlayer);
-                gameField.CheckVictory(currentPlayer,turnCounter,amountOfSkippedTurns,out winnerIndex);
-                PassTurn();
-            }
-            if(winnerIndex != -1)
-            {
-                Console.WriteLine($"Player#{playerList[winnerIndex-1].PlayerSequenceNumber} ({playerList[winnerIndex-1].PlayerName}) is winner");
-            }
-            else
-            {
-                Console.WriteLine("DRAW");
-            }
-            
+            Console.WriteLine("DRAW");
         }
 
-        private void MakeTurn(Player player)
+    }
+
+    private void MakeTurn(Player player)
+    {
+        int x = 0;
+        int y = 0;
+        while (true)
         {
-            int x = 0;
-            int y = 0;
+            try
+            {
+                ParseTurnInfo(AskPlayerForTurn(player), out x, out y);
+                _gameField.PutMark(x, y, player.Mark);
+                _gameField.DisplayField();
+                break;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                _mistakesInRow++;
+                if (_mistakesInRow >= _maxMistakesCount)
+                {
+                    Console.WriteLine($"you made {_mistakesInRow} mistakes in a row, your turn is skipped");
+                    _amountOfSkippedTurns++;
+                    _mistakesInRow = 0;
+                    return;
+                }
+                continue;
+            }
+        }
+    }
+
+    private void PassTurn()
+    {
+        _turnCounter++;
+        int necesseryPlayerSequenceNum = _turnCounter % _playersCount;
+        _currentPlayer = _playerList[necesseryPlayerSequenceNum];
+        _mistakesInRow = 0;
+    }
+
+    private void PlayersRegister()
+    {
+        for (int i = 1; i <= _playersCount; i++)
+        {
             while (true)
             {
                 try
                 {
-                    ParseTurnInfo(AskPlayerForTurn(player), out x, out y);
-                    gameField.PutMark(x, y, player.Mark);
-                    gameField.DisplayField();
+                    Console.WriteLine($"Player #{i} input your name:");
+                    _playerList.Add(new Player(Console.ReadLine(), _gameMarks[i], i));
                     break;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
-                    mistakesInRow++;
-                    if (mistakesInRow >= GameConstants.MaxMistakesCount)
-                    {
-                        //skip turn if player done to much mistakes
-                        Console.WriteLine($"is's yours {mistakesInRow}-th mistake in a row, your turn is skipped");
-                        amountOfSkippedTurns++;
-                        mistakesInRow=0;
-                        return;
-                    }
+                    Console.WriteLine("Invalid player name: " + e.Message);
                     continue;
                 }
             }
         }
+    }
 
-        private void PassTurn()
-        {
-            turnCounter++;
-            int necesseryPlayerSequenceNum = turnCounter % GameConstants.PlayersCount;
-            currentPlayer = playerList[necesseryPlayerSequenceNum];
-            mistakesInRow = 0;
-        }
+    private string? AskPlayerForTurn(Player player)
+    {
+        Console.WriteLine($"Player #{player.PlayerSequenceNumber} ({player.PlayerName}) input two numbers in range of [1-{_fieldSize}]:");
+        return Console.ReadLine();
 
-        private void PlayersRegister()
-        {
-            for (int i = 1;i<=GameConstants.PlayersCount;i++)
-            {
-                while (true)
-                {
-                    try
-                    {
-                        Console.WriteLine($"Player #{i} input your name:");
-                        char mark = GameConstants.GameMarks[i];
-                        playerList.Add(new Player(Console.ReadLine(), mark,i));
-                        break;
-                    }
-                    catch(Exception e)
-                    {
-                        Console.WriteLine("Invalid player name: " + e.Message);
-                        continue;
-                    }
-                }
-            }
-        }
+    }
 
-        private string AskPlayerForTurn(Player player) //Метод запрашиваюший у нужного игрока строку на ввод
-        {
-            Console.WriteLine($"Player #{player.PlayerSequenceNumber} ({player.PlayerName}) input two numbers in range of [1-{GameConstants.FieldSize}]:");
-            return Console.ReadLine();
-            
-        }
-
-        private void ParseTurnInfo(string turnStr, out int x, out int y)//Method for parsing Players input
+    private void ParseTurnInfo(string? turnStr, out int x, out int y)
+    {
+        if (turnStr != null)
         {
             string temp = Regex.Replace(turnStr, @"\s+", " ").Trim();
             Regex regex = new Regex(@"^\d \d$");
@@ -128,9 +138,14 @@ namespace TicTacToeVNovikov
             }
             else
             {
-                throw new Exception($"Wrong format of Info,must be two numbers from 1 to {GameConstants.FieldSize}");
+                throw new Exception($"Wrong format of Info,must be two numbers from 1 to {_fieldSize}");
             }
-
         }
+        else
+        {
+            throw new NullReferenceException("Information about turn can't be null");
+        }
+
     }
 }
+

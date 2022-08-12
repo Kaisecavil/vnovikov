@@ -1,57 +1,58 @@
-﻿using TicTacToeVNovikov.Constants;
+﻿namespace TicTacToeVNovikov;
 
-namespace TicTacToeVNovikov
+internal class Player
 {
-    internal class Player
-    {        
-        public char Mark { get; private set; }
-        public int PlayerSequenceNumber { get; private set; }
-        private string _PlayerName;
-        public string PlayerName
+
+    public char Mark { get; private set; }
+    public int PlayerSequenceNumber { get; private set; }
+    private int _MaxNameLeangth;
+    private int _MinNameLeangth;
+    private string? _PlayerName;
+    public string? PlayerName
+    {
+        get
         {
-            get
+            return _PlayerName;
+        }
+        private set
+        {
+            if (!string.IsNullOrWhiteSpace(value))
             {
-                return _PlayerName;
-            }
-            set
-            {
-                if (value != _PlayerName)
+                if (_MinNameLeangth <= value.Length && value.Length <= _MaxNameLeangth)
                 {
-                    if (!string.IsNullOrWhiteSpace(value))
-                    {
-                        if (GameConstants.MinNameLeangth <= value.Length && value.Length <= GameConstants.MaxNameLeangth)
-                        {
-                            _PlayerName = value;
-                        }
-                        else
-                        {
-                            throw new ArgumentException($"Player name length must be beetwen {GameConstants.MinNameLeangth} and {GameConstants.MaxNameLeangth} characters");
-                        }
-                    }
-                    else if (value == null)
-                    {
-                        throw new ArgumentNullException("Plaer name can't be null");
-                    }
-                    else
-                    {
-                        throw new ArgumentException("Player name can't be empty or contain only whitespaces");
-                    }
+                    _PlayerName = value;
+                }
+                else
+                {
+                    throw new ArgumentException($"Player name length must be beetwen {_MinNameLeangth} and {_MaxNameLeangth} characters");
                 }
             }
-        }
-
-        public Player(string name,char mark,int sequenceNumber)
-        {
-            try
+            else if (value == null)
             {
-                PlayerName = name;
-                Mark = mark;
-                PlayerSequenceNumber = sequenceNumber;
+                throw new ArgumentNullException("Player name can't be null");
             }
-            catch (Exception e)
+            else
             {
-                throw new Exception(e.Message);
-            }      
+                throw new ArgumentException("Player name can't be empty or contain only whitespaces");
+            }
+        }
+    }
+
+    public Player(string? name, char mark, int sequenceNumber, int maxNameLeangth = GameConstants.MaxNameLeangth, int minNameLeangth = GameConstants.MinNameLeangth)
+    {
+        try
+        {
+            _MaxNameLeangth = maxNameLeangth;
+            _MinNameLeangth = minNameLeangth;
+            PlayerName = name;
+            Mark = mark;
+            PlayerSequenceNumber = sequenceNumber;
+
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
         }
     }
 }
+

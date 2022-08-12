@@ -1,19 +1,18 @@
 ﻿
-namespace TicTacToeVNovikov
+namespace TicTacToeVNovikov;
+internal class Program
 {
-    internal class Program
-    {   
-        static void Main(string[] args)
+    static void Main(string[] args)
+    {
+        while (true)
         {
-            while (true)
+
+            if (Game.AskForNewGame())
             {
                 Game game = new Game();
-                if (game.AskForNewGame())
-                {
-                    game.Startgame();
-                }
-                else { break; }
+                game.Startgame();
             }
+            else { break; }
         }
     }
 }
