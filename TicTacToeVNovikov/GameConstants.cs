@@ -7,6 +7,8 @@ internal class GameConstants
     public const int PlayersCount = 2;
     public const int MaxMistakesCount = 3;
     public const string GameMarks = ".XO";
+    public const int MaxPlayerAge = 90;
+    public const int MinPlayerAge = 10;
 
 
 }

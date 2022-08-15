@@ -65,7 +65,7 @@ internal class Game
         {
             try
             {
-                ParseTurnInfo(AskPlayerForTurn(player), out x, out y);
+                ParseTurnInfo(AskForPlayerTurn(player), out x, out y);
                 _gameField.PutMark(x, y, player.Mark);
                 _gameField.DisplayField();
                 break;
@@ -102,20 +102,23 @@ internal class Game
             {
                 try
                 {
-                    Console.WriteLine($"Player #{i} input your name:");
-                    _playerList.Add(new Player(Console.ReadLine(), _gameMarks[i], i));
+                    int id;
+                    string? name = null;
+                    int age;
+                    Player.ParsePlayerInfo(Player.AskForPlayerInfo(i), out id, out name, out age);
+                    _playerList.Add(new Player(id,name,age,_gameMarks[i], i));
                     break;
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Invalid player name: " + e.Message);
+                    Console.WriteLine("Invalid player info: " + e.Message);
                     continue;
                 }
             }
         }
     }
 
-    private string? AskPlayerForTurn(Player player)
+    private string? AskForPlayerTurn(Player player)
     {
         Console.WriteLine($"Player #{player.PlayerSequenceNumber} ({player.PlayerName}) input two numbers in range of [1-{_fieldSize}]:");
         return Console.ReadLine();
