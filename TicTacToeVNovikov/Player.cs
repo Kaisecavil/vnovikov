@@ -1,17 +1,17 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.RegularExpressions;
 
 namespace TicTacToeVNovikov;
 
 internal class Player
 {
-    public int Id { get; private set; }
-    public char Mark { get; private set; }
-    public int PlayerSequenceNumber { get; private set; }
-    
     static private int _maxNameLeangth;
     static private int _minNameLeangth;
     static private int _maxPlayerAge;
     static private int _minPlayerAge;
+    public int Id { get; private set; }
+    //public char Mark { get; private set; }
+    //public int PlayerSequenceNumber { get; private set; }
     private int _age;
     public int Age { 
         get 
@@ -61,16 +61,13 @@ internal class Player
         }
     }
 
-    public Player(int id,string? playerName, int age, char mark, int playerSequenceNumber)//, int maxNameLeangth = GameConstants.MaxNameLeangth, int minNameLeangth = GameConstants.MinNameLeangth,int maxPlayerAge = GameConstants.MaxPlayerAge,int minPlayerAge = GameConstants.MinPlayerAge
+    public Player(int id, string? playerName, int age)//, int maxNameLeangth = GameConstants.MaxNameLeangth, int minNameLeangth = GameConstants.MinNameLeangth,int maxPlayerAge = GameConstants.MaxPlayerAge,int minPlayerAge = GameConstants.MinPlayerAge
     {
         try
         {
-            
+            Id = id;
             PlayerName = playerName;
             Age = age;
-            Mark = mark;
-            PlayerSequenceNumber = playerSequenceNumber;
-
         }
         catch (Exception e)
         {

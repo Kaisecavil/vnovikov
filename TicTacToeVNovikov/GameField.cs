@@ -35,10 +35,9 @@ internal class GameField
                 Console.WriteLine("-----");
         }
     }
-    public void CheckVictory(Player currentPlayer, int turnNumber, int skippedTurnCount, out int result)
+    public void CheckVictory(char mark, int turnNumber, int skippedTurnCount, out int result)
     {
 
-        char mark = currentPlayer.Mark;
         bool leftDiagonal = true;
         bool rightDiagonal = true;
         for (int i = 0; i < _Rows; i++)
@@ -52,7 +51,7 @@ internal class GameField
             }
             if (column || row)
             {
-                result = currentPlayer.PlayerSequenceNumber;
+                result = turnNumber % 2 + 1;
                 return;
 
 
@@ -62,7 +61,7 @@ internal class GameField
         }
         if (leftDiagonal || rightDiagonal)
         {
-            result = currentPlayer.PlayerSequenceNumber;
+            result = turnNumber % 2 + 1;
             return;
         }
         else

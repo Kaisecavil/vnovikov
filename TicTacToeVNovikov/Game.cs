@@ -43,12 +43,12 @@ internal class Game
         while (winnerIndex == 0)
         {
             MakeTurn(_currentPlayer);
-            _gameField.CheckVictory(_currentPlayer, _turnCounter, _amountOfSkippedTurns, out winnerIndex);
+            _gameField.CheckVictory(_gameMarks[_turnCounter % 2 + 1], _turnCounter, _amountOfSkippedTurns, out winnerIndex);
             PassTurn();
         }
         if (winnerIndex != -1)
         {
-            Console.WriteLine($"Player#{_playerList[winnerIndex - 1].PlayerSequenceNumber} ({_playerList[winnerIndex - 1].PlayerName}) is winner");
+            Console.WriteLine($"Player#{winnerIndex} ({_playerList[winnerIndex - 1].PlayerName}) is winner");
         }
         else
         {
@@ -66,7 +66,7 @@ internal class Game
             try
             {
                 ParseTurnInfo(AskForPlayerTurn(player), out x, out y);
-                _gameField.PutMark(x, y, player.Mark);
+                _gameField.PutMark(x, y, _gameMarks[_turnCounter%2+1]);
                 _gameField.DisplayField();
                 break;
             }
@@ -106,7 +106,7 @@ internal class Game
                     string? name = null;
                     int age;
                     Player.ParsePlayerInfo(Player.AskForPlayerInfo(i), out id, out name, out age);
-                    _playerList.Add(new Player(id,name,age,_gameMarks[i], i));
+                    _playerList.Add(new Player(id,name,age));
                     break;
                 }
                 catch (Exception e)
@@ -120,7 +120,7 @@ internal class Game
 
     private string? AskForPlayerTurn(Player player)
     {
-        Console.WriteLine($"Player #{player.PlayerSequenceNumber} ({player.PlayerName}) input two numbers in range of [1-{_fieldSize}]:");
+        Console.WriteLine($"Player #{_turnCounter % 2 + 1} ({player.PlayerName}) input two numbers in range of [1-{_fieldSize}]:");
         return Console.ReadLine();
 
     }

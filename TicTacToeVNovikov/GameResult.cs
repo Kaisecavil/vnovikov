@@ -2,14 +2,14 @@
 {
     internal class GameResult
     {
-        private int GameResultId { get; set; }
-        private string GameStartTimestamp { get; set; }
-        private string GameFinishTimestamp { get; set; }
-        private int FirstPlayerId { get; set; }
-        private int SecondPlayerId { get; set; }
-        private char FirstPlayerMark { get; set; }
-        private char SecondPlayerMark { get; set; }
-        private int WinnerId { get; set; }
+        public int GameResultId { get; private set; }
+        public string GameStartTimestamp { get; private set; }
+        public string GameFinishTimestamp { get; private set; }
+        public int FirstPlayerId { get; private set; }
+        public int SecondPlayerId { get; private set; }
+        public char FirstPlayerMark { get; private set; }
+        public char SecondPlayerMark { get; private set; }
+        public int WinnerId { get; private set; }
 
         public GameResult(int gameResultId, string gameStartTimestamp, string gameFinishTimestamp, int firstPlayerId, int secondPlayerId, char firstPlayerMark, char secondPlayerMark, int winnerId)
         {
