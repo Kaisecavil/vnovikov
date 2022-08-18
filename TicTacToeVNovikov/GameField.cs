@@ -1,4 +1,6 @@
-﻿namespace TicTacToeVNovikov;
+﻿using TicTacToeVNovikov.Resources;
+
+namespace TicTacToeVNovikov;
 internal class GameField
 {
     private char[,] _Field;
@@ -94,12 +96,12 @@ internal class GameField
             }
             else
             {
-                throw new Exception("This spot is alredy marked, try another");
+                throw new Exception(Exceptions.MarkedSpot);
             }
         }
         else
         {
-            throw new Exception($"Cordinates out of range of gamefield, must be two numbers from 1 to {_fieldSize}");
+            throw new Exception((Exceptions.CordinatesOutOfRange,_fieldSize).ToString());
         }
     }
     private void SetStartField()

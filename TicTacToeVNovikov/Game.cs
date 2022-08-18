@@ -1,10 +1,16 @@
 ﻿using System.Numerics;
 using System.Text.RegularExpressions;
+using TicTacToeVNovikov.Resources;
+using System.Reflection;
+using System.Globalization;
+using System.Resources;
 
 namespace TicTacToeVNovikov;
 
 internal class Game
 {
+    public static CultureInfo cultureInfo = new CultureInfo("en-US");
+    public static ResourceManager resourceManager = new($"TicTacToeVNovikov.Resources.en.Strings", Assembly.GetExecutingAssembly());
     private int _turnCounter;
     private int _amountOfSkippedTurns;
     private List<Player> _playerList;
@@ -32,15 +38,31 @@ internal class Game
         
     }
 
+    public void SelectLocalization()
+    {
+        var localizations = new Dictionary<ConsoleKey, string>()
+        {
+            {ConsoleKey.D1,"en"},
+            {ConsoleKey.D2,"ru"}
+        };
+        Console.WriteLine("press necess num");
+        foreach (var item in localizations)
+        {
+            Console.WriteLine($"{item.Key - 48}.{item.Value}");
+        }
+        var key = Console.ReadKey().Key;
+        resourceManager = new($"TicTacToeVNovikov.Resources.{localizations[key]}.Strings", Assembly.GetExecutingAssembly());
 
+    }
 
     public static bool AskForNewGame()
     {
-        Console.WriteLine("Would you like to start new TicTacToe game?\n..Press Enter to begin or any othe button to exit");
+        Console.WriteLine(Resource1.AskForNewGame);
         return Console.ReadKey().Key == ConsoleKey.Enter;
     }
     public void Startgame()
     {
+        SelectLocalization();
         _gameStartTime = DateTime.Now;
         _gameField.DisplayField();
         int winnerIndex = 0;
@@ -52,11 +74,11 @@ internal class Game
         }
         if (winnerIndex != -1)
         {
-            Console.WriteLine($"Player#{winnerIndex} ({_playerList[winnerIndex - 1].PlayerName}) is winner");
+            Console.WriteLine(Resource1.AnnouncementOfWinner,winnerIndex, _playerList[winnerIndex - 1].PlayerName);
         }
         else
         {
-            Console.WriteLine("DRAW");
+            Console.WriteLine(Resource1.Draw);
         }
         EndGame(_gameStartTime,winnerIndex);
         CommandLine.AskForCommand();
@@ -88,7 +110,7 @@ internal class Game
                 _mistakesInRow++;
                 if (_mistakesInRow >= _maxMistakesCount)
                 {
-                    Console.WriteLine($"you made {_mistakesInRow} mistakes in a row, your turn is skipped");
+                    Console.WriteLine(Resource1.SkippedTurn,_mistakesInRow);
                     _amountOfSkippedTurns++;
                     _mistakesInRow = 0;
                     return;
@@ -138,7 +160,7 @@ internal class Game
                                 }
                                 else
                                 {
-                                    throw new Exception($"Id = {id} is alredy occupied by another Player");
+                                    throw new Exception((resourceManager.GetString("IdIsOccupied"), id).ToString());
                                 }
                             }
                             else
@@ -156,13 +178,13 @@ internal class Game
                             unitOfWork.Commit();
                             Player playerWithId = new Player(unitOfWork.Players.GetLast().Id, name, age);
                             _playerList.Add(playerWithId);
-                            Console.WriteLine($"Registation complited successfully, {playerWithId.PlayerName} your Id = {playerWithId.Id} remember it!");
+                            Console.WriteLine(Resource1.SuccessfullRegistation,playerWithId.PlayerName,playerWithId.Id);
                         }
                         break;
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("Invalid player info: " + e.Message);
+                        Console.WriteLine(Exceptions.InvalidPlayerInfo + e.Message);
                         continue;
                     }
                 }
@@ -172,7 +194,7 @@ internal class Game
 
     private string? AskForPlayerTurn(Player player)
     {
-        Console.WriteLine($"Player #{_turnCounter % 2 + 1} ({player.PlayerName}) input two numbers in range of [1-{_fieldSize}]:");
+        Console.WriteLine(resourceManager.GetString("AskForPlayerTurn"),_turnCounter % 2 + 1,player.PlayerName,_fieldSize);
         return Console.ReadLine();
 
     }
@@ -193,12 +215,12 @@ internal class Game
             }
             else
             {
-                throw new Exception($"Wrong format of Info,must be two numbers from 1 to {_fieldSize}");
+                throw new Exception((Exceptions.WrongFormatOfTurnInfo,_fieldSize).ToString());
             }
         }
         else
         {
-            throw new NullReferenceException("Information about turn can't be null");
+            throw new NullReferenceException(Exceptions.NullPlayerInfo);
         }
 
     }

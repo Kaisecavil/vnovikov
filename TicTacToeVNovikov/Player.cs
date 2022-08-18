@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
+using TicTacToeVNovikov.Resources;
 
 namespace TicTacToeVNovikov;
 
@@ -10,8 +11,6 @@ internal class Player
     static private int _maxPlayerAge;
     static private int _minPlayerAge;
     public int Id { get; private set; }
-    //public char Mark { get; private set; }
-    //public int PlayerSequenceNumber { get; private set; }
     private int _age;
     public int Age { 
         get 
@@ -28,13 +27,13 @@ internal class Player
                 }
                 else
                 {
-                    throw new Exception("You can't grow vice versa");
+                    throw new Exception(Exceptions.LesserAge);
                 }
                 
             }
             else
             {
-                throw new Exception($"Player Age must be beetwen {_minPlayerAge} and {_maxPlayerAge} ages");
+                throw new Exception((Game.resourceManager.GetString("AgeIsOutOfLimits"),_minPlayerAge,_maxPlayerAge).ToString());
             }
         } 
     }
@@ -55,16 +54,16 @@ internal class Player
                 }
                 else
                 {
-                    throw new ArgumentException($"Player name length must be beetwen {_minNameLeangth} and {_maxNameLeangth} characters");
+                    throw new ArgumentException((Exceptions.PlayerNameLengthIsOutOfLimits,_minNameLeangth,_maxNameLeangth).ToString());
                 }
             }
             else if (value == null)
             {
-                throw new ArgumentNullException("Player name can't be null");
+                throw new ArgumentNullException(Exceptions.NullPlayerName);
             }
             else
             {
-                throw new ArgumentException("Player name can't be empty or contain only whitespaces");
+                throw new ArgumentException(Exceptions.EmptyPlayerName);
             }
         }
     }
@@ -105,7 +104,7 @@ internal class Player
 
     public static string? AskForPlayerInfo(int playerNumber)
     {
-        Console.WriteLine($"Player #{playerNumber} Input your Id Name Age if you played before,or Input your Name Age if you are a new player");
+        Console.WriteLine(Resource1.AskForPlayerInfo,playerNumber);
         return Console.ReadLine();
     }
 
@@ -134,12 +133,12 @@ internal class Player
             }
             else
             {
-                throw new Exception($"Wrong format of Info,must be Id Name Age if you are registered or Name Age if you aren't");
+                throw new Exception(Exceptions.WrongFormatOfPlayerInfo);
             }
         }
         else
         {
-            throw new NullReferenceException("Information about Player can't be null");
+            throw new NullReferenceException(Exceptions.NullPlayerInfo);
         }
     }
 }

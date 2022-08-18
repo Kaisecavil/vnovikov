@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AgeIsOutOfLimits" xml:space="preserve">
+    <value>Player Age must be beetwen {0} and {1} ages</value>
+  </data>
+  <data name="AnnouncementOfWinner" xml:space="preserve">
+    <value>Player#{0} ({1}) is winner</value>
+    <comment>1</comment>
+  </data>
+  <data name="AskForCommand" xml:space="preserve">
+    <value>Input command: </value>
+  </data>
+  <data name="AskForNewGame" xml:space="preserve">
+    <value>Would you like to start new TicTacToe game?\n..Press Enter to begin or any othe button to exit</value>
+    <comment>1</comment>
+  </data>
+  <data name="AskForPlayerInfo" xml:space="preserve">
+    <value>Player #{0} Input your Id Name Age if you played before,or Input your Name Age if you are a new player</value>
+    <comment>1</comment>
+  </data>
+  <data name="AskForPlayerTurn" xml:space="preserve">
+    <value>Player #{0} ({1}) input two numbers in range of [1-{2}]:</value>
+    <comment>1</comment>
+  </data>
+  <data name="CordinatesOutOfRange" xml:space="preserve">
+    <value>Cordinates out of range of gamefield, must be two numbers from 1 to {0}</value>
+  </data>
+  <data name="Draw" xml:space="preserve">
+    <value>DRAW</value>
+    <comment>1</comment>
+  </data>
+  <data name="EmptyPlayerName" xml:space="preserve">
+    <value>Player name can't be empty or contain only whitespaces</value>
+  </data>
+  <data name="GenerateAllResultsDescription" xml:space="preserve">
+    <value>generate file-report in json format with ALL game results</value>
+  </data>
+  <data name="GenerateLastGameResultDescription" xml:space="preserve">
+    <value>generate file-report in json format with last game result</value>
+  </data>
+  <data name="GenerateResultsForCurrentPlayersDescription" xml:space="preserve">
+    <value>show all games where two current players take part together</value>
+  </data>
+  <data name="HelpDescription" xml:space="preserve">
+    <value>show you all available command and theirs description</value>
+  </data>
+  <data name="IdIsOccupied" xml:space="preserve">
+    <value>Id = {0} is alredy occupied by another Player</value>
+  </data>
+  <data name="InvalidPlayerInfo" xml:space="preserve">
+    <value>Invalid player info:</value>
+  </data>
+  <data name="LesserAge" xml:space="preserve">
+    <value>"Your age can't be lesser than before"</value>
+  </data>
+  <data name="MarkedSpot" xml:space="preserve">
+    <value>This spot is alredy marked, try another</value>
+  </data>
+  <data name="NullPlayerInfo" xml:space="preserve">
+    <value>Information about turn can't be null</value>
+  </data>
+  <data name="NullPlayerName" xml:space="preserve">
+    <value>Player name can't be null</value>
+  </data>
+  <data name="PlayerNameLengthIsOutOfLimits" xml:space="preserve">
+    <value>Player name length must be beetwen {0} and {1} characters</value>
+  </data>
+  <data name="SkippedTurn" xml:space="preserve">
+    <value>you made {0} mistakes in a row, your turn is skipped</value>
+    <comment>1</comment>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>Information about Player can't be null</value>
+  </data>
+  <data name="SuccessfullRegistation" xml:space="preserve">
+    <value>Registation complited successfully, {0} your Id = {1} remember it!</value>
+    <comment>1</comment>
+  </data>
+  <data name="UnknownCommand" xml:space="preserve">
+    <value>In a list of commands there is no one with name {0}. you can use command /help to all available commands</value>
+  </data>
+  <data name="WrongFormatOfPlayerInfo" xml:space="preserve">
+    <value>Wrong format of Info, must be Id Name Age if you are registered or Name Age if you aren't</value>
+  </data>
+  <data name="WrongFormatOfTurnInfo" xml:space="preserve">
+    <value>Wrong format of Info,must be two numbers from 1 to {0}</value>
+  </data>
+</root>

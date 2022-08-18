@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
+using TicTacToeVNovikov.Resources;
 
 namespace TicTacToeVNovikov
 {
@@ -19,15 +20,15 @@ namespace TicTacToeVNovikov
 
         static private Dictionary<string, string> _commandDescription = new Dictionary<string, string>()
         {
-            {"/help","show you all available command and theirs description"},
-            {"/generatelastgameresult","generate file-report in json format with last game result"},
-            {"/generateresultsforcurrentplayers","show all games where two current players take part together"},
-            {"/generateallresults","generate file-report in json format with ALL game results"}
+            {"/help",CommandsDescription.HelpDescription},
+            {"/generatelastgameresult",CommandsDescription.GenerateLastGameResultDescription},
+            {"/generateresultsforcurrentplayers",CommandsDescription.GenerateResultsForCurrentPlayersDescription},
+            {"/generateallresults",CommandsDescription.GenerateAllResultsDescription}
         };
 
         static public void AskForCommand()
         {
-            Console.WriteLine("Input command: ");
+            Console.WriteLine(CommandsDescription.AskForCommand);
             string? command = Console.ReadLine();
             while (command!="/skip")
             {
@@ -37,9 +38,9 @@ namespace TicTacToeVNovikov
                 }
                 catch(KeyNotFoundException e)
                 {
-                    Console.WriteLine($"In a list of commands there is no one with name {command}. you can use command /help to all available commands");
+                    Console.WriteLine(CommandsDescription.UnknownCommand,command);
                 }
-                Console.Write("Input command: ");
+                Console.Write(CommandsDescription.AskForCommand);
                 command = Console.ReadLine();
                 
             }
