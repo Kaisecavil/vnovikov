@@ -9,8 +9,8 @@ namespace TicTacToeVNovikov;
 
 internal class Game
 {
-    public static CultureInfo cultureInfo = new CultureInfo("en-US");
-    public static ResourceManager resourceManager = new($"TicTacToeVNovikov.Resources.en.Strings", Assembly.GetExecutingAssembly());
+    //public static CultureInfo cultureInfo = new CultureInfo("en-US");
+    //public static ResourceManager resourceManager = new($"TicTacToeVNovikov.Resources.en.Strings", Assembly.GetExecutingAssembly());
     private int _turnCounter;
     private int _amountOfSkippedTurns;
     private List<Player> _playerList;
@@ -33,36 +33,38 @@ internal class Game
         _playersCount = playersCount;
         _maxMistakesCount = maxMistakesCount;
         _gameMarks = gameMarks;
+        SelectLocalization();
         PlayersRegister();
         _currentPlayer = _playerList[0];
         
+
     }
 
     public void SelectLocalization()
     {
-        var localizations = new Dictionary<ConsoleKey, string>()
+        var localizations = new Dictionary<string, string>()
         {
-            {ConsoleKey.D1,"en"},
-            {ConsoleKey.D2,"ru"}
+            {"en","en-US"},
+            {"ru","ru-RU"},
+            {"de","de-DE"}
         };
-        Console.WriteLine("press necess num");
+        Console.WriteLine(Strings.NecessaryAbbreviation);
         foreach (var item in localizations)
         {
-            Console.WriteLine($"{item.Key - 48}.{item.Value}");
+            Console.WriteLine(Strings.KeyIsForValue,item.Key,item.Value);
         }
-        var key = Console.ReadKey().Key;
-        resourceManager = new($"TicTacToeVNovikov.Resources.{localizations[key]}.Strings", Assembly.GetExecutingAssembly());
+        var key = Console.ReadLine();
+        CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(localizations[key]);
 
     }
 
     public static bool AskForNewGame()
     {
-        Console.WriteLine(Resource1.AskForNewGame);
+        Console.WriteLine(Strings.AskForNewGame,"\n");
         return Console.ReadKey().Key == ConsoleKey.Enter;
     }
     public void Startgame()
     {
-        SelectLocalization();
         _gameStartTime = DateTime.Now;
         _gameField.DisplayField();
         int winnerIndex = 0;
@@ -74,11 +76,11 @@ internal class Game
         }
         if (winnerIndex != -1)
         {
-            Console.WriteLine(Resource1.AnnouncementOfWinner,winnerIndex, _playerList[winnerIndex - 1].PlayerName);
+            Console.WriteLine(Strings.AnnouncementOfWinner,winnerIndex, _playerList[winnerIndex - 1].PlayerName);
         }
         else
         {
-            Console.WriteLine(Resource1.Draw);
+            Console.WriteLine(Strings.Draw);
         }
         EndGame(_gameStartTime,winnerIndex);
         CommandLine.AskForCommand();
@@ -110,7 +112,7 @@ internal class Game
                 _mistakesInRow++;
                 if (_mistakesInRow >= _maxMistakesCount)
                 {
-                    Console.WriteLine(Resource1.SkippedTurn,_mistakesInRow);
+                    Console.WriteLine(Strings.SkippedTurn,_mistakesInRow);
                     _amountOfSkippedTurns++;
                     _mistakesInRow = 0;
                     return;
@@ -160,7 +162,7 @@ internal class Game
                                 }
                                 else
                                 {
-                                    throw new Exception((resourceManager.GetString("IdIsOccupied"), id).ToString());
+                                    throw new Exception((Strings.IdIsOccupied, id).ToString());
                                 }
                             }
                             else
@@ -178,13 +180,13 @@ internal class Game
                             unitOfWork.Commit();
                             Player playerWithId = new Player(unitOfWork.Players.GetLast().Id, name, age);
                             _playerList.Add(playerWithId);
-                            Console.WriteLine(Resource1.SuccessfullRegistation,playerWithId.PlayerName,playerWithId.Id);
+                            Console.WriteLine(Strings.SuccessfullRegistation,playerWithId.PlayerName,playerWithId.Id);
                         }
                         break;
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(Exceptions.InvalidPlayerInfo + e.Message);
+                        Console.WriteLine(Strings.InvalidPlayerInfo + e.Message);
                         continue;
                     }
                 }
@@ -194,7 +196,7 @@ internal class Game
 
     private string? AskForPlayerTurn(Player player)
     {
-        Console.WriteLine(resourceManager.GetString("AskForPlayerTurn"),_turnCounter % 2 + 1,player.PlayerName,_fieldSize);
+        Console.WriteLine(Strings.AskForPlayerTurn,_turnCounter % 2 + 1,player.PlayerName,_fieldSize);
         return Console.ReadLine();
 
     }
@@ -215,12 +217,12 @@ internal class Game
             }
             else
             {
-                throw new Exception((Exceptions.WrongFormatOfTurnInfo,_fieldSize).ToString());
+                throw new Exception((Strings.WrongFormatOfTurnInfo,_fieldSize).ToString());
             }
         }
         else
         {
-            throw new NullReferenceException(Exceptions.NullPlayerInfo);
+            throw new NullReferenceException(Strings.NullPlayerInfo);
         }
 
     }

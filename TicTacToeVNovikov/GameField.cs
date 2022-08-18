@@ -96,12 +96,12 @@ internal class GameField
             }
             else
             {
-                throw new Exception(Exceptions.MarkedSpot);
+                throw new Exception(Strings.MarkedSpot);
             }
         }
         else
         {
-            throw new Exception((Exceptions.CordinatesOutOfRange,_fieldSize).ToString());
+            throw new Exception((Strings.CordinatesOutOfRange,_fieldSize).ToString());
         }
     }
     private void SetStartField()

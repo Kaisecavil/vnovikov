@@ -118,88 +118,93 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AgeIsOutOfLimits" xml:space="preserve">
-    <value>Player Age must be beetwen {0} and {1} ages</value>
+    <value>Das Alter des Spielers muss zwischen {0} und {1} Jahren liegen</value>
   </data>
   <data name="AnnouncementOfWinner" xml:space="preserve">
-    <value>Player#{0} ({1}) is winner</value>
-    <comment>1</comment>
+    <value>Spieler #{0} ({1}) hat gewonnen</value>
   </data>
   <data name="AskForCommand" xml:space="preserve">
-    <value>Input command: </value>
+    <value>Geben Sie den Befehl ein:</value>
   </data>
   <data name="AskForNewGame" xml:space="preserve">
-    <value>Would you like to start new TicTacToe game?\n..Press Enter to begin or any othe button to exit</value>
-    <comment>1</comment>
+    <value>Möchten Sie ein neues Tic-Tac-Toe-Spiel starten? {0} Drücken Sie die Eingabetaste, um zu starten, oder eine andere Taste, um zu beenden</value>
   </data>
   <data name="AskForPlayerInfo" xml:space="preserve">
-    <value>Player #{0} Input your Id Name Age if you played before,or Input your Name Age if you are a new player</value>
-    <comment>1</comment>
+    <value>Spieler #{0} geben Sie Ihre ID ein Name Alter wenn Sie bereits gespielt haben, oder Name Alter wenn Sie ein neuer Spieler sind</value>
   </data>
   <data name="AskForPlayerTurn" xml:space="preserve">
-    <value>Player #{0} ({1}) input two numbers in range of [1-{2}]:</value>
-    <comment>1</comment>
+    <value>Spieler #{0} ({1}) Geben Sie zwei Zahlen im Bereich [1-{2}] ein:</value>
   </data>
   <data name="CordinatesOutOfRange" xml:space="preserve">
-    <value>Cordinates out of range of gamefield, must be two numbers from 1 to {0}</value>
+    <value>Die Koordinaten außerhalb der Feldgrenzen müssen zwei Zahlen zwischen 1 und {0} sein</value>
   </data>
   <data name="Draw" xml:space="preserve">
-    <value>DRAW</value>
-    <comment>1</comment>
+    <value>Unentschieden</value>
   </data>
   <data name="EmptyPlayerName" xml:space="preserve">
-    <value>Player name can't be empty or contain only whitespaces</value>
+    <value>Der Name des Spielers darf nicht leer sein oder nur Leerzeichen enthalten</value>
   </data>
   <data name="GenerateAllResultsDescription" xml:space="preserve">
-    <value>generate file-report in json format with ALL game results</value>
+    <value>Es wird eine JSON-Berichtsdatei erstellt, die die Ergebnisse ALLER Spiele mit Spielerinformationen anzeigt</value>
   </data>
   <data name="GenerateLastGameResultDescription" xml:space="preserve">
-    <value>generate file-report in json format with last game result</value>
+    <value>Es wird eine JSON-Berichtsdatei erstellt, die das Ergebnis des letzten Spiels anzeigt</value>
   </data>
   <data name="GenerateResultsForCurrentPlayersDescription" xml:space="preserve">
-    <value>show all games where two current players take part together</value>
+    <value>Es wird eine JSON-Berichtsdatei erstellt, die die Ergebnisse aller Spiele für die in der aktuellen Sitzung angegebenen Spieler anzeigt</value>
   </data>
   <data name="HelpDescription" xml:space="preserve">
-    <value>show you all available command and theirs description</value>
+    <value>Zeigt alle verfügbaren Befehle und Beschreibungen auf dem Bildschirm an</value>
   </data>
   <data name="IdIsOccupied" xml:space="preserve">
-    <value>Id = {0} is alredy occupied by another Player</value>
+    <value>Id = {0} ist bereits von einem anderen Spieler besetzt</value>
   </data>
   <data name="InvalidPlayerInfo" xml:space="preserve">
-    <value>Invalid player info:</value>
+    <value>Falsche Informationen vom Spieler:</value>
+  </data>
+  <data name="KeyIsForValue" xml:space="preserve">
+    <value>{0} für {1}</value>
   </data>
   <data name="LesserAge" xml:space="preserve">
-    <value>"Your age can't be lesser than before"</value>
+    <value>Ihr Alter kann nicht kleiner sein als zuvor</value>
   </data>
   <data name="MarkedSpot" xml:space="preserve">
-    <value>This spot is alredy marked, try another</value>
+    <value>Dieser Käfig ist bereits besetzt, probieren Sie einen anderen aus</value>
+  </data>
+  <data name="NecessaryAbbreviation" xml:space="preserve">
+    <value>Geben Sie die gewünschte Abkürzung ein, um eine Sprache auszuwählen</value>
   </data>
   <data name="NullPlayerInfo" xml:space="preserve">
-    <value>Information about Player can't be null</value>
+    <value>Spielerinformationen können nicht null sein</value>
   </data>
   <data name="NullPlayerName" xml:space="preserve">
-    <value>Player name can't be null</value>
+    <value>Der Name des Spielers darf nicht null sein</value>
   </data>
   <data name="NullPlayerTurnInfo" xml:space="preserve">
-    <value>Information about turn can't be null</value>
+    <value>Fortschrittsinformationen können nicht null sein</value>
   </data>
   <data name="PlayerNameLengthIsOutOfLimits" xml:space="preserve">
-    <value>Player name length must be beetwen {0} and {1} characters</value>
+    <value>Der Name des Spielers muss zwischen {0} und {1} Zeichen lang sein</value>
+  </data>
+  <data name="SkipDescription" xml:space="preserve">
+    <value>Wenn Sie keine Befehle mehr eingeben möchten</value>
   </data>
   <data name="SkippedTurn" xml:space="preserve">
-    <value>you made {0} mistakes in a row, your turn is skipped</value>
-    <comment>1</comment>
+    <value>Du hast {0} Fehler hintereinander gemacht, dein Zug wird übersprungen</value>
+  </data>
+  <data name="string1" xml:space="preserve">
+    <value />
   </data>
   <data name="SuccessfullRegistation" xml:space="preserve">
-    <value>Registation complited successfully, {0} your Id = {1} remember it!</value>
-    <comment>1</comment>
+    <value>Die Registrierung war erfolgreich, {0} Ihre Id = {1} erinnere dich daran!</value>
   </data>
   <data name="UnknownCommand" xml:space="preserve">
-    <value>In a list of commands there is no one with name {0}. you can use command /help to see all available commands</value>
+    <value>Es gibt keine Befehle mit dem Namen {0} in der Befehlsliste. sie können den Befehl /help verwenden, um alle verfügbaren Befehle anzuzeigen</value>
   </data>
   <data name="WrongFormatOfPlayerInfo" xml:space="preserve">
-    <value>Wrong format of Info, must be Id Name Age if you are registered or Name Age if you aren't</value>
+    <value>Das Format der Spielerinformationen ist ungültig, es muss eine ID sein Name Alter wenn Sie bereits registriert sind, oder ein Name Alter wenn Sie noch nicht registriert sind</value>
   </data>
   <data name="WrongFormatOfTurnInfo" xml:space="preserve">
-    <value>Wrong format of Info,must be two numbers from 1 to {0}</value>
+    <value>Das Format der Fortschrittsinformationen ist ungültig, es müssen zwei Zahlen zwischen 1 und {0} vorliegen</value>
   </data>
 </root>

@@ -117,22 +117,98 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AgeIsOutOfLimits" xml:space="preserve">
+    <value>Возраст игрока должен быть между {0} и {1} годами</value>
+  </data>
+  <data name="AnnouncementOfWinner" xml:space="preserve">
+    <value>Игрок №{0} ({1}) победил</value>
+    <comment>1</comment>
+  </data>
   <data name="AskForCommand" xml:space="preserve">
-    <value>Input command: </value>
+    <value>Введите команду: </value>
+  </data>
+  <data name="AskForNewGame" xml:space="preserve">
+    <value>Хотите начать новую игру в Крестики-Нолики?{0}Нажмите Ввод чтобы начать или любую другую клавишу чтобы выйти</value>
+    <comment>1</comment>
+  </data>
+  <data name="AskForPlayerInfo" xml:space="preserve">
+    <value>Игрок №{0} введите свои ID Имя Возраст если вы уже играли раньше или Имя Возраст если вы новый игрок</value>
+    <comment>1</comment>
+  </data>
+  <data name="AskForPlayerTurn" xml:space="preserve">
+    <value>Игрок №{0} ({1}) введите два числа в диапозоне [1-{2}]:</value>
+    <comment>1</comment>
+  </data>
+  <data name="CordinatesOutOfRange" xml:space="preserve">
+    <value>Координаты вне границ поля, должны быть два числа от 1 до {0}</value>
+  </data>
+  <data name="Draw" xml:space="preserve">
+    <value>НИЧЬЯ</value>
+    <comment>1</comment>
+  </data>
+  <data name="EmptyPlayerName" xml:space="preserve">
+    <value>Имя игрока не может быть пустым или содержать только пробелы</value>
   </data>
   <data name="GenerateAllResultsDescription" xml:space="preserve">
-    <value>generate file-report in json format with ALL game results</value>
+    <value>Сформируется файл-отчет в формате json, который отобразит результаты ВСЕХ игр с информацией об игроках</value>
   </data>
   <data name="GenerateLastGameResultDescription" xml:space="preserve">
-    <value>generate file-report in json format with last game result</value>
+    <value>Сформирмируется файл-отчет в формате json, который отобразит результат последней игры</value>
   </data>
   <data name="GenerateResultsForCurrentPlayersDescription" xml:space="preserve">
-    <value>show all games where two current players take part together</value>
+    <value>Сформирмируется файл-отчет в формате json, который отобразит результаты всех игр для игроков, указанных в текущей сессии</value>
   </data>
   <data name="HelpDescription" xml:space="preserve">
-    <value>show you all available command and theirs description</value>
+    <value>Показывает на экране все доступные команды и их описания</value>
+  </data>
+  <data name="IdIsOccupied" xml:space="preserve">
+    <value>Id = {0} уже занят другим игроком</value>
+  </data>
+  <data name="InvalidPlayerInfo" xml:space="preserve">
+    <value>Неверная информация от игрока:</value>
+  </data>
+  <data name="KeyIsForValue" xml:space="preserve">
+    <value>{0} для {1}</value>
+  </data>
+  <data name="LesserAge" xml:space="preserve">
+    <value>Ваш возраст не может быть меньше чем раньше</value>
+  </data>
+  <data name="MarkedSpot" xml:space="preserve">
+    <value>Эта клетка уже занята, попробуйте другую</value>
+  </data>
+  <data name="NecessaryAbbreviation" xml:space="preserve">
+    <value>Введите необходимую аббревиатуру чтобы выбрать язык</value>
+  </data>
+  <data name="NullPlayerInfo" xml:space="preserve">
+    <value>Информация об игроке не может быть null</value>
+  </data>
+  <data name="NullPlayerName" xml:space="preserve">
+    <value>Имя игрока не может быть null</value>
+  </data>
+  <data name="NullPlayerTurnInfo" xml:space="preserve">
+    <value>Информация об ходе не может быть null</value>
+  </data>
+  <data name="PlayerNameLengthIsOutOfLimits" xml:space="preserve">
+    <value>Длинна имени игрока должна быть от {0} до {1} символов</value>
+  </data>
+  <data name="SkipDescription" xml:space="preserve">
+    <value>Если вы больше не хотите вводить команды</value>
+  </data>
+  <data name="SkippedTurn" xml:space="preserve">
+    <value>Вы сделали {0} ошибок подряд, ваш ход будет пропущен</value>
+    <comment>1</comment>
+  </data>
+  <data name="SuccessfullRegistation" xml:space="preserve">
+    <value>Регистрация прошла успешно, {0} ваш Id = {1} запомните его!</value>
+    <comment>1</comment>
   </data>
   <data name="UnknownCommand" xml:space="preserve">
-    <value>In a list of commands there is no one with name {0}. you can use command /help to all available commands</value>
+    <value>В списке команд нет ни одной с именем {0}. вы можете использовать команду /help чтобы увидеть все доступные команды</value>
+  </data>
+  <data name="WrongFormatOfPlayerInfo" xml:space="preserve">
+    <value> Неверный формат информации об игроке, должно быть Id Имя Возраст если вы уже зарегистрированы, или Имя Возраст если вы не зарегистрированы</value>
+  </data>
+  <data name="WrongFormatOfTurnInfo" xml:space="preserve">
+    <value>Неверный формат информации о ходе, должно быть два числа от 1 до {0}</value>
   </data>
 </root>

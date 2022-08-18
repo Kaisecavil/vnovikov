@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TicTacToeVNovikov.Resources.en {
+namespace TicTacToeVNovikov.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TicTacToeVNovikov.Resources.en {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TicTacToeVNovikov.Resources.en.Strings", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TicTacToeVNovikov.Resources.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -88,7 +88,7 @@ namespace TicTacToeVNovikov.Resources.en {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Would you like to start new TicTacToe game?\n..Press Enter to begin or any othe button to exit.
+        ///   Ищет локализованную строку, похожую на Would you like to start new TicTacToe game?{0}..Press Enter to begin or any othe button to exit.
         /// </summary>
         internal static string AskForNewGame {
             get {
@@ -196,6 +196,15 @@ namespace TicTacToeVNovikov.Resources.en {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на {0} is for {1}.
+        /// </summary>
+        internal static string KeyIsForValue {
+            get {
+                return ResourceManager.GetString("KeyIsForValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на &quot;Your age can&apos;t be lesser than before&quot;.
         /// </summary>
         internal static string LesserAge {
@@ -210,6 +219,15 @@ namespace TicTacToeVNovikov.Resources.en {
         internal static string MarkedSpot {
             get {
                 return ResourceManager.GetString("MarkedSpot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Write the necessary abbreviation to choose language.
+        /// </summary>
+        internal static string NecessaryAbbreviation {
+            get {
+                return ResourceManager.GetString("NecessaryAbbreviation", resourceCulture);
             }
         }
         
@@ -246,6 +264,15 @@ namespace TicTacToeVNovikov.Resources.en {
         internal static string PlayerNameLengthIsOutOfLimits {
             get {
                 return ResourceManager.GetString("PlayerNameLengthIsOutOfLimits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на If you dont want to input commands anymore.
+        /// </summary>
+        internal static string SkipDescription {
+            get {
+                return ResourceManager.GetString("SkipDescription", resourceCulture);
             }
         }
         

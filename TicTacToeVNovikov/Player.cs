@@ -27,13 +27,13 @@ internal class Player
                 }
                 else
                 {
-                    throw new Exception(Exceptions.LesserAge);
+                    throw new Exception(Strings.LesserAge);
                 }
                 
             }
             else
             {
-                throw new Exception((Game.resourceManager.GetString("AgeIsOutOfLimits"),_minPlayerAge,_maxPlayerAge).ToString());
+                throw new Exception((Strings.AgeIsOutOfLimits,_minPlayerAge,_maxPlayerAge).ToString());
             }
         } 
     }
@@ -54,16 +54,16 @@ internal class Player
                 }
                 else
                 {
-                    throw new ArgumentException((Exceptions.PlayerNameLengthIsOutOfLimits,_minNameLeangth,_maxNameLeangth).ToString());
+                    throw new ArgumentException((Strings.PlayerNameLengthIsOutOfLimits,_minNameLeangth,_maxNameLeangth).ToString());
                 }
             }
             else if (value == null)
             {
-                throw new ArgumentNullException(Exceptions.NullPlayerName);
+                throw new ArgumentNullException(Strings.NullPlayerName);
             }
             else
             {
-                throw new ArgumentException(Exceptions.EmptyPlayerName);
+                throw new ArgumentException(Strings.EmptyPlayerName);
             }
         }
     }
@@ -104,7 +104,7 @@ internal class Player
 
     public static string? AskForPlayerInfo(int playerNumber)
     {
-        Console.WriteLine(Resource1.AskForPlayerInfo,playerNumber);
+        Console.WriteLine(Strings.AskForPlayerInfo,playerNumber);
         return Console.ReadLine();
     }
 
@@ -133,12 +133,12 @@ internal class Player
             }
             else
             {
-                throw new Exception(Exceptions.WrongFormatOfPlayerInfo);
+                throw new Exception(Strings.WrongFormatOfPlayerInfo);
             }
         }
         else
         {
-            throw new NullReferenceException(Exceptions.NullPlayerInfo);
+            throw new NullReferenceException(Strings.NullPlayerInfo);
         }
     }
 }

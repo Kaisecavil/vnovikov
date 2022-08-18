@@ -20,15 +20,16 @@ namespace TicTacToeVNovikov
 
         static private Dictionary<string, string> _commandDescription = new Dictionary<string, string>()
         {
-            {"/help",CommandsDescription.HelpDescription},
-            {"/generatelastgameresult",CommandsDescription.GenerateLastGameResultDescription},
-            {"/generateresultsforcurrentplayers",CommandsDescription.GenerateResultsForCurrentPlayersDescription},
-            {"/generateallresults",CommandsDescription.GenerateAllResultsDescription}
+            {"/help",Strings.HelpDescription},
+            {"/generatelastgameresult",Strings.GenerateLastGameResultDescription},
+            {"/generateresultsforcurrentplayers",Strings.GenerateResultsForCurrentPlayersDescription},
+            {"/generateallresults",Strings.GenerateAllResultsDescription},
+            {"/skip,",Strings.SkipDescription}
         };
 
         static public void AskForCommand()
         {
-            Console.WriteLine(CommandsDescription.AskForCommand);
+            Console.WriteLine(Strings.AskForCommand);
             string? command = Console.ReadLine();
             while (command!="/skip")
             {
@@ -38,9 +39,9 @@ namespace TicTacToeVNovikov
                 }
                 catch(KeyNotFoundException e)
                 {
-                    Console.WriteLine(CommandsDescription.UnknownCommand,command);
+                    Console.WriteLine(Strings.UnknownCommand,command);
                 }
-                Console.Write(CommandsDescription.AskForCommand);
+                Console.Write(Strings.AskForCommand);
                 command = Console.ReadLine();
                 
             }

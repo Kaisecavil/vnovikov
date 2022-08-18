@@ -3,6 +3,7 @@ using System.Reflection;
 using TicTacToeVNovikov.Resources;
 using System.Resources;
 using System.Globalization;
+using System.Text;
 
 namespace TicTacToeVNovikov;
 internal class Program
@@ -13,9 +14,6 @@ internal class Program
     {
         while (true)
         {
-            CultureInfo.CurrentUICulture = new CultureInfo("en-US");
-            Console.WriteLine(CultureInfo.CurrentUICulture.Name);
-            
             if (Game.AskForNewGame())
             {
                 Game game = new Game();
