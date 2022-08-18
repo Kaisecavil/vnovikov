@@ -68,6 +68,11 @@ namespace TicTacToeVNovikov
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public Player GetLast()
+        {
+            return _players.Last();
+        }
     } 
 
     

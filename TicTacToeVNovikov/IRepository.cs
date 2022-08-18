@@ -8,6 +8,7 @@ namespace TicTacToeVNovikov
 {
     internal interface IRepository<TEntity> : IDisposable where TEntity : class 
     {
+        TEntity GetLast(); 
         IEnumerable<TEntity> GetAll(); // получение всех объектов
         TEntity GetById(int id); // получение одного объекта по id
         void Insert(TEntity entity); // создание объекта

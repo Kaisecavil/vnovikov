@@ -2,6 +2,7 @@
 {
     internal class GameResult
     {
+        
         public int GameResultId { get; private set; }
         public string GameStartTimestamp { get; private set; }
         public string GameFinishTimestamp { get; private set; }
@@ -11,9 +12,8 @@
         public char SecondPlayerMark { get; private set; }
         public int WinnerId { get; private set; }
 
-        public GameResult(int gameResultId, string gameStartTimestamp, string gameFinishTimestamp, int firstPlayerId, int secondPlayerId, char firstPlayerMark, char secondPlayerMark, int winnerId)
+        public GameResult(string gameStartTimestamp, string gameFinishTimestamp, int firstPlayerId, int secondPlayerId, char firstPlayerMark, char secondPlayerMark, int winnerId)
         {
-            GameResultId = gameResultId;
             GameStartTimestamp = gameStartTimestamp;
             GameFinishTimestamp = gameFinishTimestamp;
             FirstPlayerId = firstPlayerId;

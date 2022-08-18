@@ -18,11 +18,19 @@ internal class Player
         { 
             return _age;
         }
-        private set
+         set
         {
             if(value < _maxPlayerAge && value > _minPlayerAge)
             {
-                _age = value;
+                if(value > Age)
+                {
+                    _age = value;
+                }
+                else
+                {
+                    throw new Exception("You can't grow vice versa");
+                }
+                
             }
             else
             {
@@ -74,6 +82,19 @@ internal class Player
             throw new Exception(e.Message);
         }
     }
+
+    public Player(string playerName,int age)
+    {
+        try
+        {
+            PlayerName = playerName;
+            Age = age;
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
     static Player()
     {
         _maxPlayerAge = GameConstants.MaxPlayerAge;
@@ -84,28 +105,36 @@ internal class Player
 
     public static string? AskForPlayerInfo(int playerNumber)
     {
-        Console.WriteLine($"Player #{playerNumber} Input your Id Name Age");
+        Console.WriteLine($"Player #{playerNumber} Input your Id Name Age if you played before,or Input your Name Age if you are a new player");
         return Console.ReadLine();
     }
 
-    public static void ParsePlayerInfo(string? playerInfo,out int id,out string name,out int age)
+    public static void ParsePlayerInfo(string? playerInfo,out int id,out string name,out int age,out bool isRegistered)
     {
         if (playerInfo != null)
         {
             string temp = Regex.Replace(playerInfo, @"\s+", " ").Trim();
-            Regex regex = new Regex(@"^\d+\s\w+\s\d{1,3}$");
-            bool isValid = regex.IsMatch(temp);
-
-            if (isValid)
+            Regex regexRegistered = new Regex(@"^\d+\s\w+\s\d{1,3}$");
+            Regex regexUnregistered = new Regex(@"^\w+\s\d{1,3}$");
+            if (regexRegistered.IsMatch(temp))
             {
                 string[] nums = temp.Split(' ');
                 id = Convert.ToInt32(nums[0]);
                 name = nums[1];
                 age = Convert.ToInt32(nums[2]);
+                isRegistered = true;
+            }
+            else if (regexUnregistered.IsMatch(temp))
+            {
+                id = 0;
+                string[] nums = temp.Split(' ');
+                name = nums[0];
+                age = Convert.ToInt32(nums[1]);
+                isRegistered=false;
             }
             else
             {
-                throw new Exception($"Wrong format of Info,must be id name age, for example: 13 Vlad 19");
+                throw new Exception($"Wrong format of Info,must be Id Name Age if you are registered or Name Age if you aren't");
             }
         }
         else

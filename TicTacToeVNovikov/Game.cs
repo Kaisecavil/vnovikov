@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Numerics;
+using System.Text.RegularExpressions;
 
 namespace TicTacToeVNovikov;
 
@@ -14,6 +15,7 @@ internal class Game
     private int _playersCount;
     private int _maxMistakesCount;
     private string _gameMarks;
+    private DateTime _gameStartTime;
 
     public Game(int fieldSize = GameConstants.FieldSize, int playersCount = GameConstants.PlayersCount, int maxMistakesCount = GameConstants.MaxMistakesCount, string gameMarks = GameConstants.GameMarks)
     {
@@ -27,6 +29,7 @@ internal class Game
         _gameMarks = gameMarks;
         PlayersRegister();
         _currentPlayer = _playerList[0];
+        
     }
 
 
@@ -38,6 +41,7 @@ internal class Game
     }
     public void Startgame()
     {
+        _gameStartTime = DateTime.Now;
         _gameField.DisplayField();
         int winnerIndex = 0;
         while (winnerIndex == 0)
@@ -54,9 +58,17 @@ internal class Game
         {
             Console.WriteLine("DRAW");
         }
-
+        EndGame(_gameStartTime,winnerIndex);
+        CommandLine.AskForCommand();
     }
-
+    private void EndGame(DateTime gameStartTime,int indexOfWinner)
+    {
+        using (UnitOfWork unitOfWork = new UnitOfWork(new ApplicationContext()))
+        {
+            unitOfWork.GameResults.Insert(new GameResult(_gameStartTime.ToString("O"), DateTime.Now.ToString("O"), _playerList[0].Id, _playerList[1].Id, 'X', 'O', _playerList[indexOfWinner - 1].Id));
+            unitOfWork.Commit();
+        }
+    }
     private void MakeTurn(Player player)
     {
         int x = 0;
@@ -96,23 +108,63 @@ internal class Game
 
     private void PlayersRegister()
     {
-        for (int i = 1; i <= _playersCount; i++)
+        using(UnitOfWork unitOfWork =  new UnitOfWork(new ApplicationContext()))
         {
-            while (true)
+            for (int i = 1; i <= _playersCount; i++)
             {
-                try
+                while (true)
                 {
-                    int id;
-                    string? name = null;
-                    int age;
-                    Player.ParsePlayerInfo(Player.AskForPlayerInfo(i), out id, out name, out age);
-                    _playerList.Add(new Player(id,name,age));
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Invalid player info: " + e.Message);
-                    continue;
+                    try
+                    {
+                        int id;
+                        string? name = null;
+                        int age;
+                        bool isRegistered = false;
+                        Player.ParsePlayerInfo(Player.AskForPlayerInfo(i), out id, out name, out age,out isRegistered);
+                        if (isRegistered)
+                        {
+                            Player findedPlayer = unitOfWork.Players.GetById(id);
+                            if (findedPlayer != null)
+                            {
+                                if (findedPlayer.PlayerName == name)
+                                {
+                                    Player player = new Player(id, name, age);
+                                    _playerList.Add(player);
+                                    if (findedPlayer.Age != age)
+                                    {
+                                        findedPlayer.Age = age;
+                                        unitOfWork.Commit();
+                                    }
+                                }
+                                else
+                                {
+                                    throw new Exception($"Id = {id} is alredy occupied by another Player");
+                                }
+                            }
+                            else
+                            {
+                                Player player = new Player(id, name, age);
+                                _playerList.Add(player);
+                                unitOfWork.Players.Insert(player);
+                                unitOfWork.Commit();
+                            }
+                        }
+                        else
+                        {
+                            Player player = new Player(name, age);
+                            unitOfWork.Players.Insert(player);
+                            unitOfWork.Commit();
+                            Player playerWithId = new Player(unitOfWork.Players.GetLast().Id, name, age);
+                            _playerList.Add(playerWithId);
+                            Console.WriteLine($"Registation complited successfully, {playerWithId.PlayerName} your Id = {playerWithId.Id} remember it!");
+                        }
+                        break;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Invalid player info: " + e.Message);
+                        continue;
+                    }
                 }
             }
         }
