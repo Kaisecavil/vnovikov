@@ -101,7 +101,7 @@ internal class GameField
         }
         else
         {
-            throw new Exception((Strings.CordinatesOutOfRange,_fieldSize).ToString());
+            throw new Exception(string.Format(Strings.CordinatesOutOfRange,_fieldSize));
         }
     }
     private void SetStartField()

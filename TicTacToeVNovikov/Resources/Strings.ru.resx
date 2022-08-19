@@ -132,12 +132,15 @@
     <comment>1</comment>
   </data>
   <data name="AskForPlayerInfo" xml:space="preserve">
-    <value>Игрок №{0} введите свои ID Имя Возраст если вы уже играли раньше или Имя Возраст если вы новый игрок</value>
+    <value>Игрок №{0} введите свои ID Имя Возраст если вы уже зарегистрированы или Имя Возраст если вы не зарегистрированы</value>
     <comment>1</comment>
   </data>
   <data name="AskForPlayerTurn" xml:space="preserve">
     <value>Игрок №{0} ({1}) введите два числа в диапозоне [1-{2}]:</value>
     <comment>1</comment>
+  </data>
+  <data name="CommandExecuted" xml:space="preserve">
+    <value>Команда была выполнена и был создан файл с названием {0}</value>
   </data>
   <data name="CordinatesOutOfRange" xml:space="preserve">
     <value>Координаты вне границ поля, должны быть два числа от 1 до {0}</value>
@@ -179,6 +182,12 @@
   <data name="NecessaryAbbreviation" xml:space="preserve">
     <value>Введите необходимую аббревиатуру чтобы выбрать язык</value>
   </data>
+  <data name="NullAbbreviation" xml:space="preserve">
+    <value>Аббревиатура не может быть null</value>
+  </data>
+  <data name="NullCommand" xml:space="preserve">
+    <value>Команда не может быть null</value>
+  </data>
   <data name="NullPlayerInfo" xml:space="preserve">
     <value>Информация об игроке не может быть null</value>
   </data>
@@ -202,8 +211,14 @@
     <value>Регистрация прошла успешно, {0} ваш Id = {1} запомните его!</value>
     <comment>1</comment>
   </data>
+  <data name="UnknownAbbreviation" xml:space="preserve">
+    <value>Нет доступной локализации с токой аббревиатурой ({0})</value>
+  </data>
   <data name="UnknownCommand" xml:space="preserve">
     <value>В списке команд нет ни одной с именем {0}. вы можете использовать команду /help чтобы увидеть все доступные команды</value>
+  </data>
+  <data name="UnknownPlayer" xml:space="preserve">
+    <value>Среди зарегистрированных игроков не было найдено похожего,проверьте правильность введения данных или зарестрируйтесь введя ваши Имя Возраст</value>
   </data>
   <data name="WrongFormatOfPlayerInfo" xml:space="preserve">
     <value> Неверный формат информации об игроке, должно быть Id Имя Возраст если вы уже зарегистрированы, или Имя Возраст если вы не зарегистрированы</value>

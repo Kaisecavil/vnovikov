@@ -132,12 +132,15 @@
     <comment>1</comment>
   </data>
   <data name="AskForPlayerInfo" xml:space="preserve">
-    <value>Player #{0} Input your Id Name Age if you played before,or Input your Name Age if you are a new player</value>
+    <value>Player #{0} Input your Id Name Age if you registered, or Input your Name Age if you are not registered</value>
     <comment>1</comment>
   </data>
   <data name="AskForPlayerTurn" xml:space="preserve">
     <value>Player #{0} ({1}) input two numbers in range of [1-{2}]:</value>
     <comment>1</comment>
+  </data>
+  <data name="CommandExecuted" xml:space="preserve">
+    <value>The command was executed and a file with the name {0} was created</value>
   </data>
   <data name="CordinatesOutOfRange" xml:space="preserve">
     <value>Cordinates out of range of gamefield, must be two numbers from 1 to {0}</value>
@@ -179,6 +182,12 @@
   <data name="NecessaryAbbreviation" xml:space="preserve">
     <value>Write the necessary abbreviation to choose language</value>
   </data>
+  <data name="NullAbbreviation" xml:space="preserve">
+    <value>Abbreviation can't be null</value>
+  </data>
+  <data name="NullCommand" xml:space="preserve">
+    <value>Command can't be null</value>
+  </data>
   <data name="NullPlayerInfo" xml:space="preserve">
     <value>Information about Player can't be null</value>
   </data>
@@ -202,8 +211,14 @@
     <value>Registation complited successfully, {0} your Id = {1} remember it!</value>
     <comment>1</comment>
   </data>
+  <data name="UnknownAbbreviation" xml:space="preserve">
+    <value>The is no available localization with this abbriveation ({0})</value>
+  </data>
   <data name="UnknownCommand" xml:space="preserve">
     <value>In a list of commands there is no one with name {0}. you can use command /help to see all available commands</value>
+  </data>
+  <data name="UnknownPlayer" xml:space="preserve">
+    <value>No similar was found among the registered players, check the correctness of the data entry or register by entering your Name Age</value>
   </data>
   <data name="WrongFormatOfPlayerInfo" xml:space="preserve">
     <value>Wrong format of Info, must be Id Name Age if you are registered or Name Age if you aren't</value>

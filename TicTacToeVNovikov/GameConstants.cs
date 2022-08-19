@@ -9,7 +9,6 @@ internal class GameConstants
     public const string GameMarks = ".XO";
     public const int MaxPlayerAge = 90;
     public const int MinPlayerAge = 10;
-    
 
 }
 

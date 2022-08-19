@@ -22,10 +22,5 @@
             SecondPlayerMark = secondPlayerMark;
             WinnerId = winnerId;
         }
-
-        private void SubmitGameRusult()
-        {
-
-        }
     }
 }

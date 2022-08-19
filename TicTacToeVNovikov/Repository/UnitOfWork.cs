@@ -1,17 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TicTacToeVNovikov.Interfaces;
 
-namespace TicTacToeVNovikov
+namespace TicTacToeVNovikov.Repository
 {
     internal class UnitOfWork : IUnitOfWork
     {
         private ApplicationContext _dbContext;
         private BaseRepository<Player> _players;
         private BaseRepository<GameResult> _gameResults;
+        private bool disposed = false;
 
         public UnitOfWork(ApplicationContext dbContext)
         {
@@ -41,18 +37,16 @@ namespace TicTacToeVNovikov
             _dbContext.SaveChanges();
         }
 
-        private bool disposed = false;
-
         public virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {
                     _dbContext.Dispose();
                 }
             }
-            this.disposed = true;
+            disposed = true;
         }
 
         public void Dispose()

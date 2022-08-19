@@ -97,7 +97,7 @@ namespace TicTacToeVNovikov.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Player #{0} Input your Id Name Age if you played before,or Input your Name Age if you are a new player.
+        ///   Ищет локализованную строку, похожую на Player #{0} Input your Id Name Age if you registered, or Input your Name Age if you are not registered.
         /// </summary>
         internal static string AskForPlayerInfo {
             get {
@@ -111,6 +111,15 @@ namespace TicTacToeVNovikov.Resources {
         internal static string AskForPlayerTurn {
             get {
                 return ResourceManager.GetString("AskForPlayerTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The command was executed and a file with the name {0} was created.
+        /// </summary>
+        internal static string CommandExecuted {
+            get {
+                return ResourceManager.GetString("CommandExecuted", resourceCulture);
             }
         }
         
@@ -232,6 +241,24 @@ namespace TicTacToeVNovikov.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Abbreviation can&apos;t be null.
+        /// </summary>
+        internal static string NullAbbreviation {
+            get {
+                return ResourceManager.GetString("NullAbbreviation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Command can&apos;t be null.
+        /// </summary>
+        internal static string NullCommand {
+            get {
+                return ResourceManager.GetString("NullCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Information about Player can&apos;t be null.
         /// </summary>
         internal static string NullPlayerInfo {
@@ -295,11 +322,29 @@ namespace TicTacToeVNovikov.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на The is no available localization with this abbriveation ({0}).
+        /// </summary>
+        internal static string UnknownAbbreviation {
+            get {
+                return ResourceManager.GetString("UnknownAbbreviation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на In a list of commands there is no one with name {0}. you can use command /help to see all available commands.
         /// </summary>
         internal static string UnknownCommand {
             get {
                 return ResourceManager.GetString("UnknownCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на No similar was found among the registered players, check the correctness of the data entry or register by entering your Name Age.
+        /// </summary>
+        internal static string UnknownPlayer {
+            get {
+                return ResourceManager.GetString("UnknownPlayer", resourceCulture);
             }
         }
         

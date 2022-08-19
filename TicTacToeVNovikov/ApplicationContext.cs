@@ -9,7 +9,6 @@ namespace TicTacToeVNovikov
 
         public ApplicationContext()
         {
-            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
@@ -18,9 +17,5 @@ namespace TicTacToeVNovikov
             optionsBuilder.UseSqlite("Data Source=vladTicTacToe.db");
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Player>().Ignore(b => b.);
-        //}
     }
 }

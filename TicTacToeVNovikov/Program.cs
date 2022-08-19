@@ -1,15 +1,6 @@
-﻿
-using System.Reflection;
-using TicTacToeVNovikov.Resources;
-using System.Resources;
-using System.Globalization;
-using System.Text;
-
-namespace TicTacToeVNovikov;
+﻿namespace TicTacToeVNovikov;
 internal class Program
 {
-    
-    
     static void Main(string[] args)
     {
         while (true)

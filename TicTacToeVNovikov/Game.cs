@@ -1,16 +1,12 @@
-﻿using System.Numerics;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using TicTacToeVNovikov.Resources;
-using System.Reflection;
 using System.Globalization;
-using System.Resources;
+using TicTacToeVNovikov.Repository;
 
 namespace TicTacToeVNovikov;
 
 internal class Game
 {
-    //public static CultureInfo cultureInfo = new CultureInfo("en-US");
-    //public static ResourceManager resourceManager = new($"TicTacToeVNovikov.Resources.en.Strings", Assembly.GetExecutingAssembly());
     private int _turnCounter;
     private int _amountOfSkippedTurns;
     private List<Player> _playerList;
@@ -48,13 +44,31 @@ internal class Game
             {"ru","ru-RU"},
             {"de","de-DE"}
         };
-        Console.WriteLine(Strings.NecessaryAbbreviation);
-        foreach (var item in localizations)
+        while (true)
         {
-            Console.WriteLine(Strings.KeyIsForValue,item.Key,item.Value);
+            string? key = "";
+            try
+            {
+                Console.WriteLine(Strings.NecessaryAbbreviation);
+                foreach (var item in localizations)
+                {
+                    Console.WriteLine(Strings.KeyIsForValue, item.Key, item.Value);
+                }
+                key = Console.ReadLine();
+                CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(localizations[key]);
+            }
+            catch(KeyNotFoundException e)
+            {
+                Console.WriteLine(string.Format(Strings.UnknownAbbreviation,key));
+                continue;
+            }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine(Strings.NullAbbreviation);
+                continue;
+            }
+            break;
         }
-        var key = Console.ReadLine();
-        CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(localizations[key]);
 
     }
 
@@ -162,15 +176,13 @@ internal class Game
                                 }
                                 else
                                 {
-                                    throw new Exception((Strings.IdIsOccupied, id).ToString());
+                                    throw new Exception(string.Format(Strings.IdIsOccupied, id));
                                 }
                             }
                             else
                             {
-                                Player player = new Player(id, name, age);
-                                _playerList.Add(player);
-                                unitOfWork.Players.Insert(player);
-                                unitOfWork.Commit();
+                                Console.WriteLine(Strings.UnknownPlayer);
+                                continue;
                             }
                         }
                         else
@@ -217,7 +229,7 @@ internal class Game
             }
             else
             {
-                throw new Exception((Strings.WrongFormatOfTurnInfo,_fieldSize).ToString());
+                throw new Exception(string.Format(Strings.WrongFormatOfTurnInfo,_fieldSize));
             }
         }
         else

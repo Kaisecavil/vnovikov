@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json;
+﻿using System.Text.Json;
 using TicTacToeVNovikov.Resources;
+using TicTacToeVNovikov.Repository;
 
 namespace TicTacToeVNovikov
 {
@@ -24,7 +20,7 @@ namespace TicTacToeVNovikov
             {"/generatelastgameresult",Strings.GenerateLastGameResultDescription},
             {"/generateresultsforcurrentplayers",Strings.GenerateResultsForCurrentPlayersDescription},
             {"/generateallresults",Strings.GenerateAllResultsDescription},
-            {"/skip,",Strings.SkipDescription}
+            {"/skip",Strings.SkipDescription}
         };
 
         static public void AskForCommand()
@@ -40,6 +36,10 @@ namespace TicTacToeVNovikov
                 catch(KeyNotFoundException e)
                 {
                     Console.WriteLine(Strings.UnknownCommand,command);
+                }
+                catch (ArgumentNullException)
+                {
+                    Console.WriteLine(Strings.NullCommand);
                 }
                 Console.Write(Strings.AskForCommand);
                 command = Console.ReadLine();
@@ -68,6 +68,7 @@ namespace TicTacToeVNovikov
                     fileWriter.WriteLine(json);
                     fileWriter.Flush();
                     fileWriter.Close();
+                    Console.WriteLine(Strings.CommandExecuted, $"gameResult{gameResult.GameResultId}.txt");
                 }
                 catch (IOException ioe)
                 {
@@ -100,6 +101,7 @@ namespace TicTacToeVNovikov
                     fileWriter.WriteLine(json);
                     fileWriter.Flush();
                     fileWriter.Close();
+                    Console.WriteLine(Strings.CommandExecuted, $"GameResultsBetween{id1}and{id2}.txt");
                 }
                 catch (IOException ioe)
                 {
@@ -127,6 +129,7 @@ namespace TicTacToeVNovikov
                     fileWriter.WriteLine(json);
                     fileWriter.Flush();
                     fileWriter.Close();
+                    Console.WriteLine(Strings.CommandExecuted, "allGameResults.txt");
                 }
                 catch (IOException ioe)
                 {

@@ -1,17 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TicTacToeVNovikov.Interfaces;
 
-namespace TicTacToeVNovikov
+namespace TicTacToeVNovikov.Repository
 {
     internal class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private ApplicationContext _context;
         private DbSet<TEntity> _entities;
-
+        private bool disposed = false;
         public BaseRepository(ApplicationContext context)
         {
             _context = context;
@@ -20,7 +16,7 @@ namespace TicTacToeVNovikov
 
         public TEntity GetLast()
         {
-           return GetAll().Last();
+            return GetAll().Last();
         }
         public IEnumerable<TEntity> GetAll()
         {
@@ -52,19 +48,16 @@ namespace TicTacToeVNovikov
         {
             _context.SaveChanges();
         }
-
-        private bool disposed = false;
-
         public virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {
                     _context.Dispose();
                 }
             }
-            this.disposed = true;
+            disposed = true;
         }
 
         public void Dispose()

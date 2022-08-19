@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using TicTacToeVNovikov.Resources;
 
 namespace TicTacToeVNovikov;
@@ -33,7 +32,7 @@ internal class Player
             }
             else
             {
-                throw new Exception((Strings.AgeIsOutOfLimits,_minPlayerAge,_maxPlayerAge).ToString());
+                throw new Exception(string.Format(Strings.AgeIsOutOfLimits, _minPlayerAge, _maxPlayerAge));
             }
         } 
     }
@@ -54,7 +53,7 @@ internal class Player
                 }
                 else
                 {
-                    throw new ArgumentException((Strings.PlayerNameLengthIsOutOfLimits,_minNameLeangth,_maxNameLeangth).ToString());
+                    throw new ArgumentException(string.Format(Strings.PlayerNameLengthIsOutOfLimits,_minNameLeangth,_maxNameLeangth));
                 }
             }
             else if (value == null)
@@ -68,7 +67,15 @@ internal class Player
         }
     }
 
-    public Player(int id, string? playerName, int age)//, int maxNameLeangth = GameConstants.MaxNameLeangth, int minNameLeangth = GameConstants.MinNameLeangth,int maxPlayerAge = GameConstants.MaxPlayerAge,int minPlayerAge = GameConstants.MinPlayerAge
+    static Player()
+    {
+        _maxPlayerAge = GameConstants.MaxPlayerAge;
+        _minPlayerAge = GameConstants.MinPlayerAge;
+        _maxNameLeangth = GameConstants.MaxNameLeangth;
+        _minNameLeangth = GameConstants.MinNameLeangth;
+    }
+
+    public Player(int id, string? playerName, int age)
     {
         try
         {
@@ -93,14 +100,7 @@ internal class Player
         {
             throw new Exception(e.Message);
         }
-    }
-    static Player()
-    {
-        _maxPlayerAge = GameConstants.MaxPlayerAge;
-        _minPlayerAge = GameConstants.MinPlayerAge;
-        _maxNameLeangth = GameConstants.MaxNameLeangth;
-        _minNameLeangth = GameConstants.MinNameLeangth;
-    }
+    }  
 
     public static string? AskForPlayerInfo(int playerNumber)
     {

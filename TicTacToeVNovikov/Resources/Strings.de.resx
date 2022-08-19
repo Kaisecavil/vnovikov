@@ -130,10 +130,13 @@
     <value>Möchten Sie ein neues Tic-Tac-Toe-Spiel starten? {0} Drücken Sie die Eingabetaste, um zu starten, oder eine andere Taste, um zu beenden</value>
   </data>
   <data name="AskForPlayerInfo" xml:space="preserve">
-    <value>Spieler #{0} geben Sie Ihre ID ein Name Alter wenn Sie bereits gespielt haben, oder Name Alter wenn Sie ein neuer Spieler sind</value>
+    <value>Spieler #{0} geben Sie Ihre ID ein Name Alter wenn Sie bereits registriert sind oder Name Alter wenn Sie noch nicht registriert sind</value>
   </data>
   <data name="AskForPlayerTurn" xml:space="preserve">
     <value>Spieler #{0} ({1}) Geben Sie zwei Zahlen im Bereich [1-{2}] ein:</value>
+  </data>
+  <data name="CommandExecuted" xml:space="preserve">
+    <value>Вer Befehl wurde ausgeführt und eine Datei mit dem Namen {0} wurde erstellt</value>
   </data>
   <data name="CordinatesOutOfRange" xml:space="preserve">
     <value>Die Koordinaten außerhalb der Feldgrenzen müssen zwei Zahlen zwischen 1 und {0} sein</value>
@@ -174,6 +177,12 @@
   <data name="NecessaryAbbreviation" xml:space="preserve">
     <value>Geben Sie die gewünschte Abkürzung ein, um eine Sprache auszuwählen</value>
   </data>
+  <data name="NullAbbreviation" xml:space="preserve">
+    <value>Die Abkürzung kann nicht null sein</value>
+  </data>
+  <data name="NullCommand" xml:space="preserve">
+    <value>Befehl darf nicht null sein</value>
+  </data>
   <data name="NullPlayerInfo" xml:space="preserve">
     <value>Spielerinformationen können nicht null sein</value>
   </data>
@@ -195,11 +204,20 @@
   <data name="string1" xml:space="preserve">
     <value />
   </data>
+  <data name="String2" xml:space="preserve">
+    <value />
+  </data>
   <data name="SuccessfullRegistation" xml:space="preserve">
     <value>Die Registrierung war erfolgreich, {0} Ihre Id = {1} erinnere dich daran!</value>
   </data>
+  <data name="UnknownAbbreviation" xml:space="preserve">
+    <value>Es gibt keine verfügbare Lokalisierung mit dieser Abkürzung ({0})</value>
+  </data>
   <data name="UnknownCommand" xml:space="preserve">
     <value>Es gibt keine Befehle mit dem Namen {0} in der Befehlsliste. sie können den Befehl /help verwenden, um alle verfügbaren Befehle anzuzeigen</value>
+  </data>
+  <data name="UnknownPlayer" xml:space="preserve">
+    <value>Unter den registrierten Spielern wurde kein vergleichbares gefunden, überprüfen Sie die Richtigkeit der Dateneingabe oder geben Sie Ihren Namen ein Alter ein</value>
   </data>
   <data name="WrongFormatOfPlayerInfo" xml:space="preserve">
     <value>Das Format der Spielerinformationen ist ungültig, es muss eine ID sein Name Alter wenn Sie bereits registriert sind, oder ein Name Alter wenn Sie noch nicht registriert sind</value>
