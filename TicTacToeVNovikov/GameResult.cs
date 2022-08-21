@@ -1,8 +1,10 @@
 ﻿namespace TicTacToeVNovikov
 {
+    /// <summary>
+    /// Class that desrcibes entity of Game result
+    /// </summary>
     internal class GameResult
     {
-        
         public int GameResultId { get; private set; }
         public string GameStartTimestamp { get; private set; }
         public string GameFinishTimestamp { get; private set; }

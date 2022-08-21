@@ -4,6 +4,9 @@ using TicTacToeVNovikov.Repository;
 
 namespace TicTacToeVNovikov
 {
+    /// <summary>
+    /// That class is responsible for all actions with commandline.
+    /// </summary>
     static internal class CommandLine
     {
         static private Dictionary<string, Action> _commandAction = new Dictionary<string, Action>()
@@ -22,7 +25,9 @@ namespace TicTacToeVNovikov
             {"/generateallresults",Strings.GenerateAllResultsDescription},
             {"/skip",Strings.SkipDescription}
         };
-
+        /// <summary>
+        /// A method that prompts the user to enter a command.
+        /// </summary>
         static public void AskForCommand()
         {
             Console.WriteLine(Strings.AskForCommand);
@@ -46,7 +51,9 @@ namespace TicTacToeVNovikov
                 
             }
         }
-
+        /// <summary>
+        /// show all available command and theirs description
+        /// </summary>
         private static void Help()
         {
            foreach (var pair in _commandDescription)
@@ -54,7 +61,9 @@ namespace TicTacToeVNovikov
                 Console.WriteLine($"{pair.Key} - {pair.Value}");
             }
         }
-
+        /// <summary>
+        /// generate file-report in json format with last game result
+        /// </summary>
         private static void GenerateLastGameResult()
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new ApplicationContext()))
@@ -76,14 +85,16 @@ namespace TicTacToeVNovikov
                 }
             }
         }
-
+        /// <summary>
+        /// show all games where two current players take part together
+        /// </summary>
         private static void GenerateResultsForCurrentPlayers()
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new ApplicationContext()))
             {
                 string json = "";
                 GameResult gameResult = unitOfWork.GameResults.GetLast();
-                int id1 = gameResult.FirstPlayerId < gameResult.SecondPlayerId ? gameResult.FirstPlayerId : gameResult.SecondPlayerId;
+                int id1 = gameResult.FirstPlayerId < gameResult.SecondPlayerId ? gameResult.FirstPlayerId : gameResult.SecondPlayerId;//In order to avoid situation where we have two identical filese but with names like "GameResultsBetween1and2.txt" and "GameResultsBetween2and1.txt";
                 int id2 = gameResult.FirstPlayerId < gameResult.SecondPlayerId ? gameResult.SecondPlayerId : gameResult.FirstPlayerId;
                 var results = unitOfWork.GameResults.GetAll().ToList();
                 for (int i = 0; i < results.Count(); i++)
@@ -110,7 +121,9 @@ namespace TicTacToeVNovikov
 
             }
         }
-
+        /// <summary>
+        /// generate file-report in json format with ALL game results
+        /// </summary>
         private static void GenerateAllResults()
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new ApplicationContext()))

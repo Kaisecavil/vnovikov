@@ -1,4 +1,7 @@
 ﻿namespace TicTacToeVNovikov;
+/// <summary>
+/// This class contains game constants.
+/// </summary>
 internal class GameConstants
 {
     public const int FieldSize = 3;

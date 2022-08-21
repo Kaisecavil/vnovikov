@@ -4,7 +4,23 @@ using System.Globalization;
 using TicTacToeVNovikov.Repository;
 
 namespace TicTacToeVNovikov;
-
+/// <summary>
+/// This class is responsible for game logic and players registation.
+/// </summary>
+/// <remarks>
+/// If you want to use this class, you should use construction like that
+/// <code>
+///      while (true)
+///      {
+///         if (Game.AskForNewGame())
+///             {
+///                 Game game = new Game();
+///                 game.Startgame();
+///         }
+///         else { break; }
+///      }    
+/// </code>
+/// </remarks>
 internal class Game
 {
     private int _turnCounter;
@@ -18,7 +34,13 @@ internal class Game
     private int _maxMistakesCount;
     private string _gameMarks;
     private DateTime _gameStartTime;
-
+    /// <summary>
+    /// Main constructor that implements fields and calls some methods
+    /// </summary>
+    /// <param name="fieldSize">Gamefield size</param>
+    /// <param name="playersCount">Players count</param>
+    /// <param name="maxMistakesCount">Max count of mistakes that user allowed to do until his turn would be skipped </param>
+    /// <param name="gameMarks">String that will be represent all game marks, where first symbol is for wightspace, others is for player marks in order</param>
     public Game(int fieldSize = GameConstants.FieldSize, int playersCount = GameConstants.PlayersCount, int maxMistakesCount = GameConstants.MaxMistakesCount, string gameMarks = GameConstants.GameMarks)
     {
         _playerList = new List<Player>();
@@ -35,7 +57,9 @@ internal class Game
         
 
     }
-
+    /// <summary>
+    /// Method that allows you to ask a user to choose necessary localization
+    /// </summary>
     public void SelectLocalization()
     {
         var localizations = new Dictionary<string, string>()
@@ -65,18 +89,28 @@ internal class Game
             catch (ArgumentNullException)
             {
                 Console.WriteLine(Strings.NullAbbreviation);
-                continue;
+                continue;  
             }
             break;
         }
 
     }
-
+    /// <summary>
+    /// A method that prompt the user to start a new game.
+    /// </summary>
+    /// <returns>
+    /// <para> <see cref="System.Boolean"/> True, if user wants to start new game</para>
+    /// <para> <see cref="System.Boolean"/> False, if user doesn't want to start new game</para>
+    /// </returns>
     public static bool AskForNewGame()
     {
         Console.WriteLine(Strings.AskForNewGame,"\n");
         return Console.ReadKey().Key == ConsoleKey.Enter;
+
     }
+    /// <summary>
+    /// Method that starts game algorithm and turn sequence.
+    /// </summary>
     public void Startgame()
     {
         _gameStartTime = DateTime.Now;
@@ -85,7 +119,7 @@ internal class Game
         while (winnerIndex == 0)
         {
             MakeTurn(_currentPlayer);
-            _gameField.CheckVictory(_gameMarks[_turnCounter % 2 + 1], _turnCounter, _amountOfSkippedTurns, out winnerIndex);
+            _gameField.CheckVictory(_gameMarks[_turnCounter % 2 + 1], _turnCounter, _amountOfSkippedTurns, out winnerIndex); // _turnCounter % 2 + 1 That expression allows us to determine what mark we should to check
             PassTurn();
         }
         if (winnerIndex != -1)
@@ -96,10 +130,15 @@ internal class Game
         {
             Console.WriteLine(Strings.Draw);
         }
-        EndGame(_gameStartTime,winnerIndex);
+        CommitGameResult(_gameStartTime,winnerIndex);
         CommandLine.AskForCommand();
     }
-    private void EndGame(DateTime gameStartTime,int indexOfWinner)
+    /// <summary>
+    /// Method that commits game result
+    /// </summary>
+    /// <param name="gameStartTime">Parameter that is necessary for commiting game result and contains game start time</param>
+    /// <param name="indexOfWinner">Parameter that is necessary for commiting game result and contains sequence number of player that wins the game</param>
+    private void CommitGameResult(DateTime gameStartTime,int indexOfWinner)
     {
         using (UnitOfWork unitOfWork = new UnitOfWork(new ApplicationContext()))
         {
@@ -107,6 +146,10 @@ internal class Game
             unitOfWork.Commit();
         }
     }
+    /// <summary>
+    /// Method that realize all actions contained in one turn.
+    /// </summary>
+    /// <param name="player">The player who is making turn now</param>
     private void MakeTurn(Player player)
     {
         int x = 0;
@@ -135,7 +178,9 @@ internal class Game
             }
         }
     }
-
+    /// <summary>
+    /// Method that pass the turn.
+    /// </summary>
     private void PassTurn()
     {
         _turnCounter++;
@@ -143,7 +188,9 @@ internal class Game
         _currentPlayer = _playerList[necesseryPlayerSequenceNum];
         _mistakesInRow = 0;
     }
-
+    /// <summary>
+    /// Method that is responsible for registering players
+    /// </summary>
     private void PlayersRegister()
     {
         using(UnitOfWork unitOfWork =  new UnitOfWork(new ApplicationContext()))
@@ -205,14 +252,25 @@ internal class Game
             }
         }
     }
-
+    /// <summary>
+    /// A method that prompt the user to enter a turn information.
+    /// </summary>
+    /// <param name="player">The player who is making turn now</param>
+    /// <returns>Any string expression or null</returns>
     private string? AskForPlayerTurn(Player player)
     {
         Console.WriteLine(Strings.AskForPlayerTurn,_turnCounter % 2 + 1,player.PlayerName,_fieldSize);
         return Console.ReadLine();
 
     }
-
+    /// <summary>
+    /// Method that parse string in certain way to get information about player's turn
+    /// </summary>
+    /// <param name="turnStr">String that probably containt information about player's turn or null</param>
+    /// <param name="x">First coordinate of player's turn</param>
+    /// <param name="y">Second coordinate of player's turn</param>
+    /// <exception cref="Exception">Invalid format of player's turn information</exception>
+    /// <exception cref="NullReferenceException">Turn information is null</exception>
     private void ParseTurnInfo(string? turnStr, out int x, out int y)
     {
         if (turnStr != null)

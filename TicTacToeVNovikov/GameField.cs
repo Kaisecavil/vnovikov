@@ -1,6 +1,9 @@
 ﻿using TicTacToeVNovikov.Resources;
 
 namespace TicTacToeVNovikov;
+/// <summary>
+/// This class is responsible for all actions related to game field 
+/// </summary>
 internal class GameField
 {
     private char[,] _Field;
@@ -19,7 +22,9 @@ internal class GameField
 
         SetStartField();
     }
-
+    /// <summary>
+    /// Method that outputs game field to console.
+    /// </summary>
     public void DisplayField()
     {
         for (int i = 0; i < _Rows; i++)
@@ -37,6 +42,13 @@ internal class GameField
                 Console.WriteLine("-----");
         }
     }
+    /// <summary>
+    /// Method that checks the field for the victory of one of the players.
+    /// </summary>
+    /// <param name="mark">Mark of Player that did last move</param>
+    /// <param name="turnNumber">Turn Number in game</param>
+    /// <param name="skippedTurnCount">Amount of skipped turns during the game</param>
+    /// <param name="result">A sign of the victory of one of the players</param>
     public void CheckVictory(char mark, int turnNumber, int skippedTurnCount, out int result)
     {
 
@@ -77,7 +89,12 @@ internal class GameField
             return;
         }
     }
-
+    /// <summary>
+    /// Method that puts the mark on the game field.
+    /// </summary>
+    /// <param name="x">First coordinate</param>
+    /// <param name="y">Second cordinate</param>
+    /// <param name="mark">Current player's mark</param>
     public void PutMark(int x, int y, char mark)
     {
         if (ValidSpot(x, y))
@@ -85,7 +102,15 @@ internal class GameField
             _Field[x - 1, y - 1] = mark;
         }
     }
-
+    /// <summary>
+    /// Method that validate the spot on the game field.
+    /// </summary>
+    /// <param name="x">First coordinate</param>
+    /// <param name="y">Second cordinate</param>
+    /// <returns>
+    /// <para>True, if spot is valid</para>
+    /// </returns>
+    /// <exception cref="Exception">Spot is invlaid</exception>
     private bool ValidSpot(int x, int y)
     {
         if (x <= _Rows && y <= _Columns && x >= 1 && y >= 1)
@@ -104,6 +129,9 @@ internal class GameField
             throw new Exception(string.Format(Strings.CordinatesOutOfRange,_fieldSize));
         }
     }
+    /// <summary>
+    /// Method that initilize game field with empty game marks.
+    /// </summary>
     private void SetStartField()
     {
         for (int i = 0; i < _Rows; i++)
