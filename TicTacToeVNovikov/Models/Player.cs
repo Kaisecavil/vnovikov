@@ -1,5 +1,5 @@
 ﻿using System.Text.RegularExpressions;
-using TicTacToeVNovikov.Constants;
+using TicTacToeVNovikov.GameConstants;
 using TicTacToeVNovikov.Resources;
 
 namespace TicTacToeVNovikov.Models;
@@ -94,10 +94,10 @@ internal class Player
     /// </summary>
     static Player()
     {
-        _maxPlayerAge = Constants.Constants.MaxPlayerAge;
-        _minPlayerAge = Constants.Constants.MinPlayerAge;
-        _maxNameLength = Constants.Constants.MaxNameLeangth;
-        _minNameLength = Constants.Constants.MinNameLeangth;
+        _maxPlayerAge = Constants.MaxPlayerAge;
+        _minPlayerAge = Constants.MinPlayerAge;
+        _maxNameLength = Constants.MaxNameLeangth;
+        _minNameLength = Constants.MinNameLeangth;
     }
     /// <summary>
     /// Main constructor that initializes all fields and used by EntityFramework to create entities

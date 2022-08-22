@@ -145,6 +145,9 @@
   <data name="CordinatesOutOfRange" xml:space="preserve">
     <value>Координаты вне границ поля, должны быть два числа от 1 до {0}</value>
   </data>
+  <data name="DbSavingException" xml:space="preserve">
+    <value>Что-то пошло не так во время сохранения данных в базе данных : {0}</value>
+  </data>
   <data name="Draw" xml:space="preserve">
     <value>НИЧЬЯ</value>
     <comment>1</comment>

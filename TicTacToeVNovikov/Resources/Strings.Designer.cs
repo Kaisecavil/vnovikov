@@ -133,6 +133,15 @@ namespace TicTacToeVNovikov.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Something goes wrong drunig saving your data in data base : {0}.
+        /// </summary>
+        internal static string DbSavingException {
+            get {
+                return ResourceManager.GetString("DbSavingException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DRAW.
         /// </summary>
         internal static string Draw {

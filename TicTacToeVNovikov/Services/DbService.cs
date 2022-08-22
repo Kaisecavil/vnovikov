@@ -2,6 +2,9 @@
 
 namespace TicTacToeVNovikov.Services
 {
+    /// <summary>
+    /// This class allows us to interact with Db anywhere in project
+    /// </summary>
     internal static class DbService
     {
         private static UnitOfWork _unit;
@@ -15,11 +18,8 @@ namespace TicTacToeVNovikov.Services
             }
         }
 
-       
-
         static DbService()
         {
-            
             try
             {
                 Unit = new(new ApplicationContext());

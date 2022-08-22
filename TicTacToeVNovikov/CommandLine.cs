@@ -1,10 +1,8 @@
 ﻿using System.Text.Json;
 using TicTacToeVNovikov.Resources;
-using TicTacToeVNovikov.Repository;
 using TicTacToeVNovikov.Models;
-using System.IO;
-using System;
 using TicTacToeVNovikov.Services;
+using TicTacToeVNovikov.GameConstants;
 
 namespace TicTacToeVNovikov
 {
@@ -44,7 +42,7 @@ namespace TicTacToeVNovikov
                 {
                     _commandAction[command].Invoke();
                 }
-                catch (KeyNotFoundException e)
+                catch (KeyNotFoundException)
                 {
                     Console.WriteLine(Strings.UnknownCommand, command);
                 }
@@ -77,15 +75,15 @@ namespace TicTacToeVNovikov
             try
             {
                 var directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-                string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.Constants.DownloadedFilesDirectoryName);
+                string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.DownloadedFilesDirectoryName);
                 string dateTime = DateTime.Now.ToString().Replace(':', '_').Replace('.', '_');
-                string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.Constants.LastGameResultFileName, gameResult.GameResultId));
+                string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.LastGameResultFileName, gameResult.GameResultId));
                 FileStream fileStream = File.Open(path, FileMode.Create, FileAccess.Write);
                 StreamWriter fileWriter = new StreamWriter(fileStream);
                 fileWriter.WriteLine(json);
                 fileWriter.Flush();
                 fileWriter.Close();
-                Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.Constants.LastGameResultFileName, gameResult.GameResultId), path);
+                Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.LastGameResultFileName, gameResult.GameResultId), path);
             }
             catch (IOException ioe)
             {
@@ -115,15 +113,15 @@ namespace TicTacToeVNovikov
             try
             {
                 var directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-                string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.Constants.DownloadedFilesDirectoryName);
+                string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.DownloadedFilesDirectoryName);
                 string dateTime = DateTime.Now.ToString().Replace(':', '_').Replace('.', '_');
-                string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.Constants.GameResultsForCurrentPlayersFileName, id1, id2));
+                string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.GameResultsForCurrentPlayersFileName, id1, id2));
                 FileStream fileStream = File.Open(path, FileMode.Create, FileAccess.Write);
                 StreamWriter fileWriter = new StreamWriter(fileStream);
                 fileWriter.WriteLine(json);
                 fileWriter.Flush();
                 fileWriter.Close();
-                Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.Constants.GameResultsForCurrentPlayersFileName, id1, id2), path);
+                Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.GameResultsForCurrentPlayersFileName, id1, id2), path);
             }
             catch (IOException ioe)
             {
@@ -148,15 +146,15 @@ namespace TicTacToeVNovikov
             try
             {
                 var directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-                string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.Constants.DownloadedFilesDirectoryName);
+                string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.DownloadedFilesDirectoryName);
                 string dateTime = DateTime.Now.ToString().Replace(':', '_').Replace('.', '_');
-                string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.Constants.AllGameResultsFileName));
+                string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.AllGameResultsFileName));
                 FileStream fileStream = File.Open(path, FileMode.Create, FileAccess.Write);
                 StreamWriter fileWriter = new StreamWriter(fileStream);
                 fileWriter.WriteLine(json);
                 fileWriter.Flush();
                 fileWriter.Close();
-                Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.Constants.AllGameResultsFileName), path);
+                Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.AllGameResultsFileName), path);
 
             }
             catch (IOException ioe)

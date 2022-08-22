@@ -1,5 +1,6 @@
 ﻿using TicTacToeVNovikov.Interfaces;
 using TicTacToeVNovikov.Models;
+using TicTacToeVNovikov.Resources;
 
 namespace TicTacToeVNovikov.Repository
 {
@@ -49,7 +50,14 @@ namespace TicTacToeVNovikov.Repository
         /// </summary>
         public void Commit()
         {
-            _dbContext.SaveChanges();
+            try
+            {
+                _dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(Strings.DbSavingException, ex.Message);
+            }
         }
 
         public virtual void Dispose(bool disposing)

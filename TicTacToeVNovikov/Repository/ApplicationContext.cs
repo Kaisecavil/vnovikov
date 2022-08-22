@@ -1,11 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Protocols;
 using TicTacToeVNovikov.Models;
 using System.Configuration;
-using System;
-using System.Data;
-using System.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
+
 
 
 namespace TicTacToeVNovikov.Repository

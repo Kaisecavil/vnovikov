@@ -1,10 +1,9 @@
 ﻿using System.Text.RegularExpressions;
 using TicTacToeVNovikov.Resources;
 using System.Globalization;
-using TicTacToeVNovikov.Repository;
 using TicTacToeVNovikov.Models;
-using TicTacToeVNovikov.Constants;
 using TicTacToeVNovikov.Services;
+using TicTacToeVNovikov.GameConstants;
 
 namespace TicTacToeVNovikov;
 /// <summary>
@@ -44,9 +43,10 @@ internal class Game
     /// <param name="playersCount">Players count</param>
     /// <param name="maxMistakesCount">Max count of mistakes that user allowed to do until his turn would be skipped </param>
     /// <param name="gameMarks">String that will be represent all game marks, where first symbol is for wightspace, others is for player marks in order</param>
-    public Game(int fieldSize = Constants.Constants.FieldSize, int playersCount = Constants.Constants.PlayersCount, int maxMistakesCount = Constants.Constants.MaxMistakesCount, string gameMarks = Constants.Constants.GameMarks)
+    public Game(int fieldSize = Constants.FieldSize, int playersCount = Constants.PlayersCount, int maxMistakesCount = Constants.MaxMistakesCount, string gameMarks = Constants.GameMarks)
     {
-        _playerList = new List<Player>();
+        SelectLocalization();
+        _playerList = PlayerService.PlayersGeristration(playersCount);
         _gameField = new GameField(fieldSize, fieldSize);
         _turnCounter = 0;
         _mistakesInRow = 0;
@@ -54,11 +54,7 @@ internal class Game
         _playersCount = playersCount;
         _maxMistakesCount = maxMistakesCount;
         _gameMarks = gameMarks;
-        SelectLocalization();
-        PlayersRegister();
         _currentPlayer = _playerList[0];
-
-
     }
     /// <summary>
     /// Method that allows you to ask a user to choose necessary localization
@@ -133,20 +129,10 @@ internal class Game
         {
             Console.WriteLine(Strings.Draw);
         }
-        CommitGameResult(_gameStartTime, winnerIndex);
+        GameResultService.CommitGameResult(_gameStartTime, winnerIndex, _playerList);
         CommandLine.AskForCommand();
     }
-    /// <summary>
-    /// Method that commits game result
-    /// </summary>
-    /// <param name="gameStartTime">Parameter that is necessary for commiting game result and contains game start time</param>
-    /// <param name="indexOfWinner">Parameter that is necessary for commiting game result and contains sequence number of player that wins the game</param>
-    private void CommitGameResult(DateTime gameStartTime, int indexOfWinner)
-    {
 
-        DbService.Unit.GameResults.Insert(new GameResult(_gameStartTime.ToString("O"), DateTime.Now.ToString("O"), _playerList[0].Id, _playerList[1].Id, 'X', 'O', _playerList[indexOfWinner - 1].Id));
-        DbService.Unit.Commit();
-    }
     /// <summary>
     /// Method that realize all actions contained in one turn.
     /// </summary>
@@ -189,69 +175,7 @@ internal class Game
         _currentPlayer = _playerList[necesseryPlayerSequenceNum];
         _mistakesInRow = 0;
     }
-    /// <summary>
-    /// Method that is responsible for registering players
-    /// </summary>
-    private void PlayersRegister()
-    {
 
-        for (int i = 1; i <= _playersCount; i++)
-        {
-            while (true)
-            {
-                try
-                {
-                    int id;
-                    string? name = null;
-                    int age;
-                    bool isRegistered = false;
-                    Player.ParsePlayerInfo(Player.AskForPlayerInfo(i), out id, out name, out age, out isRegistered);
-                    if (isRegistered)
-                    {
-                        Player findedPlayer = DbService.Unit.Players.GetById(id);
-                        if (findedPlayer != null)
-                        {
-                            if (findedPlayer.PlayerName == name)
-                            {
-                                Player player = new Player(id, name, age);
-                                _playerList.Add(player);
-                                if (findedPlayer.Age != age)
-                                {
-                                    findedPlayer.Age = age;
-                                    DbService.Unit.Commit();
-                                }
-                            }
-                            else
-                            {
-                                throw new Exception(string.Format(Strings.IdIsOccupied, id));
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine(Strings.UnknownPlayer);
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        Player player = new Player(name, age);
-                        DbService.Unit.Players.Insert(player);
-                        DbService.Unit.Commit();
-                        Player playerWithId = new Player(DbService.Unit.Players.GetLast().Id, name, age);
-                        _playerList.Add(playerWithId);
-                        Console.WriteLine(Strings.SuccessfullRegistation, playerWithId.PlayerName, playerWithId.Id);
-                    }
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(Strings.InvalidPlayerInfo + e.Message);
-                    continue;
-                }
-            }
-        }
-
-    }
     /// <summary>
     /// A method that prompt the user to enter a turn information.
     /// </summary>

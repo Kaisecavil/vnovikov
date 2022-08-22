@@ -145,6 +145,9 @@
   <data name="CordinatesOutOfRange" xml:space="preserve">
     <value>Cordinates out of range of gamefield, must be two numbers from 1 to {0}</value>
   </data>
+  <data name="DbSavingException" xml:space="preserve">
+    <value>Something goes wrong drunig saving your data in data base : {0}</value>
+  </data>
   <data name="Draw" xml:space="preserve">
     <value>DRAW</value>
     <comment>1</comment>

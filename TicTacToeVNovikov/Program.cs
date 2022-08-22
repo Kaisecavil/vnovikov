@@ -1,12 +1,9 @@
-﻿using TicTacToeVNovikov.Repository;
-using TicTacToeVNovikov.Services;
-
-namespace TicTacToeVNovikov;
+﻿namespace TicTacToeVNovikov;
 internal class Program
 {
     static void Main(string[] args)
     {
-        
+
         while (true)
         {
             if (Game.AskForNewGame())

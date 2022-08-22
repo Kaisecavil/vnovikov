@@ -1,4 +1,4 @@
-﻿namespace TicTacToeVNovikov.Constants;
+﻿namespace TicTacToeVNovikov.GameConstants;
 /// <summary>
 /// This class contains game constants.
 /// </summary>

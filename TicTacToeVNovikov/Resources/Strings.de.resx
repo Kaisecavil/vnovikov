@@ -141,6 +141,9 @@
   <data name="CordinatesOutOfRange" xml:space="preserve">
     <value>Die Koordinaten außerhalb der Feldgrenzen müssen zwei Zahlen zwischen 1 und {0} sein</value>
   </data>
+  <data name="DbSavingException" xml:space="preserve">
+    <value>Beim Speichern Ihrer Daten in der Datenbank geht etwas schief : {0}</value>
+  </data>
   <data name="Draw" xml:space="preserve">
     <value>Unentschieden</value>
   </data>
