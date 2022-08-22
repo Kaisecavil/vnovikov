@@ -4,6 +4,7 @@ using TicTacToeVNovikov.Repository;
 using TicTacToeVNovikov.Models;
 using System.IO;
 using System;
+using TicTacToeVNovikov.Services;
 
 namespace TicTacToeVNovikov
 {
@@ -12,7 +13,7 @@ namespace TicTacToeVNovikov
     /// </summary>
     static internal class CommandLine
     {
-        
+
         static private Dictionary<string, Action> _commandAction = new Dictionary<string, Action>()
         {
             {"/help", Help},
@@ -37,15 +38,15 @@ namespace TicTacToeVNovikov
             Help();
             Console.WriteLine(Strings.AskForCommand);
             string? command = Console.ReadLine();
-            while (command!="/skip")
+            while (command != "/skip")
             {
                 try
                 {
                     _commandAction[command].Invoke();
                 }
-                catch(KeyNotFoundException e)
+                catch (KeyNotFoundException e)
                 {
-                    Console.WriteLine(Strings.UnknownCommand,command);
+                    Console.WriteLine(Strings.UnknownCommand, command);
                 }
                 catch (ArgumentNullException)
                 {
@@ -53,7 +54,7 @@ namespace TicTacToeVNovikov
                 }
                 Console.Write(Strings.AskForCommand);
                 command = Console.ReadLine();
-                
+
             }
         }
         /// <summary>
@@ -61,7 +62,7 @@ namespace TicTacToeVNovikov
         /// </summary>
         private static void Help()
         {
-           foreach (var pair in _commandDescription)
+            foreach (var pair in _commandDescription)
             {
                 Console.WriteLine($"{pair.Key} - {pair.Value}");
             }
@@ -71,102 +72,98 @@ namespace TicTacToeVNovikov
         /// </summary>
         private static void GenerateLastGameResult()
         {
-            using (UnitOfWork unitOfWork = new UnitOfWork(new ApplicationContext()))
+            GameResult gameResult = DbService.Unit.GameResults.GetLast();
+            string json = JsonSerializer.Serialize(gameResult);
+            try
             {
-                GameResult gameResult = unitOfWork.GameResults.GetLast();
-                string json = JsonSerializer.Serialize(gameResult);
-                try
-                {
-                    var directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-                    string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.Constants.DownloadedFilesDirectoryName);
-                    string dateTime = DateTime.Now.ToString().Replace(':', '_').Replace('.', '_');
-                    string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.Constants.LastGameResultFileName, gameResult.GameResultId));
-                    FileStream fileStream = File.Open(path, FileMode.Create, FileAccess.Write);
-                    StreamWriter fileWriter = new StreamWriter(fileStream);
-                    fileWriter.WriteLine(json);
-                    fileWriter.Flush();
-                    fileWriter.Close();
-                    Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.Constants.LastGameResultFileName, gameResult.GameResultId), path);
-                }
-                catch (IOException ioe)
-                {
-                    Console.WriteLine(ioe);
-                }
+                var directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+                string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.Constants.DownloadedFilesDirectoryName);
+                string dateTime = DateTime.Now.ToString().Replace(':', '_').Replace('.', '_');
+                string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.Constants.LastGameResultFileName, gameResult.GameResultId));
+                FileStream fileStream = File.Open(path, FileMode.Create, FileAccess.Write);
+                StreamWriter fileWriter = new StreamWriter(fileStream);
+                fileWriter.WriteLine(json);
+                fileWriter.Flush();
+                fileWriter.Close();
+                Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.Constants.LastGameResultFileName, gameResult.GameResultId), path);
             }
+            catch (IOException ioe)
+            {
+                Console.WriteLine(ioe);
+            }
+
         }
         /// <summary>
         /// show all games where two current players take part together
         /// </summary>
         private static void GenerateResultsForCurrentPlayers()
         {
-            using (UnitOfWork unitOfWork = new UnitOfWork(new ApplicationContext()))
-            {
-                string json = "";
-                GameResult gameResult = unitOfWork.GameResults.GetLast();
-                int id1 = gameResult.FirstPlayerId < gameResult.SecondPlayerId ? gameResult.FirstPlayerId : gameResult.SecondPlayerId;//In order to avoid situation where we have two identical filese but with names like "GameResultsBetween1and2.json" and "GameResultsBetween2and1.json";
-                int id2 = gameResult.FirstPlayerId < gameResult.SecondPlayerId ? gameResult.SecondPlayerId : gameResult.FirstPlayerId;
-                var results = unitOfWork.GameResults.GetAll().ToList();
-                for (int i = 0; i < results.Count(); i++)
-                {
-                    if(results[i].FirstPlayerId == gameResult.FirstPlayerId && results[i].SecondPlayerId == gameResult.SecondPlayerId || results[i].FirstPlayerId == gameResult.SecondPlayerId && results[i].SecondPlayerId == gameResult.FirstPlayerId)
-                    {
-                        json += JsonSerializer.Serialize(results[i]);
-                        json += "\n";
-                    }
-                }
-                try
-                {
-                    var directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-                    string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.Constants.DownloadedFilesDirectoryName);
-                    string dateTime = DateTime.Now.ToString().Replace(':', '_').Replace('.', '_');
-                    string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.Constants.GameResultsForCurrentPlayersFileName,id1,id2));
-                    FileStream fileStream = File.Open(path, FileMode.Create, FileAccess.Write);
-                    StreamWriter fileWriter = new StreamWriter(fileStream);
-                    fileWriter.WriteLine(json);
-                    fileWriter.Flush();
-                    fileWriter.Close();
-                    Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.Constants.GameResultsForCurrentPlayersFileName, id1, id2), path);
-                }
-                catch (IOException ioe)
-                {
-                    Console.WriteLine(ioe);
-                }
 
+            string json = "";
+            GameResult gameResult = DbService.Unit.GameResults.GetLast();
+            int id1 = gameResult.FirstPlayerId < gameResult.SecondPlayerId ? gameResult.FirstPlayerId : gameResult.SecondPlayerId;//In order to avoid situation where we have two identical filese but with names like "GameResultsBetween1and2.json" and "GameResultsBetween2and1.json";
+            int id2 = gameResult.FirstPlayerId < gameResult.SecondPlayerId ? gameResult.SecondPlayerId : gameResult.FirstPlayerId;
+            var results = DbService.Unit.GameResults.GetAll().ToList();
+            for (int i = 0; i < results.Count(); i++)
+            {
+                if (results[i].FirstPlayerId == gameResult.FirstPlayerId && results[i].SecondPlayerId == gameResult.SecondPlayerId || results[i].FirstPlayerId == gameResult.SecondPlayerId && results[i].SecondPlayerId == gameResult.FirstPlayerId)
+                {
+                    json += JsonSerializer.Serialize(results[i]);
+                    json += "\n";
+                }
             }
+            try
+            {
+                var directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+                string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.Constants.DownloadedFilesDirectoryName);
+                string dateTime = DateTime.Now.ToString().Replace(':', '_').Replace('.', '_');
+                string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.Constants.GameResultsForCurrentPlayersFileName, id1, id2));
+                FileStream fileStream = File.Open(path, FileMode.Create, FileAccess.Write);
+                StreamWriter fileWriter = new StreamWriter(fileStream);
+                fileWriter.WriteLine(json);
+                fileWriter.Flush();
+                fileWriter.Close();
+                Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.Constants.GameResultsForCurrentPlayersFileName, id1, id2), path);
+            }
+            catch (IOException ioe)
+            {
+                Console.WriteLine(ioe);
+            }
+
+
         }
         /// <summary>
         /// generate file-report in json format with ALL game results
         /// </summary>
         private static void GenerateAllResults()
         {
-            using (UnitOfWork unitOfWork = new UnitOfWork(new ApplicationContext()))
-            {
-                string json = "";
-                var results = unitOfWork.GameResults.GetAll();
-                foreach (var result in results)
-                {
-                    json+=JsonSerializer.Serialize(result);
-                    json += "\n";
-                }
-                try
-                {
-                    var directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-                    string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.Constants.DownloadedFilesDirectoryName);
-                    string dateTime = DateTime.Now.ToString().Replace(':', '_').Replace('.', '_');
-                    string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.Constants.AllGameResultsFileName));
-                    FileStream fileStream = File.Open(path, FileMode.Create, FileAccess.Write);
-                    StreamWriter fileWriter = new StreamWriter(fileStream);
-                    fileWriter.WriteLine(json);
-                    fileWriter.Flush();
-                    fileWriter.Close();
-                    Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.Constants.AllGameResultsFileName), path);
 
-                }
-                catch (IOException ioe)
-                {
-                    Console.WriteLine(ioe);
-                }
+            string json = "";
+            var results = DbService.Unit.GameResults.GetAll();
+            foreach (var result in results)
+            {
+                json += JsonSerializer.Serialize(result);
+                json += "\n";
             }
+            try
+            {
+                var directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+                string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.Constants.DownloadedFilesDirectoryName);
+                string dateTime = DateTime.Now.ToString().Replace(':', '_').Replace('.', '_');
+                string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.Constants.AllGameResultsFileName));
+                FileStream fileStream = File.Open(path, FileMode.Create, FileAccess.Write);
+                StreamWriter fileWriter = new StreamWriter(fileStream);
+                fileWriter.WriteLine(json);
+                fileWriter.Flush();
+                fileWriter.Close();
+                Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.Constants.AllGameResultsFileName), path);
+
+            }
+            catch (IOException ioe)
+            {
+                Console.WriteLine(ioe);
+            }
+
         }
     }
 }

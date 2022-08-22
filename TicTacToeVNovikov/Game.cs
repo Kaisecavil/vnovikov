@@ -4,6 +4,7 @@ using System.Globalization;
 using TicTacToeVNovikov.Repository;
 using TicTacToeVNovikov.Models;
 using TicTacToeVNovikov.Constants;
+using TicTacToeVNovikov.Services;
 
 namespace TicTacToeVNovikov;
 /// <summary>
@@ -56,7 +57,7 @@ internal class Game
         SelectLocalization();
         PlayersRegister();
         _currentPlayer = _playerList[0];
-        
+
 
     }
     /// <summary>
@@ -83,15 +84,15 @@ internal class Game
                 key = Console.ReadLine();
                 CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(localizations[key]);
             }
-            catch(KeyNotFoundException e)
+            catch (KeyNotFoundException e)
             {
-                Console.WriteLine(string.Format(Strings.UnknownAbbreviation,key));
+                Console.WriteLine(string.Format(Strings.UnknownAbbreviation, key));
                 continue;
             }
             catch (ArgumentNullException)
             {
                 Console.WriteLine(Strings.NullAbbreviation);
-                continue;  
+                continue;
             }
             break;
         }
@@ -106,7 +107,7 @@ internal class Game
     /// </returns>
     public static bool AskForNewGame()
     {
-        Console.WriteLine(Strings.AskForNewGame,"\n");
+        Console.WriteLine(Strings.AskForNewGame, "\n");
         return Console.ReadKey().Key == ConsoleKey.Enter;
 
     }
@@ -126,13 +127,13 @@ internal class Game
         }
         if (winnerIndex != -1)
         {
-            Console.WriteLine(Strings.AnnouncementOfWinner,winnerIndex, _playerList[winnerIndex - 1].PlayerName);
+            Console.WriteLine(Strings.AnnouncementOfWinner, winnerIndex, _playerList[winnerIndex - 1].PlayerName);
         }
         else
         {
             Console.WriteLine(Strings.Draw);
         }
-        CommitGameResult(_gameStartTime,winnerIndex);
+        CommitGameResult(_gameStartTime, winnerIndex);
         CommandLine.AskForCommand();
     }
     /// <summary>
@@ -140,13 +141,11 @@ internal class Game
     /// </summary>
     /// <param name="gameStartTime">Parameter that is necessary for commiting game result and contains game start time</param>
     /// <param name="indexOfWinner">Parameter that is necessary for commiting game result and contains sequence number of player that wins the game</param>
-    private void CommitGameResult(DateTime gameStartTime,int indexOfWinner)
+    private void CommitGameResult(DateTime gameStartTime, int indexOfWinner)
     {
-        using (UnitOfWork unitOfWork = new UnitOfWork(new ApplicationContext()))
-        {
-            unitOfWork.GameResults.Insert(new GameResult(_gameStartTime.ToString("O"), DateTime.Now.ToString("O"), _playerList[0].Id, _playerList[1].Id, 'X', 'O', _playerList[indexOfWinner - 1].Id));
-            unitOfWork.Commit();
-        }
+
+        DbService.Unit.GameResults.Insert(new GameResult(_gameStartTime.ToString("O"), DateTime.Now.ToString("O"), _playerList[0].Id, _playerList[1].Id, 'X', 'O', _playerList[indexOfWinner - 1].Id));
+        DbService.Unit.Commit();
     }
     /// <summary>
     /// Method that realize all actions contained in one turn.
@@ -161,7 +160,7 @@ internal class Game
             try
             {
                 ParseTurnInfo(AskForPlayerTurn(player), out x, out y);
-                _gameField.PutMark(x, y, _gameMarks[_turnCounter%2+1]);
+                _gameField.PutMark(x, y, _gameMarks[_turnCounter % 2 + 1]);
                 _gameField.DisplayField();
                 break;
             }
@@ -171,7 +170,7 @@ internal class Game
                 _mistakesInRow++;
                 if (_mistakesInRow >= _maxMistakesCount)
                 {
-                    Console.WriteLine(Strings.SkippedTurn,_mistakesInRow);
+                    Console.WriteLine(Strings.SkippedTurn, _mistakesInRow);
                     _amountOfSkippedTurns++;
                     _mistakesInRow = 0;
                     return;
@@ -195,64 +194,63 @@ internal class Game
     /// </summary>
     private void PlayersRegister()
     {
-        using(UnitOfWork unitOfWork =  new UnitOfWork(new ApplicationContext()))
+
+        for (int i = 1; i <= _playersCount; i++)
         {
-            for (int i = 1; i <= _playersCount; i++)
+            while (true)
             {
-                while (true)
+                try
                 {
-                    try
+                    int id;
+                    string? name = null;
+                    int age;
+                    bool isRegistered = false;
+                    Player.ParsePlayerInfo(Player.AskForPlayerInfo(i), out id, out name, out age, out isRegistered);
+                    if (isRegistered)
                     {
-                        int id;
-                        string? name = null;
-                        int age;
-                        bool isRegistered = false;
-                        Player.ParsePlayerInfo(Player.AskForPlayerInfo(i), out id, out name, out age,out isRegistered);
-                        if (isRegistered)
+                        Player findedPlayer = DbService.Unit.Players.GetById(id);
+                        if (findedPlayer != null)
                         {
-                            Player findedPlayer = unitOfWork.Players.GetById(id);
-                            if (findedPlayer != null)
+                            if (findedPlayer.PlayerName == name)
                             {
-                                if (findedPlayer.PlayerName == name)
+                                Player player = new Player(id, name, age);
+                                _playerList.Add(player);
+                                if (findedPlayer.Age != age)
                                 {
-                                    Player player = new Player(id, name, age);
-                                    _playerList.Add(player);
-                                    if (findedPlayer.Age != age)
-                                    {
-                                        findedPlayer.Age = age;
-                                        unitOfWork.Commit();
-                                    }
-                                }
-                                else
-                                {
-                                    throw new Exception(string.Format(Strings.IdIsOccupied, id));
+                                    findedPlayer.Age = age;
+                                    DbService.Unit.Commit();
                                 }
                             }
                             else
                             {
-                                Console.WriteLine(Strings.UnknownPlayer);
-                                continue;
+                                throw new Exception(string.Format(Strings.IdIsOccupied, id));
                             }
                         }
                         else
                         {
-                            Player player = new Player(name, age);
-                            unitOfWork.Players.Insert(player);
-                            unitOfWork.Commit();
-                            Player playerWithId = new Player(unitOfWork.Players.GetLast().Id, name, age);
-                            _playerList.Add(playerWithId);
-                            Console.WriteLine(Strings.SuccessfullRegistation,playerWithId.PlayerName,playerWithId.Id);
+                            Console.WriteLine(Strings.UnknownPlayer);
+                            continue;
                         }
-                        break;
                     }
-                    catch (Exception e)
+                    else
                     {
-                        Console.WriteLine(Strings.InvalidPlayerInfo + e.Message);
-                        continue;
+                        Player player = new Player(name, age);
+                        DbService.Unit.Players.Insert(player);
+                        DbService.Unit.Commit();
+                        Player playerWithId = new Player(DbService.Unit.Players.GetLast().Id, name, age);
+                        _playerList.Add(playerWithId);
+                        Console.WriteLine(Strings.SuccessfullRegistation, playerWithId.PlayerName, playerWithId.Id);
                     }
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(Strings.InvalidPlayerInfo + e.Message);
+                    continue;
                 }
             }
         }
+
     }
     /// <summary>
     /// A method that prompt the user to enter a turn information.
@@ -261,7 +259,7 @@ internal class Game
     /// <returns>Any string expression or null</returns>
     private string? AskForPlayerTurn(Player player)
     {
-        Console.WriteLine(Strings.AskForPlayerTurn,_turnCounter % 2 + 1,player.PlayerName,_fieldSize);
+        Console.WriteLine(Strings.AskForPlayerTurn, _turnCounter % 2 + 1, player.PlayerName, _fieldSize);
         return Console.ReadLine();
 
     }
@@ -289,7 +287,7 @@ internal class Game
             }
             else
             {
-                throw new Exception(string.Format(Strings.WrongFormatOfTurnInfo,_fieldSize));
+                throw new Exception(string.Format(Strings.WrongFormatOfTurnInfo, _fieldSize));
             }
         }
         else
