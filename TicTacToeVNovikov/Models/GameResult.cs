@@ -1,4 +1,4 @@
-﻿namespace TicTacToeVNovikov
+﻿namespace TicTacToeVNovikov.Models
 {
     /// <summary>
     /// Class that desrcibes entity of Game result

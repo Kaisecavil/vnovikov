@@ -140,7 +140,7 @@
     <comment>1</comment>
   </data>
   <data name="CommandExecuted" xml:space="preserve">
-    <value>Команда была выполнена и был создан файл с названием {0}</value>
+    <value>Команда была выполнена и был создан файл с названием {0}. Его путь {1}.</value>
   </data>
   <data name="CordinatesOutOfRange" xml:space="preserve">
     <value>Координаты вне границ поля, должны быть два числа от 1 до {0}</value>

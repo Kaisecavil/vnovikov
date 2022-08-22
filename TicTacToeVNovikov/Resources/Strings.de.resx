@@ -136,7 +136,7 @@
     <value>Spieler #{0} ({1}) Geben Sie zwei Zahlen im Bereich [1-{2}] ein:</value>
   </data>
   <data name="CommandExecuted" xml:space="preserve">
-    <value>Вer Befehl wurde ausgeführt und eine Datei mit dem Namen {0} wurde erstellt</value>
+    <value>Вer Befehl wurde ausgeführt und eine Datei mit dem Namen {0} wurde erstellt. Es ist Pfad: {1}</value>
   </data>
   <data name="CordinatesOutOfRange" xml:space="preserve">
     <value>Die Koordinaten außerhalb der Feldgrenzen müssen zwei Zahlen zwischen 1 und {0} sein</value>

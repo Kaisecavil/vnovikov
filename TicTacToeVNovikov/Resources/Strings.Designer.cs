@@ -115,7 +115,7 @@ namespace TicTacToeVNovikov.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The command was executed and a file with the name {0} was created.
+        ///   Looks up a localized string similar to The command was executed and a file with the name {0} was created. It&apos;s Path :{1}.
         /// </summary>
         internal static string CommandExecuted {
             get {

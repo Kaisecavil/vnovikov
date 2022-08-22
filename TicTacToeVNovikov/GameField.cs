@@ -1,4 +1,5 @@
-﻿using TicTacToeVNovikov.Resources;
+﻿using TicTacToeVNovikov.Constants;
+using TicTacToeVNovikov.Resources;
 
 namespace TicTacToeVNovikov;
 /// <summary>
@@ -12,7 +13,7 @@ internal class GameField
     private int _fieldSize;
     private string _gameMarks;
 
-    public GameField(int rows, int cols, int fieldSize = GameConstants.FieldSize, string gameMarks = GameConstants.GameMarks)
+    public GameField(int rows, int cols, int fieldSize = Constants.Constants.FieldSize, string gameMarks = Constants.Constants.GameMarks)
     {
         _Field = new char[rows, cols];
         _Rows = rows;

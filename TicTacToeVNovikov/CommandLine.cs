@@ -1,6 +1,9 @@
 ﻿using System.Text.Json;
 using TicTacToeVNovikov.Resources;
 using TicTacToeVNovikov.Repository;
+using TicTacToeVNovikov.Models;
+using System.IO;
+using System;
 
 namespace TicTacToeVNovikov
 {
@@ -9,6 +12,7 @@ namespace TicTacToeVNovikov
     /// </summary>
     static internal class CommandLine
     {
+        
         static private Dictionary<string, Action> _commandAction = new Dictionary<string, Action>()
         {
             {"/help", Help},
@@ -30,6 +34,7 @@ namespace TicTacToeVNovikov
         /// </summary>
         static public void AskForCommand()
         {
+            Help();
             Console.WriteLine(Strings.AskForCommand);
             string? command = Console.ReadLine();
             while (command!="/skip")
@@ -72,12 +77,16 @@ namespace TicTacToeVNovikov
                 string json = JsonSerializer.Serialize(gameResult);
                 try
                 {
-                    FileStream fileStream = File.Open($"gameResult{gameResult.GameResultId}.txt", FileMode.Create, FileAccess.Write);
+                    var directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+                    string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.Constants.DownloadedFilesDirectoryName);
+                    string dateTime = DateTime.Now.ToString().Replace(':', '_').Replace('.', '_');
+                    string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.Constants.LastGameResultFileName, gameResult.GameResultId));
+                    FileStream fileStream = File.Open(path, FileMode.Create, FileAccess.Write);
                     StreamWriter fileWriter = new StreamWriter(fileStream);
                     fileWriter.WriteLine(json);
                     fileWriter.Flush();
                     fileWriter.Close();
-                    Console.WriteLine(Strings.CommandExecuted, $"gameResult{gameResult.GameResultId}.txt");
+                    Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.Constants.LastGameResultFileName, gameResult.GameResultId), path);
                 }
                 catch (IOException ioe)
                 {
@@ -94,7 +103,7 @@ namespace TicTacToeVNovikov
             {
                 string json = "";
                 GameResult gameResult = unitOfWork.GameResults.GetLast();
-                int id1 = gameResult.FirstPlayerId < gameResult.SecondPlayerId ? gameResult.FirstPlayerId : gameResult.SecondPlayerId;//In order to avoid situation where we have two identical filese but with names like "GameResultsBetween1and2.txt" and "GameResultsBetween2and1.txt";
+                int id1 = gameResult.FirstPlayerId < gameResult.SecondPlayerId ? gameResult.FirstPlayerId : gameResult.SecondPlayerId;//In order to avoid situation where we have two identical filese but with names like "GameResultsBetween1and2.json" and "GameResultsBetween2and1.json";
                 int id2 = gameResult.FirstPlayerId < gameResult.SecondPlayerId ? gameResult.SecondPlayerId : gameResult.FirstPlayerId;
                 var results = unitOfWork.GameResults.GetAll().ToList();
                 for (int i = 0; i < results.Count(); i++)
@@ -107,12 +116,16 @@ namespace TicTacToeVNovikov
                 }
                 try
                 {
-                    FileStream fileStream = File.Open($"GameResultsBetween{id1}and{id2}.txt", FileMode.Create, FileAccess.Write);
+                    var directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+                    string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.Constants.DownloadedFilesDirectoryName);
+                    string dateTime = DateTime.Now.ToString().Replace(':', '_').Replace('.', '_');
+                    string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.Constants.GameResultsForCurrentPlayersFileName,id1,id2));
+                    FileStream fileStream = File.Open(path, FileMode.Create, FileAccess.Write);
                     StreamWriter fileWriter = new StreamWriter(fileStream);
                     fileWriter.WriteLine(json);
                     fileWriter.Flush();
                     fileWriter.Close();
-                    Console.WriteLine(Strings.CommandExecuted, $"GameResultsBetween{id1}and{id2}.txt");
+                    Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.Constants.GameResultsForCurrentPlayersFileName, id1, id2), path);
                 }
                 catch (IOException ioe)
                 {
@@ -137,12 +150,17 @@ namespace TicTacToeVNovikov
                 }
                 try
                 {
-                    FileStream fileStream = File.Open("allGameResults.txt", FileMode.Create, FileAccess.Write);
+                    var directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+                    string folderPath = Path.Combine(directory.Parent.Parent.Parent.ToString(), Constants.Constants.DownloadedFilesDirectoryName);
+                    string dateTime = DateTime.Now.ToString().Replace(':', '_').Replace('.', '_');
+                    string path = Path.Combine(folderPath, dateTime + '_' + string.Format(Constants.Constants.AllGameResultsFileName));
+                    FileStream fileStream = File.Open(path, FileMode.Create, FileAccess.Write);
                     StreamWriter fileWriter = new StreamWriter(fileStream);
                     fileWriter.WriteLine(json);
                     fileWriter.Flush();
                     fileWriter.Close();
-                    Console.WriteLine(Strings.CommandExecuted, "allGameResults.txt");
+                    Console.WriteLine(Strings.CommandExecuted, dateTime + '_' + string.Format(Constants.Constants.AllGameResultsFileName), path);
+
                 }
                 catch (IOException ioe)
                 {

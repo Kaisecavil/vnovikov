@@ -1,7 +1,8 @@
 ﻿using System.Text.RegularExpressions;
+using TicTacToeVNovikov.Constants;
 using TicTacToeVNovikov.Resources;
 
-namespace TicTacToeVNovikov;
+namespace TicTacToeVNovikov.Models;
 /// <summary>
 /// Class that describes entity of player.
 /// </summary>
@@ -29,16 +30,17 @@ internal class Player
     /// </summary>
     public int Id { get; private set; }
     private int _age;
-    public int Age { 
-        get 
-        { 
+    public int Age
+    {
+        get
+        {
             return _age;
         }
         set
         {
-            if(value < _maxPlayerAge && value > _minPlayerAge)
+            if (value < _maxPlayerAge && value > _minPlayerAge)
             {
-                if(value > Age)
+                if (value > Age)
                 {
                     _age = value;
                 }
@@ -46,13 +48,13 @@ internal class Player
                 {
                     throw new Exception(Strings.LesserAge);
                 }
-                
+
             }
             else
             {
                 throw new Exception(string.Format(Strings.AgeIsOutOfLimits, _minPlayerAge, _maxPlayerAge));
             }
-        } 
+        }
     }
     private string? _playerName;
     /// <summary>
@@ -74,7 +76,7 @@ internal class Player
                 }
                 else
                 {
-                    throw new ArgumentException(string.Format(Strings.PlayerNameLengthIsOutOfLimits,_minNameLength,_maxNameLength));
+                    throw new ArgumentException(string.Format(Strings.PlayerNameLengthIsOutOfLimits, _minNameLength, _maxNameLength));
                 }
             }
             else if (value == null)
@@ -92,10 +94,10 @@ internal class Player
     /// </summary>
     static Player()
     {
-        _maxPlayerAge = GameConstants.MaxPlayerAge;
-        _minPlayerAge = GameConstants.MinPlayerAge;
-        _maxNameLength = GameConstants.MaxNameLeangth;
-        _minNameLength = GameConstants.MinNameLeangth;
+        _maxPlayerAge = Constants.Constants.MaxPlayerAge;
+        _minPlayerAge = Constants.Constants.MinPlayerAge;
+        _maxNameLength = Constants.Constants.MaxNameLeangth;
+        _minNameLength = Constants.Constants.MinNameLeangth;
     }
     /// <summary>
     /// Main constructor that initializes all fields and used by EntityFramework to create entities
@@ -123,7 +125,7 @@ internal class Player
     /// <param name="playerName">Player's name</param>
     /// <param name="age">Player's age</param>
     /// <exception cref="Exception">If any player parameters are invalid, an exception will be thrown with the corresponding message</exception>
-    public Player(string playerName,int age)
+    public Player(string playerName, int age)
     {
         try
         {
@@ -142,7 +144,7 @@ internal class Player
     /// <returns>Any string expression or <see cref="System"/></returns>
     public static string? AskForPlayerInfo(int playerNumber)
     {
-        Console.WriteLine(Strings.AskForPlayerInfo,playerNumber);
+        Console.WriteLine(Strings.AskForPlayerInfo, playerNumber);
         return Console.ReadLine();
     }
 
@@ -156,7 +158,7 @@ internal class Player
     /// <param name="isRegistered">bool variable that shows whether the user is registered</param>
     /// <exception cref="Exception">Invalid format of player's personal information</exception>
     /// <exception cref="NullReferenceException">Player's information is null</exception>
-    public static void ParsePlayerInfo(string? playerInfo,out int id,out string name,out int age,out bool isRegistered)
+    public static void ParsePlayerInfo(string? playerInfo, out int id, out string name, out int age, out bool isRegistered)
     {
         if (playerInfo != null)
         {
@@ -177,7 +179,7 @@ internal class Player
                 string[] nums = temp.Split(' ');
                 name = nums[0];
                 age = Convert.ToInt32(nums[1]);
-                isRegistered=false;
+                isRegistered = false;
             }
             else
             {

@@ -1,8 +1,8 @@
-﻿namespace TicTacToeVNovikov;
+﻿namespace TicTacToeVNovikov.Constants;
 /// <summary>
 /// This class contains game constants.
 /// </summary>
-internal class GameConstants
+internal class Constants
 {
     public const int FieldSize = 3;
     public const int MaxNameLeangth = 25;
@@ -12,6 +12,9 @@ internal class GameConstants
     public const string GameMarks = ".XO";
     public const int MaxPlayerAge = 90;
     public const int MinPlayerAge = 10;
-
+    public const string DownloadedFilesDirectoryName = "DownloadedFiles";
+    public const string AllGameResultsFileName = "allGaneResults.json";
+    public const string LastGameResultFileName = "lastGameResult{0}.json";
+    public const string GameResultsForCurrentPlayersFileName = "gameResultsForPlayers{0}and{1}.json";
 }
 

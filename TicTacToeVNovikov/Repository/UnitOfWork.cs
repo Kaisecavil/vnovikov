@@ -1,4 +1,5 @@
 ﻿using TicTacToeVNovikov.Interfaces;
+using TicTacToeVNovikov.Models;
 
 namespace TicTacToeVNovikov.Repository
 {

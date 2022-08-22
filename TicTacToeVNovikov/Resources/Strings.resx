@@ -140,7 +140,7 @@
     <comment>1</comment>
   </data>
   <data name="CommandExecuted" xml:space="preserve">
-    <value>The command was executed and a file with the name {0} was created</value>
+    <value>The command was executed and a file with the name {0} was created. It's Path :{1}</value>
   </data>
   <data name="CordinatesOutOfRange" xml:space="preserve">
     <value>Cordinates out of range of gamefield, must be two numbers from 1 to {0}</value>

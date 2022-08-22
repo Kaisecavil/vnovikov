@@ -1,4 +1,6 @@
-﻿namespace TicTacToeVNovikov.Interfaces
+﻿using TicTacToeVNovikov.Models;
+
+namespace TicTacToeVNovikov.Interfaces
 {
     internal interface IUnitOfWork : IDisposable
     {

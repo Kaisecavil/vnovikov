@@ -2,6 +2,8 @@
 using TicTacToeVNovikov.Resources;
 using System.Globalization;
 using TicTacToeVNovikov.Repository;
+using TicTacToeVNovikov.Models;
+using TicTacToeVNovikov.Constants;
 
 namespace TicTacToeVNovikov;
 /// <summary>
@@ -41,7 +43,7 @@ internal class Game
     /// <param name="playersCount">Players count</param>
     /// <param name="maxMistakesCount">Max count of mistakes that user allowed to do until his turn would be skipped </param>
     /// <param name="gameMarks">String that will be represent all game marks, where first symbol is for wightspace, others is for player marks in order</param>
-    public Game(int fieldSize = GameConstants.FieldSize, int playersCount = GameConstants.PlayersCount, int maxMistakesCount = GameConstants.MaxMistakesCount, string gameMarks = GameConstants.GameMarks)
+    public Game(int fieldSize = Constants.Constants.FieldSize, int playersCount = Constants.Constants.PlayersCount, int maxMistakesCount = Constants.Constants.MaxMistakesCount, string gameMarks = Constants.Constants.GameMarks)
     {
         _playerList = new List<Player>();
         _gameField = new GameField(fieldSize, fieldSize);

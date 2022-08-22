@@ -1,4 +1,6 @@
-﻿namespace TicTacToeVNovikov;
+﻿using TicTacToeVNovikov.Repository;
+
+namespace TicTacToeVNovikov;
 internal class Program
 {
     static void Main(string[] args)
