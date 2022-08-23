@@ -46,21 +46,22 @@ namespace TicTacToeVNovikov.Services
                                     {
                                         try
                                         {
-                                            foundPlayer.Name = name;  
+                                            foundPlayer.Name = name;
+                                            DbService.Unit.Commit();
                                         }
                                         catch (Exception e)
                                         {
                                             Console.WriteLine(e.Message);
                                             continue;
                                         }
-                                        //throw new Exception(string.Format(Strings.IdIsOccupied, id));
                                     }
 
                                     if (foundPlayer.Age != age)
                                     {
                                         try
                                         {
-                                            foundPlayer.Age = age;  
+                                            foundPlayer.Age = age;
+                                            DbService.Unit.Commit();
                                         }
                                         catch (Exception e)
                                         {
@@ -70,11 +71,12 @@ namespace TicTacToeVNovikov.Services
 
                                     }
                                     playerList.Add(player);
-                                    DbService.Unit.Commit();
+                                    
                                 }
                                 else
                                 {
-                                    throw new Exception(string.Format(Strings.SimilarPlayerException));
+                                    Console.WriteLine(Strings.SimilarPlayerException);
+                                    continue;
                                 }
                             }
                             else
