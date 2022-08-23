@@ -13,7 +13,7 @@ internal class GameField
     private int _fieldSize;
     private string _gameMarks;
 
-    public GameField(int rows, int cols, int fieldSize = Constants.GameLimits.FieldSize, string gameMarks = Constants.GameLimits.GameMarks)
+    public GameField(int rows, int cols, int fieldSize = Constants.GameLimits.FieldSize, string gameMarks = Constants.GameStrings.GameMarks)
     {
         _Field = new char[rows, cols];
         _Rows = rows;
@@ -23,6 +23,7 @@ internal class GameField
 
         SetStartField();
     }
+
     /// <summary>
     /// Method that outputs game field to console.
     /// </summary>
@@ -33,16 +34,17 @@ internal class GameField
             for (int j = 0; j < _Columns; j++)
             {
                 if (j != _Columns - 1)
-                    Console.Write($"{_Field[i, j]}|");
+                    Console.Write(_Field[i, j]+Constants.GameStrings.FieldColumnDelimeter);
                 else
                     Console.Write($"{_Field[i, j]}");
             }
 
             Console.WriteLine();
             if (i != _Rows - 1)
-                Console.WriteLine("-----");
+                Console.WriteLine(Constants.GameStrings.FieldRowDelimeter);
         }
     }
+
     /// <summary>
     /// Method that checks the field for the victory of one of the players.
     /// </summary>
@@ -90,6 +92,7 @@ internal class GameField
             return;
         }
     }
+
     /// <summary>
     /// Method that puts the mark on the game field.
     /// </summary>
@@ -103,6 +106,7 @@ internal class GameField
             _Field[x - 1, y - 1] = mark;
         }
     }
+
     /// <summary>
     /// Method that validate the spot on the game field.
     /// </summary>
@@ -130,6 +134,7 @@ internal class GameField
             throw new Exception(string.Format(Strings.CordinatesOutOfRange,_fieldSize));
         }
     }
+
     /// <summary>
     /// Method that initilize game field with empty game marks.
     /// </summary>

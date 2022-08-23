@@ -23,9 +23,9 @@ namespace TicTacToeVNovikov.Repository
         {
             _dbContext = dbContext;
         }
-        /// <summary>
-        /// Property that provides access to necessary DbSet
-        /// </summary>
+
+        
+        /// <inheritdoc/>
         public IRepository<Player> Players
         {
             get
@@ -34,9 +34,8 @@ namespace TicTacToeVNovikov.Repository
                     (_players = new BaseRepository<Player>(_dbContext));
             }
         }
-        /// <summary>
-        /// Property that provides access to necessary DbSet
-        /// </summary>
+        
+        /// <inheritdoc/>
         public IRepository<GameResult> GameResults
         {
             get
@@ -45,9 +44,9 @@ namespace TicTacToeVNovikov.Repository
                     (_gameResults = new BaseRepository<GameResult>(_dbContext));
             }
         }
-        /// <summary>
-        /// Method that save all changes made in context
-        /// </summary>
+
+        
+        /// <inheritdoc/>
         public void Commit()
         {
             try
@@ -60,6 +59,10 @@ namespace TicTacToeVNovikov.Repository
             }
         }
 
+        /// <summary>
+        /// realization of <see cref="IDisposable"/> , so that allows to use "using(...)" constraction
+        /// </summary>
+        /// <param name="disposing">Is disposing</param>
         public virtual void Dispose(bool disposing)
         {
             if (!disposed)

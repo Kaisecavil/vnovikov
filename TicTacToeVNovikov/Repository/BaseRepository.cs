@@ -29,64 +29,59 @@ namespace TicTacToeVNovikov.Repository
             _context = context;
             _entities = context.Set<TEntity>();
         }
-        /// <summary>
-        /// Method that returns last record in <seealso cref="DbSet{TEntity}"/>
-        /// </summary>
-        /// <returns>Last Entity in <seealso cref="entities"/></returns>
+
+        
+        /// <inheritdoc/>
         public TEntity GetLast()
         {
             return GetAll().Last();
         }
-        /// <summary>
-        /// Method that allows to get all entities from <seealso cref="DbSet{TEntity}"/>
-        /// </summary>
-        /// <returns>returns list of entities</returns>
+
+        /// <inheritdoc/>
         public IEnumerable<TEntity> GetAll()
         {
             return _entities.ToList();
         }
-        /// <summary>
-        /// Method that allows to get necessary record in <seealso cref="DbSet{TEntity}"/> by id
-        /// </summary>
-        /// <param name="id">id to find necessary record in DbSet</param>
-        /// <returns>Entity with necessery id or null</returns>
+
+        /// <inheritdoc/>
         public TEntity GetById(int id)
         {
             return _entities.Find(id);
         }
-        /// <summary>
-        /// Method that adds a record in DbSet
-        /// </summary>
-        /// <param name="entity">Entity that you want to add</param>
+
+        /// <inheritdoc/>
         public void Insert(TEntity entity)
         {
             _entities.Add(entity);
         }
-        /// <summary>
-        /// Method that delete necessry record in DbSet by id
-        /// </summary>
-        /// <param name="id">id to find necessary record in DbSet</param>
-        public void Delete(int id)
-        {
-            TEntity entity = _entities.Find(id);
-            _entities.Remove(entity);
-        }
-        /// <summary>
-        /// Method that tells context to track entity
-        /// </summary>
-        /// <param name="entity">Necessary entity to track</param>
+
+
+
+
+        /// <inheritdoc/>
         public void Update(TEntity entity)
         {
             _entities.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
         }
-        /// <summary>
-        /// Method that save all made changes in context
-        /// </summary>
+
+        /// <inheritdoc/>
+        public void Delete(int id)
+        {
+            TEntity entity = _entities.Find(id);
+            _entities.Remove(entity);
+        }
+
+        /// <inheritdoc/>
         public void Save()
         {
             _context.SaveChanges();
         }
+
+        /// <summary>
+        /// realization of <see cref="IDisposable"/> , so that allows to use "using(...)" constraction
+        /// </summary>
+        /// <param name="disposing">Is disposing</param>
         public virtual void Dispose(bool disposing)
         {
             if (!disposed)
@@ -98,7 +93,9 @@ namespace TicTacToeVNovikov.Repository
             }
             disposed = true;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);

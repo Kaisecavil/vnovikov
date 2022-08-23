@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Age" xml:space="preserve">
+    <value>Возраст</value>
+  </data>
   <data name="AgeIsOutOfLimits" xml:space="preserve">
     <value>Возраст игрока должен быть между {0} и {1} годами</value>
   </data>
@@ -132,11 +135,11 @@
     <comment>1</comment>
   </data>
   <data name="AskForPlayerInfo" xml:space="preserve">
-    <value>Игрок №{0} введите свои ID Имя Возраст если вы уже зарегистрированы или Имя Возраст если вы не зарегистрированы</value>
+    <value>Игрок #{0} загляните в таблицу зарегистрированных игроков и введите свое ID Имя Возраст, если вы зарегистрированы, или Введите свое Имя Возраст для регистрации</value>
     <comment>1</comment>
   </data>
   <data name="AskForPlayerTurn" xml:space="preserve">
-    <value>Игрок №{0} ({1}) введите два числа в диапозоне [1-{2}]:</value>
+    <value>Игрок #{0} ({1}) введите два числа в диапазоне [1-{2}] и разделите их пробелом</value>
     <comment>1</comment>
   </data>
   <data name="CommandExecuted" xml:space="preserve">
@@ -151,6 +154,9 @@
   <data name="Draw" xml:space="preserve">
     <value>НИЧЬЯ</value>
     <comment>1</comment>
+  </data>
+  <data name="EmptyPlayerDbSet" xml:space="preserve">
+    <value>Сейчас в базе данных ещё нет игроков, зарегистрируйтесь чтобы играть</value>
   </data>
   <data name="EmptyPlayerName" xml:space="preserve">
     <value>Имя игрока не может быть пустым или содержать только пробелы</value>
@@ -167,6 +173,9 @@
   <data name="HelpDescription" xml:space="preserve">
     <value>Показывает на экране все доступные команды и их описания</value>
   </data>
+  <data name="ID" xml:space="preserve">
+    <value>Id</value>
+  </data>
   <data name="IdIsOccupied" xml:space="preserve">
     <value>Id = {0} уже занят другим игроком</value>
   </data>
@@ -181,6 +190,9 @@
   </data>
   <data name="MarkedSpot" xml:space="preserve">
     <value>Эта клетка уже занята, попробуйте другую</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
   </data>
   <data name="NecessaryAbbreviation" xml:space="preserve">
     <value>Введите необходимую аббревиатуру чтобы выбрать язык</value>
@@ -202,6 +214,12 @@
   </data>
   <data name="PlayerNameLengthIsOutOfLimits" xml:space="preserve">
     <value>Длинна имени игрока должна быть от {0} до {1} символов</value>
+  </data>
+  <data name="PlayersTableAgeColumnWidth" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="SimilarPlayerException" xml:space="preserve">
+    <value>Данный игрок уже в игре</value>
   </data>
   <data name="SkipDescription" xml:space="preserve">
     <value>Если вы больше не хотите вводить команды</value>

@@ -4,6 +4,7 @@
 /// </summary>
 internal static class Constants
 {
+
     public static class GameLimits
     {
         public const int FieldSize = 3;
@@ -11,9 +12,9 @@ internal static class Constants
         public const int MinNameLeangth = 3;
         public const int PlayersCount = 2;
         public const int MaxMistakesCount = 3;
-        public const string GameMarks = ".XO";
         public const int MaxPlayerAge = 90;
         public const int MinPlayerAge = 10;
+
     }
 
     public static class TextOfCommand
@@ -31,6 +32,21 @@ internal static class Constants
         public const string AllGameResultsFileName = "allGameResults.json";
         public const string LastGameResultFileName = "lastGameResult{0}.json";
         public const string GameResultsForCurrentPlayersFileName = "gameResultsForPlayers{0}and{1}.json";
+    }
+
+    public static class GameStrings
+    {
+        public const string GameMarks = ".XO";
+        public const string FieldRowDelimeter = "-----";
+        public const string FieldColumnDelimeter = "|";  
+    }
+
+    public static class TableParameters
+    {
+        public const char PlayersTableRowDelimeter = '-';
+        public const string PlayersTableColumnDelimeter = "|";
+        public const int PlayersTableAgeColumnWidth = 10;
+        public const int PlayersTableIdColumnWidth = 4;
     }
 
 }

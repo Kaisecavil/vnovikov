@@ -61,6 +61,15 @@ namespace TicTacToeVNovikov.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Age.
+        /// </summary>
+        internal static string Age {
+            get {
+                return ResourceManager.GetString("Age", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Player Age must be beetwen {0} and {1} ages.
         /// </summary>
         internal static string AgeIsOutOfLimits {
@@ -97,7 +106,7 @@ namespace TicTacToeVNovikov.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Player #{0} Input your Id Name Age if you registered, or Input your Name Age if you are not registered.
+        ///   Looks up a localized string similar to Player #{0} take a look on table of registered players and Input your Id Name Age if you registered, or Input your Name Age to register.
         /// </summary>
         internal static string AskForPlayerInfo {
             get {
@@ -106,7 +115,7 @@ namespace TicTacToeVNovikov.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Player #{0} ({1}) input two numbers in range of [1-{2}]:.
+        ///   Looks up a localized string similar to Player #{0} ({1}) input two numbers in range of [1-{2}] and separated by a space:.
         /// </summary>
         internal static string AskForPlayerTurn {
             get {
@@ -147,6 +156,15 @@ namespace TicTacToeVNovikov.Resources {
         internal static string Draw {
             get {
                 return ResourceManager.GetString("Draw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no players in the database yet, register to play.
+        /// </summary>
+        internal static string EmptyPlayerDbSet {
+            get {
+                return ResourceManager.GetString("EmptyPlayerDbSet", resourceCulture);
             }
         }
         
@@ -196,6 +214,15 @@ namespace TicTacToeVNovikov.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Id.
+        /// </summary>
+        internal static string ID {
+            get {
+                return ResourceManager.GetString("ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Id = {0} is alredy occupied by another Player.
         /// </summary>
         internal static string IdIsOccupied {
@@ -237,6 +264,15 @@ namespace TicTacToeVNovikov.Resources {
         internal static string MarkedSpot {
             get {
                 return ResourceManager.GetString("MarkedSpot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
@@ -300,6 +336,24 @@ namespace TicTacToeVNovikov.Resources {
         internal static string PlayerNameLengthIsOutOfLimits {
             get {
                 return ResourceManager.GetString("PlayerNameLengthIsOutOfLimits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4.
+        /// </summary>
+        internal static string PlayersTableAgeColumnWidth {
+            get {
+                return ResourceManager.GetString("PlayersTableAgeColumnWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This player is already in the game.
+        /// </summary>
+        internal static string SimilarPlayerException {
+            get {
+                return ResourceManager.GetString("SimilarPlayerException", resourceCulture);
             }
         }
         

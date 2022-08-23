@@ -1,4 +1,5 @@
-﻿using TicTacToeVNovikov.Models;
+﻿using TicTacToeVNovikov.GameConstants;
+using TicTacToeVNovikov.Models;
 using TicTacToeVNovikov.Resources;
 
 namespace TicTacToeVNovikov.Services
@@ -23,33 +24,48 @@ namespace TicTacToeVNovikov.Services
                         string? name = null;
                         int age;
                         bool isRegistered = false;
+                        try
+                        {
+                            ShowAllPlayers();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                         Player.ParsePlayerInfo(Player.AskForPlayerInfo(i), out id, out name, out age, out isRegistered);
                         if (isRegistered)
                         {
                             Player foundPlayer = DbService.Unit.Players.GetById(id);
                             if (foundPlayer != null)
                             {
-                                if (foundPlayer.PlayerName == name)
+                                if (foundPlayer.Name == name)
                                 {
                                     Player player = new Player(id, name, age);
-                                    if (foundPlayer.Age != age)
+                                    if (NoAnySimilarPlayer(playerList,player))
                                     {
-                                        try
+                                        if (foundPlayer.Age != age)
                                         {
-                                            foundPlayer.Age = age;
-                                            playerList.Add(player);
-                                            DbService.Unit.Commit();
-                                        }
-                                        catch (Exception e)
-                                        {
-                                            Console.WriteLine(e.Message);
-                                            continue;
-                                        }
+                                            try
+                                            {
+                                                foundPlayer.Age = age;
+                                                playerList.Add(player);
+                                                DbService.Unit.Commit();
+                                            }
+                                            catch (Exception e)
+                                            {
+                                                Console.WriteLine(e.Message);
+                                                continue;
+                                            }
 
+                                        }
+                                        else
+                                        {
+                                            playerList.Add(player);
+                                        }
                                     }
                                     else
                                     {
-                                        playerList.Add(player);
+                                        throw new Exception(string.Format(Strings.SimilarPlayerException));
                                     }
 
                                 }
@@ -71,7 +87,7 @@ namespace TicTacToeVNovikov.Services
                             DbService.Unit.Commit();
                             Player playerWithId = new Player(DbService.Unit.Players.GetLast().Id, name, age);
                             playerList.Add(playerWithId);
-                            Console.WriteLine(Strings.SuccessfullRegistation, playerWithId.PlayerName, playerWithId.Id);
+                            Console.WriteLine(Strings.SuccessfullRegistation, playerWithId.Name, playerWithId.Id);
                         }
                         break;
                     }
@@ -83,6 +99,40 @@ namespace TicTacToeVNovikov.Services
                 }
             }
             return playerList;
+        }
+
+        private static void ShowAllPlayers()
+        {
+
+            List<Player> allPlayers = DbService.Unit.Players.GetAll().ToList();
+            if (allPlayers.Count != 0)
+            {
+                Console.WriteLine($"{Constants.TableParameters.PlayersTableColumnDelimeter}{Strings.ID,-Constants.TableParameters.PlayersTableIdColumnWidth}{Constants.TableParameters.PlayersTableColumnDelimeter}{Strings.Name,-Constants.GameLimits.MaxNameLeangth}{Constants.TableParameters.PlayersTableColumnDelimeter}{Strings.Age,-Constants.TableParameters.PlayersTableAgeColumnWidth}{Constants.TableParameters.PlayersTableColumnDelimeter}");
+                foreach (Player player in allPlayers)
+                {
+                    
+                    string outStr = string.Format($"{Constants.TableParameters.PlayersTableColumnDelimeter}{player.Id,-Constants.TableParameters.PlayersTableIdColumnWidth}{Constants.TableParameters.PlayersTableColumnDelimeter}{player.Name,-Constants.GameLimits.MaxNameLeangth}{Constants.TableParameters.PlayersTableColumnDelimeter}{player.Age,-Constants.TableParameters.PlayersTableAgeColumnWidth}{Constants.TableParameters.PlayersTableColumnDelimeter}");
+                    Console.WriteLine(new String(Constants.TableParameters.PlayersTableRowDelimeter, outStr.Length));
+                    Console.WriteLine(outStr);
+                    
+                }
+            }
+            else
+            {
+                throw new Exception(Strings.EmptyPlayerDbSet);
+            }
+        }
+
+        private static bool NoAnySimilarPlayer(List<Player> players,Player playerToCheck)
+        {
+            foreach (Player player in players)
+            {
+                if (player.Equals(playerToCheck))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

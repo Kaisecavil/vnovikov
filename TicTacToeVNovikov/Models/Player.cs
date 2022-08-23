@@ -1,8 +1,10 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Drawing;
+using System.Text.RegularExpressions;
 using TicTacToeVNovikov.GameConstants;
 using TicTacToeVNovikov.Resources;
 
 namespace TicTacToeVNovikov.Models;
+
 /// <summary>
 /// Class that describes entity of player.
 /// </summary>
@@ -56,15 +58,15 @@ internal class Player
             }
         }
     }
-    private string? _playerName;
+    private string? _name;
     /// <summary>
     /// Player name property that realize logic of get and set methods in the right way
     /// </summary>
-    public string? PlayerName
+    public string? Name
     {
         get
         {
-            return _playerName;
+            return _name;
         }
         private set
         {
@@ -72,7 +74,7 @@ internal class Player
             {
                 if (_minNameLength <= value.Length && value.Length <= _maxNameLength)
                 {
-                    _playerName = value;
+                    _name = value;
                 }
                 else
                 {
@@ -106,12 +108,12 @@ internal class Player
     /// <param name="playerName">Player's name</param>
     /// <param name="age">Player's age</param>
     /// <exception cref="Exception">If any player parameters are invalid, an exception will be thrown with the corresponding message</exception>
-    public Player(int id, string? playerName, int age)
+    public Player(int id, string? name, int age)
     {
         try
         {
             Id = id;
-            PlayerName = playerName;
+            Name = name;
             Age = age;
         }
         catch (Exception e)
@@ -129,7 +131,7 @@ internal class Player
     {
         try
         {
-            PlayerName = playerName;
+            Name = playerName;
             Age = age;
         }
         catch (Exception e)
@@ -189,6 +191,20 @@ internal class Player
         else
         {
             throw new NullReferenceException(Strings.NullPlayerInfo);
+        }
+    }
+
+    public override bool Equals(Object obj)
+    {
+        //Check for null and compare run-time types.
+        if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+        {
+            return false;
+        }
+        else
+        {
+            Player player = (Player)obj;
+            return (this.Id == player.Id) && (this.Name == player.Name) && (this.Age == player.Age);
         }
     }
 }

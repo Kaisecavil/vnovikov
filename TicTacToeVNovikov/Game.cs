@@ -6,6 +6,7 @@ using TicTacToeVNovikov.Services;
 using TicTacToeVNovikov.GameConstants;
 
 namespace TicTacToeVNovikov;
+
 /// <summary>
 /// This class is responsible for game logic and players registation.
 /// </summary>
@@ -36,6 +37,7 @@ internal class Game
     private int _maxMistakesCount;
     private string _gameMarks;
     private DateTime _gameStartTime;
+
     /// <summary>
     /// Main constructor that implements fields and calls some methods
     /// </summary>
@@ -43,7 +45,7 @@ internal class Game
     /// <param name="playersCount">Players count</param>
     /// <param name="maxMistakesCount">Max count of mistakes that user allowed to do until his turn would be skipped </param>
     /// <param name="gameMarks">String that will be represent all game marks, where first symbol is for wightspace, others is for player marks in order</param>
-    public Game(int fieldSize = Constants.GameLimits.FieldSize, int playersCount = Constants.GameLimits.PlayersCount, int maxMistakesCount = Constants.GameLimits.MaxMistakesCount, string gameMarks = Constants.GameLimits.GameMarks)
+    public Game(int fieldSize, int playersCount, int maxMistakesCount, string gameMarks)
     {
         SelectLocalization();
         _playerList = PlayerService.PlayersRegistration(playersCount);
@@ -56,6 +58,7 @@ internal class Game
         _gameMarks = gameMarks;
         _currentPlayer = _playerList[0];
     }
+
     /// <summary>
     /// Method that allows you to ask a user to choose necessary localization
     /// </summary>
@@ -94,6 +97,7 @@ internal class Game
         }
 
     }
+
     /// <summary>
     /// A method that prompt the user to start a new game.
     /// </summary>
@@ -107,6 +111,7 @@ internal class Game
         return Console.ReadKey().Key == ConsoleKey.Enter;
 
     }
+
     /// <summary>
     /// Method that starts game algorithm and turn sequence.
     /// </summary>
@@ -123,7 +128,7 @@ internal class Game
         }
         if (winnerIndex != -1)
         {
-            Console.WriteLine(Strings.AnnouncementOfWinner, winnerIndex, _playerList[winnerIndex - 1].PlayerName);
+            Console.WriteLine(Strings.AnnouncementOfWinner, winnerIndex, _playerList[winnerIndex - 1].Name);
         }
         else
         {
@@ -165,6 +170,7 @@ internal class Game
             }
         }
     }
+
     /// <summary>
     /// Method that pass the turn.
     /// </summary>
@@ -183,7 +189,7 @@ internal class Game
     /// <returns>Any string expression or null</returns>
     private string? AskForPlayerTurn(Player player)
     {
-        Console.WriteLine(Strings.AskForPlayerTurn, _turnCounter % 2 + 1, player.PlayerName, _fieldSize);
+        Console.WriteLine(Strings.AskForPlayerTurn, _turnCounter % 2 + 1, player.Name, _fieldSize);
         return Console.ReadLine();
 
     }

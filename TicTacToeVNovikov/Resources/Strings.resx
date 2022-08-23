@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
   <data name="AgeIsOutOfLimits" xml:space="preserve">
     <value>Player Age must be beetwen {0} and {1} ages</value>
   </data>
@@ -132,11 +135,11 @@
     <comment>1</comment>
   </data>
   <data name="AskForPlayerInfo" xml:space="preserve">
-    <value>Player #{0} Input your Id Name Age if you registered, or Input your Name Age if you are not registered</value>
+    <value>Player #{0} take a look on table of registered players and Input your Id Name Age if you registered, or Input your Name Age to register</value>
     <comment>1</comment>
   </data>
   <data name="AskForPlayerTurn" xml:space="preserve">
-    <value>Player #{0} ({1}) input two numbers in range of [1-{2}]:</value>
+    <value>Player #{0} ({1}) input two numbers in range of [1-{2}] and separated by a space:</value>
     <comment>1</comment>
   </data>
   <data name="CommandExecuted" xml:space="preserve">
@@ -151,6 +154,9 @@
   <data name="Draw" xml:space="preserve">
     <value>DRAW</value>
     <comment>1</comment>
+  </data>
+  <data name="EmptyPlayerDbSet" xml:space="preserve">
+    <value>There are no players in the database yet, register to play</value>
   </data>
   <data name="EmptyPlayerName" xml:space="preserve">
     <value>Player name can't be empty or contain only whitespaces</value>
@@ -167,6 +173,9 @@
   <data name="HelpDescription" xml:space="preserve">
     <value>show you all available command and theirs description</value>
   </data>
+  <data name="ID" xml:space="preserve">
+    <value>Id</value>
+  </data>
   <data name="IdIsOccupied" xml:space="preserve">
     <value>Id = {0} is alredy occupied by another Player</value>
   </data>
@@ -181,6 +190,9 @@
   </data>
   <data name="MarkedSpot" xml:space="preserve">
     <value>This spot is alredy marked, try another</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="NecessaryAbbreviation" xml:space="preserve">
     <value>Write the necessary abbreviation to choose language</value>
@@ -202,6 +214,12 @@
   </data>
   <data name="PlayerNameLengthIsOutOfLimits" xml:space="preserve">
     <value>Player name length must be beetwen {0} and {1} characters</value>
+  </data>
+  <data name="PlayersTableAgeColumnWidth" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="SimilarPlayerException" xml:space="preserve">
+    <value>This player is already in the game</value>
   </data>
   <data name="SkipDescription" xml:space="preserve">
     <value>If you dont want to input commands anymore</value>

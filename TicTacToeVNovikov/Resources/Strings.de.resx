@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Age" xml:space="preserve">
+    <value>Alter</value>
+  </data>
   <data name="AgeIsOutOfLimits" xml:space="preserve">
     <value>Das Alter des Spielers muss zwischen {0} und {1} Jahren liegen</value>
   </data>
@@ -130,10 +133,10 @@
     <value>Möchten Sie ein neues Tic-Tac-Toe-Spiel starten? {0} Drücken Sie die Eingabetaste, um zu starten, oder eine andere Taste, um zu beenden</value>
   </data>
   <data name="AskForPlayerInfo" xml:space="preserve">
-    <value>Spieler #{0} geben Sie Ihre ID ein Name Alter wenn Sie bereits registriert sind oder Name Alter wenn Sie noch nicht registriert sind</value>
+    <value>Spieler # {0} werfen Sie einen Blick auf die Tabelle der registrierten Spieler und geben Sie Ihr ID-Namensalter ein, wenn Sie sich registriert haben, oder geben Sie Ihr Namensalter ein, um sich zu registrieren</value>
   </data>
   <data name="AskForPlayerTurn" xml:space="preserve">
-    <value>Spieler #{0} ({1}) Geben Sie zwei Zahlen im Bereich [1-{2}] ein:</value>
+    <value>Spieler # {0} ({1}) Geben Sie zwei Zahlen im Bereich von [1- {2}] ein, die durch ein Leerzeichen getrennt sind</value>
   </data>
   <data name="CommandExecuted" xml:space="preserve">
     <value>Вer Befehl wurde ausgeführt und eine Datei mit dem Namen {0} wurde erstellt. Es ist Pfad: {1}</value>
@@ -146,6 +149,9 @@
   </data>
   <data name="Draw" xml:space="preserve">
     <value>Unentschieden</value>
+  </data>
+  <data name="EmptyPlayerDbSet" xml:space="preserve">
+    <value>Es gibt noch keine Spieler in der Datenbank, registrieren Sie sich, um zu spielen</value>
   </data>
   <data name="EmptyPlayerName" xml:space="preserve">
     <value>Der Name des Spielers darf nicht leer sein oder nur Leerzeichen enthalten</value>
@@ -162,6 +168,9 @@
   <data name="HelpDescription" xml:space="preserve">
     <value>Zeigt alle verfügbaren Befehle und Beschreibungen auf dem Bildschirm an</value>
   </data>
+  <data name="ID" xml:space="preserve">
+    <value>Id</value>
+  </data>
   <data name="IdIsOccupied" xml:space="preserve">
     <value>Id = {0} ist bereits von einem anderen Spieler besetzt</value>
   </data>
@@ -176,6 +185,9 @@
   </data>
   <data name="MarkedSpot" xml:space="preserve">
     <value>Dieser Käfig ist bereits besetzt, probieren Sie einen anderen aus</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="NecessaryAbbreviation" xml:space="preserve">
     <value>Geben Sie die gewünschte Abkürzung ein, um eine Sprache auszuwählen</value>
@@ -198,17 +210,17 @@
   <data name="PlayerNameLengthIsOutOfLimits" xml:space="preserve">
     <value>Der Name des Spielers muss zwischen {0} und {1} Zeichen lang sein</value>
   </data>
+  <data name="PlayersTableAgeColumnWidth" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="SimilarPlayerException" xml:space="preserve">
+    <value>Dieser Spieler ist bereits im Spiel</value>
+  </data>
   <data name="SkipDescription" xml:space="preserve">
     <value>Wenn Sie keine Befehle mehr eingeben möchten</value>
   </data>
   <data name="SkippedTurn" xml:space="preserve">
     <value>Du hast {0} Fehler hintereinander gemacht, dein Zug wird übersprungen</value>
-  </data>
-  <data name="string1" xml:space="preserve">
-    <value />
-  </data>
-  <data name="String2" xml:space="preserve">
-    <value />
   </data>
   <data name="SuccessfullRegistation" xml:space="preserve">
     <value>Die Registrierung war erfolgreich, {0} Ihre Id = {1} erinnere dich daran!</value>
