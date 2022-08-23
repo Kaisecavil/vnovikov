@@ -10,7 +10,7 @@ namespace TicTacToeVNovikov.Services
         /// </summary>
         /// <param name="playersCount">players count in the game</param>
         /// <returns>List of players</returns>
-        public static List<Player> PlayersGeristration(int playersCount)
+        public static List<Player> PlayersRegistration(int playersCount)
         {
             List<Player> playerList = new List<Player>();
             for (int i = 1; i <= playersCount; i++)
@@ -26,17 +26,17 @@ namespace TicTacToeVNovikov.Services
                         Player.ParsePlayerInfo(Player.AskForPlayerInfo(i), out id, out name, out age, out isRegistered);
                         if (isRegistered)
                         {
-                            Player findedPlayer = DbService.Unit.Players.GetById(id);
-                            if (findedPlayer != null)
+                            Player foundPlayer = DbService.Unit.Players.GetById(id);
+                            if (foundPlayer != null)
                             {
-                                if (findedPlayer.PlayerName == name)
+                                if (foundPlayer.PlayerName == name)
                                 {
                                     Player player = new Player(id, name, age);
-                                    if (findedPlayer.Age != age)
+                                    if (foundPlayer.Age != age)
                                     {
                                         try
                                         {
-                                            findedPlayer.Age = age;
+                                            foundPlayer.Age = age;
                                             playerList.Add(player);
                                             DbService.Unit.Commit();
                                         }

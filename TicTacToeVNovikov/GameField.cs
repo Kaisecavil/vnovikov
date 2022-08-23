@@ -13,7 +13,7 @@ internal class GameField
     private int _fieldSize;
     private string _gameMarks;
 
-    public GameField(int rows, int cols, int fieldSize = Constants.FieldSize, string gameMarks = Constants.GameMarks)
+    public GameField(int rows, int cols, int fieldSize = Constants.GameLimits.FieldSize, string gameMarks = Constants.GameLimits.GameMarks)
     {
         _Field = new char[rows, cols];
         _Rows = rows;

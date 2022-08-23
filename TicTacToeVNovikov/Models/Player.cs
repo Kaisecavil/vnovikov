@@ -94,10 +94,10 @@ internal class Player
     /// </summary>
     static Player()
     {
-        _maxPlayerAge = Constants.MaxPlayerAge;
-        _minPlayerAge = Constants.MinPlayerAge;
-        _maxNameLength = Constants.MaxNameLeangth;
-        _minNameLength = Constants.MinNameLeangth;
+        _maxPlayerAge = Constants.GameLimits.MaxPlayerAge;
+        _minPlayerAge = Constants.GameLimits.MinPlayerAge;
+        _maxNameLength = Constants.GameLimits.MaxNameLeangth;
+        _minNameLength = Constants.GameLimits.MinNameLeangth;
     }
     /// <summary>
     /// Main constructor that initializes all fields and used by EntityFramework to create entities

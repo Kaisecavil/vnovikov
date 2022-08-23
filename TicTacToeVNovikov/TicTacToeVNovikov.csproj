@@ -30,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DownloadedFiles\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 

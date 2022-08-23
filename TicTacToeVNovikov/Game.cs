@@ -43,10 +43,10 @@ internal class Game
     /// <param name="playersCount">Players count</param>
     /// <param name="maxMistakesCount">Max count of mistakes that user allowed to do until his turn would be skipped </param>
     /// <param name="gameMarks">String that will be represent all game marks, where first symbol is for wightspace, others is for player marks in order</param>
-    public Game(int fieldSize = Constants.FieldSize, int playersCount = Constants.PlayersCount, int maxMistakesCount = Constants.MaxMistakesCount, string gameMarks = Constants.GameMarks)
+    public Game(int fieldSize = Constants.GameLimits.FieldSize, int playersCount = Constants.GameLimits.PlayersCount, int maxMistakesCount = Constants.GameLimits.MaxMistakesCount, string gameMarks = Constants.GameLimits.GameMarks)
     {
         SelectLocalization();
-        _playerList = PlayerService.PlayersGeristration(playersCount);
+        _playerList = PlayerService.PlayersRegistration(playersCount);
         _gameField = new GameField(fieldSize, fieldSize);
         _turnCounter = 0;
         _mistakesInRow = 0;
@@ -130,7 +130,7 @@ internal class Game
             Console.WriteLine(Strings.Draw);
         }
         GameResultService.CommitGameResult(_gameStartTime, winnerIndex, _playerList);
-        CommandLine.AskForCommand();
+        CommandLineRequest.AskForCommand();
     }
 
     /// <summary>
