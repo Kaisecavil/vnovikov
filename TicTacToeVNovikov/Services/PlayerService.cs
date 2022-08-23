@@ -38,40 +38,43 @@ namespace TicTacToeVNovikov.Services
                             Player foundPlayer = DbService.Unit.Players.GetById(id);
                             if (foundPlayer != null)
                             {
-                                if (foundPlayer.Name == name)
+                                
+                                Player player = new Player(id, name, age);
+                                if (NoAnySimilarPlayer(playerList, player))
                                 {
-                                    Player player = new Player(id, name, age);
-                                    if (NoAnySimilarPlayer(playerList,player))
+                                    if (foundPlayer.Name != name)
                                     {
-                                        if (foundPlayer.Age != age)
+                                        try
                                         {
-                                            try
-                                            {
-                                                foundPlayer.Age = age;
-                                                playerList.Add(player);
-                                                DbService.Unit.Commit();
-                                            }
-                                            catch (Exception e)
-                                            {
-                                                Console.WriteLine(e.Message);
-                                                continue;
-                                            }
-
+                                            foundPlayer.Name = name;  
                                         }
-                                        else
+                                        catch (Exception e)
                                         {
-                                            playerList.Add(player);
+                                            Console.WriteLine(e.Message);
+                                            continue;
                                         }
-                                    }
-                                    else
-                                    {
-                                        throw new Exception(string.Format(Strings.SimilarPlayerException));
+                                        //throw new Exception(string.Format(Strings.IdIsOccupied, id));
                                     }
 
+                                    if (foundPlayer.Age != age)
+                                    {
+                                        try
+                                        {
+                                            foundPlayer.Age = age;  
+                                        }
+                                        catch (Exception e)
+                                        {
+                                            Console.WriteLine(e.Message);
+                                            continue;
+                                        }
+
+                                    }
+                                    playerList.Add(player);
+                                    DbService.Unit.Commit();
                                 }
                                 else
                                 {
-                                    throw new Exception(string.Format(Strings.IdIsOccupied, id));
+                                    throw new Exception(string.Format(Strings.SimilarPlayerException));
                                 }
                             }
                             else

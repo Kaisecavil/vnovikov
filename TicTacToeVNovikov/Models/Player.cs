@@ -76,7 +76,7 @@ internal class Player
         {
             return _name;
         }
-        private set
+        set
         {
             if (!string.IsNullOrWhiteSpace(value))
             {
@@ -221,7 +221,7 @@ internal class Player
         else
         {
             Player player = (Player)obj;
-            return (this.Id == player.Id) && (this.Name == player.Name) && (this.Age == player.Age);
+            return (this.Id == player.Id) ||((this.Name == player.Name) && (this.Age == player.Age));
         }
     }
 }
