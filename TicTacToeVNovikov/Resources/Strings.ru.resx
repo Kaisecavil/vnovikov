@@ -188,17 +188,20 @@
   <data name="LesserAge" xml:space="preserve">
     <value>Ваш возраст не может быть меньше чем раньше</value>
   </data>
+  <data name="Localizations" xml:space="preserve">
+    <value>Английская,Немецкая,Русская</value>
+  </data>
   <data name="MarkedSpot" xml:space="preserve">
     <value>Эта клетка уже занята, попробуйте другую</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Имя</value>
   </data>
-  <data name="NecessaryAbbreviation" xml:space="preserve">
-    <value>Введите необходимую аббревиатуру чтобы выбрать язык</value>
+  <data name="NecessaryKey" xml:space="preserve">
+    <value>Нажмите необходимую клавишу чтобы выбрать язык</value>
   </data>
   <data name="NullAbbreviation" xml:space="preserve">
-    <value>Аббревиатура не может быть null</value>
+    <value>Клавиша не может быть null</value>
   </data>
   <data name="NullCommand" xml:space="preserve">
     <value>Команда не может быть null</value>
@@ -218,6 +221,9 @@
   <data name="PlayersTableAgeColumnWidth" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="PressKey" xml:space="preserve">
+    <value>Нажмите необходимую клафишу с цифрой , не букву</value>
+  </data>
   <data name="SimilarPlayerException" xml:space="preserve">
     <value>Данный игрок уже в игре</value>
   </data>
@@ -232,11 +238,11 @@
     <value>Регистрация прошла успешно, {0} ваш Id = {1} запомните его!</value>
     <comment>1</comment>
   </data>
-  <data name="UnknownAbbreviation" xml:space="preserve">
-    <value>Нет доступной локализации с токой аббревиатурой ({0})</value>
-  </data>
   <data name="UnknownCommand" xml:space="preserve">
     <value>В списке команд нет ни одной с именем {0}. вы можете использовать команду /help чтобы увидеть все доступные команды</value>
+  </data>
+  <data name="UnknownKey" xml:space="preserve">
+    <value>Нет доступной локализации с таким индексом  ({0})</value>
   </data>
   <data name="UnknownPlayer" xml:space="preserve">
     <value>Среди зарегистрированных игроков не было найдено похожего,проверьте правильность введения данных или зарестрируйтесь введя ваши Имя Возраст</value>

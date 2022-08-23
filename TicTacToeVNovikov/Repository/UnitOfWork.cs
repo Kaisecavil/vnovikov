@@ -5,14 +5,14 @@ using TicTacToeVNovikov.Resources;
 namespace TicTacToeVNovikov.Repository
 {
     /// <summary>
-    /// Class that encapsulates all necessary <seealso cref="Repository.BaseRepository{TEntity}"></seealso> and provides access to them.
+    /// Class that encapsulates all necessary <seealso cref="Repository.GenericRepository{TEntity}"></seealso> and provides access to them.
     /// </summary>
     /// 
     internal class UnitOfWork : IUnitOfWork
     {
         private ApplicationContext _dbContext;
-        private BaseRepository<Player>? _players;
-        private BaseRepository<GameResult>? _gameResults;
+        private GenericRepository<Player>? _players;
+        private GenericRepository<GameResult>? _gameResults;
         private bool disposed = false;
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace TicTacToeVNovikov.Repository
             get
             {
                 return _players ??
-                    (_players = new BaseRepository<Player>(_dbContext));
+                    (_players = new GenericRepository<Player>(_dbContext));
             }
         }
         
@@ -41,7 +41,7 @@ namespace TicTacToeVNovikov.Repository
             get
             {
                 return _gameResults ??
-                    (_gameResults = new BaseRepository<GameResult>(_dbContext));
+                    (_gameResults = new GenericRepository<GameResult>(_dbContext));
             }
         }
 

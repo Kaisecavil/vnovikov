@@ -1,7 +1,7 @@
 ﻿using TicTacToeVNovikov.GameConstants;
-using TicTacToeVNovikov.Models;
 
 namespace TicTacToeVNovikov;
+
 internal class Program
 {
     static void Main(string[] args)

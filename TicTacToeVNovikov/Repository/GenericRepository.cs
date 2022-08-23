@@ -8,7 +8,7 @@ namespace TicTacToeVNovikov.Repository
     /// Class that realize Repository pattern and helps to interact with necessary <seealso cref="DbSet{TEntity}"/> in database.
     /// </summary>
     /// <typeparam name="TEntity">Any class that presents in <seealso cref="ApplicationContext"/> like DbSet parameter,in our case it can be <see cref="Player"/> or <see cref="GameResult"/></typeparam>
-    internal class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class
+    internal class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         /// <summary>
         /// Data base context
@@ -24,7 +24,7 @@ namespace TicTacToeVNovikov.Repository
         /// Main constructor
         /// </summary>
         /// <param name="context">Our data base context</param>
-        public BaseRepository(ApplicationContext context)
+        public GenericRepository(ApplicationContext context)
         {
             _context = context;
             _entities = context.Set<TEntity>();
@@ -72,7 +72,7 @@ namespace TicTacToeVNovikov.Repository
             _entities.Remove(entity);
         }
 
-        /// <inheritdoc/>
+        
         public void Save()
         {
             _context.SaveChanges();

@@ -183,20 +183,23 @@
   <data name="LesserAge" xml:space="preserve">
     <value>Ihr Alter kann nicht kleiner sein als zuvor</value>
   </data>
+  <data name="Localizations" xml:space="preserve">
+    <value>Englisch,Deutsch,Russisch</value>
+  </data>
   <data name="MarkedSpot" xml:space="preserve">
     <value>Dieser Käfig ist bereits besetzt, probieren Sie einen anderen aus</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="NecessaryAbbreviation" xml:space="preserve">
+  <data name="NecessaryKey" xml:space="preserve">
     <value>Geben Sie die gewünschte Abkürzung ein, um eine Sprache auszuwählen</value>
-  </data>
-  <data name="NullAbbreviation" xml:space="preserve">
-    <value>Die Abkürzung kann nicht null sein</value>
   </data>
   <data name="NullCommand" xml:space="preserve">
     <value>Befehl darf nicht null sein</value>
+  </data>
+  <data name="NullKey" xml:space="preserve">
+    <value>Die Abkürzung kann nicht null sein</value>
   </data>
   <data name="NullPlayerInfo" xml:space="preserve">
     <value>Spielerinformationen können nicht null sein</value>
@@ -213,6 +216,9 @@
   <data name="PlayersTableAgeColumnWidth" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="PressKey" xml:space="preserve">
+    <value>Drücken Sie die erforderliche Zifferntaste, nicht den Buchstaben</value>
+  </data>
   <data name="SimilarPlayerException" xml:space="preserve">
     <value>Dieser Spieler ist bereits im Spiel</value>
   </data>
@@ -225,11 +231,11 @@
   <data name="SuccessfullRegistation" xml:space="preserve">
     <value>Die Registrierung war erfolgreich, {0} Ihre Id = {1} erinnere dich daran!</value>
   </data>
-  <data name="UnknownAbbreviation" xml:space="preserve">
-    <value>Es gibt keine verfügbare Lokalisierung mit dieser Abkürzung ({0})</value>
-  </data>
   <data name="UnknownCommand" xml:space="preserve">
     <value>Es gibt keine Befehle mit dem Namen {0} in der Befehlsliste. sie können den Befehl /help verwenden, um alle verfügbaren Befehle anzuzeigen</value>
+  </data>
+  <data name="UnknownKey" xml:space="preserve">
+    <value>Es gibt keine verfügbare Lokalisierung mit dieser Abkürzung ({0})</value>
   </data>
   <data name="UnknownPlayer" xml:space="preserve">
     <value>Unter den registrierten Spielern wurde kein vergleichbares gefunden, überprüfen Sie die Richtigkeit der Dateneingabe oder geben Sie Ihren Namen ein Alter ein</value>

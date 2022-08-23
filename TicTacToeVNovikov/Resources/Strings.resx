@@ -188,20 +188,23 @@
   <data name="LesserAge" xml:space="preserve">
     <value>"Your age can't be lesser than before"</value>
   </data>
+  <data name="Localizations" xml:space="preserve">
+    <value>English,Deutch,Russian</value>
+  </data>
   <data name="MarkedSpot" xml:space="preserve">
     <value>This spot is alredy marked, try another</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="NecessaryAbbreviation" xml:space="preserve">
-    <value>Write the necessary abbreviation to choose language</value>
-  </data>
-  <data name="NullAbbreviation" xml:space="preserve">
-    <value>Abbreviation can't be null</value>
+  <data name="NecessaryKey" xml:space="preserve">
+    <value>Press the necessary key to choose localization</value>
   </data>
   <data name="NullCommand" xml:space="preserve">
     <value>Command can't be null</value>
+  </data>
+  <data name="NullKey" xml:space="preserve">
+    <value>Key can't be null</value>
   </data>
   <data name="NullPlayerInfo" xml:space="preserve">
     <value>Information about Player can't be null</value>
@@ -218,6 +221,9 @@
   <data name="PlayersTableAgeColumnWidth" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="PressKey" xml:space="preserve">
+    <value>Press necessary digit key not letter</value>
+  </data>
   <data name="SimilarPlayerException" xml:space="preserve">
     <value>This player is already in the game</value>
   </data>
@@ -232,11 +238,11 @@
     <value>Registation complited successfully, {0} your Id = {1} remember it!</value>
     <comment>1</comment>
   </data>
-  <data name="UnknownAbbreviation" xml:space="preserve">
-    <value>The is no available localization with this abbriveation ({0})</value>
-  </data>
   <data name="UnknownCommand" xml:space="preserve">
     <value>In a list of commands there is no one with name {0}. you can use command /help to see all available commands</value>
+  </data>
+  <data name="UnknownKey" xml:space="preserve">
+    <value>The is no available localization with this key(index) ({0})</value>
   </data>
   <data name="UnknownPlayer" xml:space="preserve">
     <value>No similar was found among the registered players, check the correctness of the data entry or register by entering your Name Age</value>

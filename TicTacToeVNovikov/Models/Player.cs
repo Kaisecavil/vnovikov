@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using TicTacToeVNovikov.GameConstants;
 using TicTacToeVNovikov.Resources;
 
@@ -14,14 +13,17 @@ internal class Player
     /// Maximal allowed player's name length
     /// </summary>
     static private int _maxNameLength;
+
     /// <summary>
     /// Minimal allowed player's name length
     /// </summary>
     static private int _minNameLength;
+
     /// <summary>
     /// Maximal allowed player's age
     /// </summary>
     static private int _maxPlayerAge;
+
     /// <summary>
     /// Minimal allowed player's age
     /// </summary>
@@ -31,7 +33,12 @@ internal class Player
     /// Player's Id.
     /// </summary>
     public int Id { get; private set; }
+
     private int _age;
+
+    /// <summary>
+    /// Player age property that realize logic of get and set methods in the right way
+    /// </summary>
     public int Age
     {
         get
@@ -59,6 +66,7 @@ internal class Player
         }
     }
     private string? _name;
+
     /// <summary>
     /// Player name property that realize logic of get and set methods in the right way
     /// </summary>
@@ -91,6 +99,7 @@ internal class Player
             }
         }
     }
+
     /// <summary>
     /// Static constructor that initializes static fields
     /// </summary>
@@ -101,6 +110,7 @@ internal class Player
         _maxNameLength = Constants.GameLimits.MaxNameLeangth;
         _minNameLength = Constants.GameLimits.MinNameLeangth;
     }
+
     /// <summary>
     /// Main constructor that initializes all fields and used by EntityFramework to create entities
     /// </summary>
@@ -121,6 +131,7 @@ internal class Player
             throw new Exception(e.Message);
         }
     }
+
     /// <summary>
     /// Constructor that initializes all fields but ID and used by EntityFramework to create entities where id will be autoincremented
     /// </summary>
@@ -139,6 +150,7 @@ internal class Player
             throw new Exception(e.Message);
         }
     }
+
     /// <summary>
     /// A method that prompt the user to enter a presonal information.
     /// </summary>
@@ -164,9 +176,9 @@ internal class Player
     {
         if (playerInfo != null)
         {
-            string temp = Regex.Replace(playerInfo, @"\s+", " ").Trim();
-            Regex regexRegistered = new Regex(@"^\d+\s\w+\s\d{1,3}$");
-            Regex regexUnregistered = new Regex(@"^\w+\s\d{1,3}$");
+            string temp = Regex.Replace(playerInfo, Constants.GameRegularExpressions.WightSpaces, " ").Trim();
+            Regex regexRegistered = new Regex(Constants.GameRegularExpressions.Registered);
+            Regex regexUnregistered = new Regex(Constants.GameRegularExpressions.Unregistered);
             if (regexRegistered.IsMatch(temp))//We parse our string depends onwhat RexEx is would be valid
             {
                 string[] nums = temp.Split(' ');
@@ -194,6 +206,11 @@ internal class Player
         }
     }
 
+    /// <summary>
+    /// override of Equals method
+    /// </summary>
+    /// <param name="obj">obj to compare</param>
+    /// <returns>true if equals , false otherwise</returns>
     public override bool Equals(Object obj)
     {
         //Check for null and compare run-time types.

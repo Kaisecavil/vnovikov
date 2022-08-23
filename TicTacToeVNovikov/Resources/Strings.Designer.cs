@@ -259,6 +259,15 @@ namespace TicTacToeVNovikov.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to English,Deutch,Russian.
+        /// </summary>
+        internal static string Localizations {
+            get {
+                return ResourceManager.GetString("Localizations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This spot is alredy marked, try another.
         /// </summary>
         internal static string MarkedSpot {
@@ -277,20 +286,11 @@ namespace TicTacToeVNovikov.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Write the necessary abbreviation to choose language.
+        ///   Looks up a localized string similar to Press the necessary key to choose localization.
         /// </summary>
-        internal static string NecessaryAbbreviation {
+        internal static string NecessaryKey {
             get {
-                return ResourceManager.GetString("NecessaryAbbreviation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Abbreviation can&apos;t be null.
-        /// </summary>
-        internal static string NullAbbreviation {
-            get {
-                return ResourceManager.GetString("NullAbbreviation", resourceCulture);
+                return ResourceManager.GetString("NecessaryKey", resourceCulture);
             }
         }
         
@@ -300,6 +300,15 @@ namespace TicTacToeVNovikov.Resources {
         internal static string NullCommand {
             get {
                 return ResourceManager.GetString("NullCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Key can&apos;t be null.
+        /// </summary>
+        internal static string NullKey {
+            get {
+                return ResourceManager.GetString("NullKey", resourceCulture);
             }
         }
         
@@ -349,6 +358,15 @@ namespace TicTacToeVNovikov.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Press necessary digit key not letter.
+        /// </summary>
+        internal static string PressKey {
+            get {
+                return ResourceManager.GetString("PressKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This player is already in the game.
         /// </summary>
         internal static string SimilarPlayerException {
@@ -385,20 +403,20 @@ namespace TicTacToeVNovikov.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The is no available localization with this abbriveation ({0}).
-        /// </summary>
-        internal static string UnknownAbbreviation {
-            get {
-                return ResourceManager.GetString("UnknownAbbreviation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to In a list of commands there is no one with name {0}. you can use command /help to see all available commands.
         /// </summary>
         internal static string UnknownCommand {
             get {
                 return ResourceManager.GetString("UnknownCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The is no available localization with this key(index) ({0}).
+        /// </summary>
+        internal static string UnknownKey {
+            get {
+                return ResourceManager.GetString("UnknownKey", resourceCulture);
             }
         }
         

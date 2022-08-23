@@ -49,7 +49,7 @@ internal class Game
     {
         SelectLocalization();
         _playerList = PlayerService.PlayersRegistration(playersCount);
-        _gameField = new GameField(fieldSize, fieldSize);
+        _gameField = new GameField(fieldSize, Constants.GameStrings.GameMarks);
         _turnCounter = 0;
         _mistakesInRow = 0;
         _fieldSize = fieldSize;
@@ -57,45 +57,6 @@ internal class Game
         _maxMistakesCount = maxMistakesCount;
         _gameMarks = gameMarks;
         _currentPlayer = _playerList[0];
-    }
-
-    /// <summary>
-    /// Method that allows you to ask a user to choose necessary localization
-    /// </summary>
-    public void SelectLocalization()
-    {
-        var localizations = new Dictionary<string, string>()
-        {
-            {"en","en-US"},
-            {"ru","ru-RU"},
-            {"de","de-DE"}
-        };
-        while (true)
-        {
-            string? key = "";
-            try
-            {
-                Console.WriteLine(Strings.NecessaryAbbreviation);
-                foreach (var item in localizations)
-                {
-                    Console.WriteLine(Strings.KeyIsForValue, item.Key, item.Value);
-                }
-                key = Console.ReadLine();
-                CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(localizations[key]);
-            }
-            catch (KeyNotFoundException e)
-            {
-                Console.WriteLine(string.Format(Strings.UnknownAbbreviation, key));
-                continue;
-            }
-            catch (ArgumentNullException)
-            {
-                Console.WriteLine(Strings.NullAbbreviation);
-                continue;
-            }
-            break;
-        }
-
     }
 
     /// <summary>
@@ -193,6 +154,7 @@ internal class Game
         return Console.ReadLine();
 
     }
+
     /// <summary>
     /// Method that parse string in certain way to get information about player's turn
     /// </summary>
@@ -205,11 +167,9 @@ internal class Game
     {
         if (turnStr != null)
         {
-            string temp = Regex.Replace(turnStr, @"\s+", " ").Trim();
-            Regex regex = new Regex(@"^\d \d$");
-            bool isValid = regex.IsMatch(temp);
-
-            if (isValid)
+            string temp = Regex.Replace(turnStr, Constants.GameRegularExpressions.WightSpaces, " ").Trim();
+            Regex regex = new Regex(Constants.GameRegularExpressions.Turn);
+            if (regex.IsMatch(temp))
             {
                 string[] nums = temp.Split(' ', 2);
                 x = Convert.ToInt32(nums[0]);
@@ -225,6 +185,61 @@ internal class Game
             throw new NullReferenceException(Strings.NullPlayerInfo);
         }
 
+    }
+
+    /// <summary>
+    /// Method that allows you to ask a user to choose necessary localization
+    /// </summary>
+    private void SelectLocalization()
+    {
+        CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(AskForLocalization());
+    }
+
+    private string AskForLocalization()
+    {
+        string[] localizaedLocalizations = Strings.Localizations.Split(Constants.GameStrings.AvailableLocalizationsDelimeter);
+        string[] localizations = Constants.GameStrings.AvailableLocalizations.Split(Constants.GameStrings.AvailableLocalizationsDelimeter);
+        int key = 0;
+        string result;
+        while (true)
+        {
+            try
+            {
+                Console.WriteLine(Strings.NecessaryKey);
+
+                for (int i = 0; i < localizaedLocalizations.Count(); i++)
+                {
+                    Console.WriteLine($"{i + 1}.{localizaedLocalizations[i]}");
+                }
+                var UserInput = Console.ReadKey();
+                if (char.IsDigit(UserInput.KeyChar))
+                {
+                    key = int.Parse(UserInput.KeyChar.ToString());
+                }
+                else
+                {
+                    throw new KeyNotFoundException();
+                }
+                result = localizations[key - 1];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine(string.Format(Strings.UnknownKey, key));
+                continue;
+            }
+            catch (KeyNotFoundException)
+            {
+                Console.WriteLine(Strings.PressKey);
+                continue;
+            }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine(Strings.NullKey);
+                continue;
+            }
+            return result;
+            break;
+        }
     }
 }
 

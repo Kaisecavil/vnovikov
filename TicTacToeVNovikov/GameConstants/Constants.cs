@@ -1,10 +1,14 @@
-﻿namespace TicTacToeVNovikov.GameConstants;
+﻿using System.Text.RegularExpressions;
+
+namespace TicTacToeVNovikov.GameConstants;
 /// <summary>
 /// This class contains game constants.
 /// </summary>
 internal static class Constants
 {
-
+    /// <summary>
+    /// inner class of <see cref="Constants"/> contains game limit constants
+    /// </summary>
     public static class GameLimits
     {
         public const int FieldSize = 3;
@@ -17,6 +21,9 @@ internal static class Constants
 
     }
 
+    /// <summary>
+    /// inner class of <see cref="Constants"/> contains Text Of Commandline commands constants
+    /// </summary>
     public static class TextOfCommand
     {
         public const string Help = "/help";
@@ -26,6 +33,9 @@ internal static class Constants
         public const string Skip = "/skip";
     }
 
+    /// <summary>
+    /// inner class of <see cref="Constants"/> contains File Name constants
+    /// </summary>
     public static class FileName
     {
         public const string DownloadedFilesDirectoryName = "DownloadedFiles";
@@ -34,19 +44,40 @@ internal static class Constants
         public const string GameResultsForCurrentPlayersFileName = "gameResultsForPlayers{0}and{1}.json";
     }
 
+    /// <summary>
+    /// inner class of <see cref="Constants"/> contains Game String constants
+    /// </summary>
     public static class GameStrings
     {
         public const string GameMarks = ".XO";
         public const string FieldRowDelimeter = "-----";
-        public const string FieldColumnDelimeter = "|";  
+        public const string FieldColumnDelimeter = "|";
+        public const string AvailableLocalizations = "en-US,de-DE,ru-RU";
+        public const char AvailableLocalizationsDelimeter = ',';
     }
 
+    /// <summary>
+    /// inner class of <see cref="Constants"/> contains Table Parameters constants
+    /// </summary>
     public static class TableParameters
     {
         public const char PlayersTableRowDelimeter = '-';
         public const string PlayersTableColumnDelimeter = "|";
         public const int PlayersTableAgeColumnWidth = 10;
         public const int PlayersTableIdColumnWidth = 4;
+    }
+
+    /// <summary>
+    /// inner class of <see cref="Constants"/> contains Regular Expressions constants
+    /// </summary>
+    public static class GameRegularExpressions
+    {
+        public const string WightSpaces = @"\s+";
+        public const string Registered = @"^\d+\s\w+\s\d{1,3}$";
+        public const string Unregistered = @"^\w+\s\d{1,3}$";
+        public const string Turn = @"^\d \d$";
+
+
     }
 
 }

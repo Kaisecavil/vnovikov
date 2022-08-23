@@ -2,25 +2,21 @@
 using TicTacToeVNovikov.Resources;
 
 namespace TicTacToeVNovikov;
+
 /// <summary>
 /// This class is responsible for all actions related to game field 
 /// </summary>
 internal class GameField
 {
-    private char[,] _Field;
-    private int _Rows;
-    private int _Columns;
+    private char[,] _field;
     private int _fieldSize;
     private string _gameMarks;
 
-    public GameField(int rows, int cols, int fieldSize = Constants.GameLimits.FieldSize, string gameMarks = Constants.GameStrings.GameMarks)
+    public GameField(int fieldsize, string gameMarks)
     {
-        _Field = new char[rows, cols];
-        _Rows = rows;
-        _Columns = cols;
-        _fieldSize = fieldSize;
+        _fieldSize = fieldsize;
+        _field = new char[fieldsize, fieldsize];
         _gameMarks = gameMarks;
-
         SetStartField();
     }
 
@@ -29,18 +25,18 @@ internal class GameField
     /// </summary>
     public void DisplayField()
     {
-        for (int i = 0; i < _Rows; i++)
+        for (int i = 0; i < _fieldSize; i++)
         {
-            for (int j = 0; j < _Columns; j++)
+            for (int j = 0; j < _fieldSize; j++)
             {
-                if (j != _Columns - 1)
-                    Console.Write(_Field[i, j]+Constants.GameStrings.FieldColumnDelimeter);
+                if (j != _fieldSize - 1)
+                    Console.Write(_field[i, j]+Constants.GameStrings.FieldColumnDelimeter);
                 else
-                    Console.Write($"{_Field[i, j]}");
+                    Console.Write($"{_field[i, j]}");
             }
 
             Console.WriteLine();
-            if (i != _Rows - 1)
+            if (i != _fieldSize - 1)
                 Console.WriteLine(Constants.GameStrings.FieldRowDelimeter);
         }
     }
@@ -57,14 +53,14 @@ internal class GameField
 
         bool leftDiagonal = true;
         bool rightDiagonal = true;
-        for (int i = 0; i < _Rows; i++)
+        for (int i = 0; i < _fieldSize; i++)
         {
             bool column = true;
             bool row = true;
-            for (int j = 0; j < _Columns; j++)
+            for (int j = 0; j < _fieldSize; j++)
             {
-                column &= _Field[i, j] == mark;
-                row &= _Field[j, i] == mark;
+                column &= _field[i, j] == mark;
+                row &= _field[j, i] == mark;
             }
             if (column || row)
             {
@@ -73,8 +69,8 @@ internal class GameField
 
 
             }
-            leftDiagonal &= _Field[i, i] == mark;
-            rightDiagonal &= _Field[i, _Rows - i - 1] == mark;
+            leftDiagonal &= _field[i, i] == mark;
+            rightDiagonal &= _field[i, _fieldSize - i - 1] == mark;
         }
         if (leftDiagonal || rightDiagonal)
         {
@@ -83,7 +79,7 @@ internal class GameField
         }
         else
         {
-            if (turnNumber - skippedTurnCount == _Rows * _Columns - 1)
+            if (turnNumber - skippedTurnCount == _fieldSize * _fieldSize - 1)
             {
                 result = -1;
                 return;
@@ -103,7 +99,7 @@ internal class GameField
     {
         if (ValidSpot(x, y))
         {
-            _Field[x - 1, y - 1] = mark;
+            _field[x - 1, y - 1] = mark;
         }
     }
 
@@ -118,9 +114,9 @@ internal class GameField
     /// <exception cref="Exception">Spot is invlaid</exception>
     private bool ValidSpot(int x, int y)
     {
-        if (x <= _Rows && y <= _Columns && x >= 1 && y >= 1)
+        if (x <= _fieldSize && y <= _fieldSize && x >= 1 && y >= 1)
         {
-            if (_Field[x - 1, y - 1] == _gameMarks[0])
+            if (_field[x - 1, y - 1] == _gameMarks[0])
             {
                 return true;
             }
@@ -140,14 +136,12 @@ internal class GameField
     /// </summary>
     private void SetStartField()
     {
-        for (int i = 0; i < _Rows; i++)
-            for (int j = 0; j < _Columns; j++)
+        for (int i = 0; i < _fieldSize; i++)
+            for (int j = 0; j < _fieldSize; j++)
             {
-                _Field[i, j] = _gameMarks[0];
+                _field[i, j] = _gameMarks[0];
             }
     }
-
-
 
 }
 
