@@ -200,7 +200,7 @@ internal class Game
         string[] localizaedLocalizations = Strings.Localizations.Split(Constants.GameStrings.AvailableLocalizationsDelimeter);
         string[] localizations = Constants.GameStrings.AvailableLocalizations.Split(Constants.GameStrings.AvailableLocalizationsDelimeter);
         int key = 0;
-        string result;
+        string resultLocaliztion;
         while (true)
         {
             try
@@ -211,16 +211,17 @@ internal class Game
                 {
                     Console.WriteLine($"{i + 1}.{localizaedLocalizations[i]}");
                 }
-                var UserInput = Console.ReadKey();
-                if (char.IsDigit(UserInput.KeyChar))
+                var UserInput = Console.ReadLine();
+                int result = 0;
+                if (int.TryParse(UserInput,out result))
                 {
-                    key = int.Parse(UserInput.KeyChar.ToString());
+                    resultLocaliztion = localizations[result - 1];
                 }
                 else
                 {
                     throw new KeyNotFoundException();
                 }
-                result = localizations[key - 1];
+                
             }
             catch (IndexOutOfRangeException)
             {
@@ -237,7 +238,7 @@ internal class Game
                 Console.WriteLine(Strings.NullKey);
                 continue;
             }
-            return result;
+            return resultLocaliztion;
             break;
         }
     }

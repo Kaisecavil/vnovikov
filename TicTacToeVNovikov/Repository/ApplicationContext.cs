@@ -23,6 +23,7 @@ namespace TicTacToeVNovikov.Repository
         /// </summary>
         public ApplicationContext()
         { 
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
